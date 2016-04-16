@@ -1,0 +1,38 @@
+
+RM=rm -f
+CFLAGS=-c -I. \
+-I$(P7ZIP_PATH)/C \
+-I$(P7ZIP_PATH)/CPP/myWindows \
+-I$(P7ZIP_PATH)/CPP/include_windows \
+-I$(P7ZIP_PATH)/CPP/
+
+CXXFLAGS=-c -I. \
+-I$(P7ZIP_PATH)/CPP/myWindows \
+-I$(P7ZIP_PATH)/CPP/ \
+-I$(P7ZIP_PATH)/CPP/include_windows
+
+DFLAGS=-MM -I. \
+-I$(P7ZIP_PATH)/CPP/myWindows \
+-I$(P7ZIP_PATH)/CPP/ \
+-I$(P7ZIP_PATH)/CPP/include_windows
+
+all: $(PCH_NAME) $(PROG)
+
+$(PROG): $(OBJS)
+	libtool -static -o $(PROG) $(OBJS) $(LIBS) -v
+
+include makefile.rules
+
+depend:
+	rm -f makefile.depend
+	$(CXX) $(DFLAGS) $(SRCS) > makefile.depend
+	
+clean:
+	-@$(RM) core *.exe *.o *~ .*.swp *.orig *.gch $(PROGS)
+	-@$(RM) -fr SunWS_cache/
+	-@$(RM) -r .inslog2 pchdir/ tca.map ir.out
+	-@$(RM) make.log tags 1 2
+
+# CRC32, ASM version
+7zCrcT8U.o : $(P7ZIP_PATH)/Asm/$(CPU)/7zCrcT8U.asm
+	$(ASM) $(P7ZIP_PATH)/Asm/$(CPU)/7zCrcT8U.asm -o 7zCrcT8U.o
