@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+ 
 @protocol ArchiveDelegate <NSObject>
 
 -(void)item:(NSString *)name;
@@ -29,10 +29,12 @@
 
 -(NSArray *)list;
 -(int)compressItem:(NSArray *)items;
--(int)decompressItemToDir:(NSString *)dir;
+-(int)decompressToDir:(NSString *)dir;
+-(int)decompressItems:(NSArray *)items toDir:(NSString *)dir;
+
 
 @property (readonly) NSString *name;
-@property id<ArchiveDelegate> delegate;
+@property (assign) id<ArchiveDelegate> delegate;
 
 @end
 

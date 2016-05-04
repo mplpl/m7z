@@ -147,9 +147,18 @@ public:
     return MLCompressArchive([self.name wstring], itemsW, cb);
 }
 
--(int)decompressItemToDir:(NSString *)dir {
-    CallbackTest cb(self.delegate);
-    return MLDecompressArchive([self.name wstring], [dir wstring], cb);
+-(int)decompressToDir:(NSString *)dir {
+    return [self decompressItems:nil toDir:dir];
 }
+
+-(int)decompressItems:(NSArray *)items toDir:(NSString *)dir {
+    std::vector<std::wstring> files;
+    for (NSString *item : items) {
+        files.push_back(item.wstring);
+    }
+    CallbackTest cb(self.delegate);
+    return MLDecompressArchive([self.name wstring], [dir wstring], files, cb);
+}
+
 
 @end

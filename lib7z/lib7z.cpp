@@ -23,6 +23,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 using namespace NWindows;
 using namespace NFile;
@@ -158,7 +159,7 @@ HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
 }
 
 
-HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, MLExtractCallback &callback)
+HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files, MLExtractCallback &callback)
 {
   UString archiveName = archiveNameW.c_str();
   UString outDir = outDirW.c_str();
@@ -202,7 +203,12 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, MLE
 	  //RINOK(IsArchiveItemFolder(archive, i, isFolder));
 	  //if (!wildcardCensor.CheckPath(filePath, !isFolder))
 		//continue;
-	  realIndices.Add(i);
+        if (files.size() &&
+            std::find(files.begin(), files.end(), std::wstring(filePath)) == files.end())
+        {
+            continue;
+        }
+        realIndices.Add(i);
 	}
 	if (realIndices.Size() == 0)
 	{

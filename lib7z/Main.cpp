@@ -34,13 +34,24 @@ int main(int numArgs, const char *args[])
 	MLCallbackTest ucallback;
 
 	wcout << "\n\n\n";
-  wcout << "Unpacking\n";
+  /*wcout << "Unpacking\n";
 	wcout << "*****************************\n";
-  result = MLDecompressArchive(arch1, archDir, ucallback);
+    vector<wstring> files0;
+  result = MLDecompressArchive(arch1, archDir, files0, ucallback);
 	wcout << "*****************************\n";
 	if (result != S_OK)
 		wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")\n";
-
+*/
+    wcout << "Unpacking selected\n";
+    wcout << "*****************************\n";
+    vector<wstring> files1;
+    files1.push_back(L"Alloc.o");
+    files1.push_back(L"7z.so");
+    result = MLDecompressArchive(arch1, archDir, files1, ucallback);
+    wcout << "*****************************\n";
+    if (result != S_OK)
+        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+    
 	wcout << "\n\n\n";
   wcout << "Packing\n";
 	wcout << "*****************************\n";
