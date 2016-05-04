@@ -37,6 +37,7 @@
 @property (readonly) NSString *archName;
 @property (readonly) NSString *missingArchName;
 @property (readonly) NSArray *items;
+@property (readonly) NSArray *itemsToUnpack;
 @property (readonly) NSString *unpackDir;
 @property (readonly) frmDelegate *delegate;
 @end
@@ -50,6 +51,7 @@
     _missingArchName = @"/tmp/123.7z";
     _unpackDir = @"/tmp/1";
     _items = [NSArray arrayWithObjects:@"/tmp/1.txt", @"/tmp/2.txt", @"/tmp/3.txt", nil];
+    _itemsToUnpack = [NSArray arrayWithObjects:@"2.txt", @"3.txt", nil];
     
     
     NSError *err;
@@ -104,7 +106,14 @@
     Archive *archive = [[Archive alloc] initWithName:self.archName];
     XCTAssert([archive compressItem:self.items] == 0);
     archive.delegate = self.delegate;
-    XCTAssert([archive decompressItemToDir:self.unpackDir] == 0);
+    XCTAssert([archive decompressToDir:self.unpackDir] == 0);
 }
 
+- (void)testDecompressSelected {
+    Archive *archive = [[Archive alloc] initWithName:self.archName];
+    XCTAssert([archive compressItem:self.items] == 0);
+    archive.delegate = self.delegate;
+    
+    XCTAssert([archive decompressItems:_itemsToUnpack toDir:self.unpackDir] == 0);
+}
 @end
