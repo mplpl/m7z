@@ -83,11 +83,11 @@ const wchar_t *GetErrorMessage(HRESULT result)
 HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue)
 {
   UString archiveName = archiveNameW.c_str();
-  NFile::NFind::CFileInfoW fi;
-  if (!fi.Find(archiveName) || fi.IsDir())
-  {
-    return S_FALSE;
-  }
+  //NFile::NFind::CFileInfoW fi;
+  //if (!fi.Find(archiveName) || fi.IsDir())
+  //{
+  //  return S_FALSE;
+  //}
 
 	HRESULT result;
 
@@ -164,12 +164,12 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std
   UString archiveName = archiveNameW.c_str();
   UString outDir = outDirW.c_str();
 
-  NFile::NFind::CFileInfoW fi;
+  /*NFile::NFind::CFileInfoW fi;
   if (!fi.Find(archiveName) || fi.IsDir())
   {
     //callback.OpenResult(archiveNameW.c_str(), S_FALSE);
     return S_FALSE;
-  }
+  }*/
 
 	CCodecs *codecs = new CCodecs;
 	CMyComPtr<IUnknown> compressCodecsInfo = codecs;
