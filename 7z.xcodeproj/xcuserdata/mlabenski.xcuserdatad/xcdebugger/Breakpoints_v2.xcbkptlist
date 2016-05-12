@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "7z/Archive.mm"
-            timestampString = "481715655.791984"
+            timestampString = "484753751.402919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-decompressItemToDir:"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-compressItem:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

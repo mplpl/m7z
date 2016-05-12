@@ -117,7 +117,9 @@ public:
 -(NSArray *)list {
     
     std::vector<DirectoryItem> ra;
-    if (MLListArchive([self.name wstring], ra) != 0) {
+    int ret = MLListArchive([self.name wstring], ra);
+    if (ret != 0) {
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
         return nil;
     }
     
@@ -144,7 +146,11 @@ public:
         itemsW.push_back([item wstring]);
     }
     CallbackTest cb(self.delegate);
-    return MLCompressArchive([self.name wstring], itemsW, cb);
+    int ret = MLCompressArchive([self.name wstring], itemsW, cb);
+    if (ret) {
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
+    }
+    return ret;
 }
 
 -(int)decompressToDir:(NSString *)dir {
@@ -157,7 +163,11 @@ public:
         files.push_back(item.wstring);
     }
     CallbackTest cb(self.delegate);
-    return MLDecompressArchive([self.name wstring], [dir wstring], files, cb);
+    int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb);
+    if (ret) {
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
+    }
+    return ret;
 }
 
 
