@@ -50,8 +50,8 @@
     _archName = @"/tmp/1.7z";
     _missingArchName = @"/tmp/123.7z";
     _unpackDir = @"/tmp/1";
-    _items = [NSArray arrayWithObjects:@"/tmp/1.txt", @"/tmp/2.txt", @"/tmp/3.txt", nil];
-    _itemsToUnpack = [NSArray arrayWithObjects:@"2.txt", @"3.txt", nil];
+    _items = @[@"/tmp/1.txt", @"/tmp/2.txt", @"/tmp/3.txt"];
+    _itemsToUnpack = @[@"2.txt", @"3.txt"];
     
     
     NSError *err;
