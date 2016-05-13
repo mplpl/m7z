@@ -15,19 +15,18 @@
 -(void)error:(NSString *)err;
 -(void)done;
 
--(NSString *)password;
-
-@property (readwrite) unsigned long long total;
-@property (readwrite) unsigned long long completed;
+@property (readonly) NSString *password;
+@property unsigned long long total;
+@property unsigned long long completed;
 
 @end
 
 
 @interface Archive : NSObject
 
--initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name;
 
--(NSArray *)list;
+@property (readonly) NSArray *list;
 -(int)compressItem:(NSArray *)items;
 -(int)decompressToDir:(NSString *)dir;
 -(int)decompressItems:(NSArray *)items toDir:(NSString *)dir;

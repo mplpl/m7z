@@ -68,7 +68,7 @@ public:
     }
     
     const wchar_t *GetPassword() {
-        NSString *pass = [delegat password];
+        NSString *pass = delegat.password;
         if (!pass) {
             return L"";
         } else {
@@ -105,7 +105,7 @@ public:
 
 @implementation Archive
 
--(id)initWithName:(NSString *)name {
+-(instancetype)initWithName:(NSString *)name {
     
     if (self = [super init]) {
         _name = name;
@@ -131,8 +131,8 @@ public:
         Item *item = [[Item alloc] initWithName:[NSString stringWithWstring:di.name]
                                            size:di.size
                                  sizeCompressed:di.sizeCompressed
-                                           date:[NSString stringWithUTF8String:di.date.c_str()]
-                                          attrs:[NSString stringWithUTF8String:di.attrs.c_str()]];
+                                           date:@(di.date.c_str())
+                                          attrs:@(di.attrs.c_str())];
         [retArr addObject:item];
     }
     

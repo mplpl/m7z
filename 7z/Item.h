@@ -10,7 +10,7 @@
 
 @interface Item : NSObject
 
--initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs;
+- (instancetype)initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs;
 
 @property (readonly) NSString *name;
 @property (readonly) int size;
