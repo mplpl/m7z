@@ -15,4 +15,6 @@
 
 -(std::wstring)wstring;
 
+-(const wchar_t*)wcstr;
+
 @end

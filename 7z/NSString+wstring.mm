@@ -22,4 +22,9 @@
     return (const wchar_t *)[self cStringUsingEncoding:NSUTF32StringEncoding];
 }
 
+-(const wchar_t *)wcstr {
+    
+    return (const wchar_t *)[self cStringUsingEncoding:NSUTF32StringEncoding];
+}
+
 @end
