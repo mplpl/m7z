@@ -68,11 +68,13 @@ public:
     }
     
     const wchar_t *GetPassword() {
+        
         NSString *pass = delegat.password;
+
         if (!pass) {
             return L"";
         } else {
-            return [pass wstring].c_str();
+            return [pass wcstr];
         }
     }
     
