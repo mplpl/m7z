@@ -12,7 +12,7 @@
 
 -(void)item:(NSString *)name;
 
--(void)error:(NSString *)err;
+-(BOOL)error:(NSString *)err;
 -(void)done;
 
 @property (readonly) NSString *password;
@@ -30,7 +30,7 @@
 -(int)compressItem:(NSArray *)items;
 -(int)decompressToDir:(NSString *)dir;
 -(int)decompressItems:(NSArray *)items toDir:(NSString *)dir;
-
+-(NSString *)errorForCode:(NSInteger)code kind:(NSInteger)kind;
 
 @property (readonly) NSString *name;
 @property (assign) id<ArchiveDelegate> delegate;

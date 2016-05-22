@@ -48,9 +48,24 @@ static BOOL IsFileTimeZero(CONST FILETIME *lpFileTime)
 #define X_UOINITFAILED ((HRESULT)300002)
 #define X_CANTCREATEOUTDIR ((HRESULT)300003)
 
-const wchar_t *GetErrorMessage(HRESULT result)
+//kind: 0-open, 1-extract, 2-pack
+const wchar_t *GetErrorMessage(HRESULT result, int kind)
 {
-	if (result == E_ABORT)
+    if (kind == 1) {
+        if (result == NArchive::NExtract::NOperationResult::kUnSupportedMethod) {
+            return L"Unsuported compression method";
+        } else if (result == NArchive::NExtract::NOperationResult::kDataError) {
+            return L"Data error";
+        } else if (result == NArchive::NExtract::NOperationResult::kCRCError) {
+            return L"CRC error";
+        } else if (result == 1000 + NArchive::NExtract::NOperationResult::kDataError) {
+            return L"Data error in encrypted file. Wrong password?";
+        } else if (result == 1000 + NArchive::NExtract::NOperationResult::kCRCError) {
+            return L"CRC error in encrypted file. Wrong password?";
+        }
+    }
+    
+    if (result == E_ABORT)
   {
     return L"Aborted";
 	}
@@ -239,6 +254,7 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std
 			      0);
 	result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
 	callback.FinishArchive();
+    
   return result;
 }
 

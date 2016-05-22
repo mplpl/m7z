@@ -23,6 +23,6 @@ public:
 extern "C" int MLListArchive(std::wstring archiveName, std::vector<DirectoryItem> &retValue);
 extern "C" int MLCompressArchive(std::wstring archiveName, std::vector<std::wstring> files, MLUpdateCallback &callback);
 extern "C" int MLDecompressArchive(std::wstring archiveName, std::wstring outDir, std::vector<std::wstring> files, MLExtractCallback &callback);
-extern "C" const wchar_t *GetErrorMessage(int result);
+extern "C" const wchar_t *GetErrorMessage(int result, int kind);
 
 #endif

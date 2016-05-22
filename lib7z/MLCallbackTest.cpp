@@ -27,6 +27,7 @@ using namespace std;
 int MLCallbackTest::SetTotal(unsigned long long size)
 {
   wcout << "[SetTotal] " << size << endl;
+  return S_OK;
 }
 
 int MLCallbackTest::CanNotFindError(const wchar_t *name, int systemError)
@@ -88,7 +89,7 @@ int MLCallbackTest::MessageError(const wchar_t *message)
     return S_OK;
 }
 
-int MLCallbackTest::SetOperationResult(int operationResult)
+int MLCallbackTest::SetOperationResult(int operationResult, int kind)
 {
     switch(operationResult)
     {
@@ -104,10 +105,16 @@ int MLCallbackTest::SetOperationResult(int operationResult)
       case NArchive::NExtract::NOperationResult::kDataError:
         wcout << "[SetOperationResult] kDataError" << endl;
         break;
-      default:
+      case 1000 + NArchive::NExtract::NOperationResult::kCRCError:
+        wcout << "[SetOperationResult] 1000 + kCRCError" << endl;
+        break;
+      case 1000 + NArchive::NExtract::NOperationResult::kDataError:
+        wcout << "[SetOperationResult] 1000 + kDataError" << endl;
+        break;
+    default:
         wcout << "[SetOperationResult] UnknownError" << endl;
     }
-    return S_OK;
+    return (operationResult==0)?S_OK:operationResult;
 
 }
 
@@ -118,5 +125,10 @@ int MLCallbackTest::ThereAreNoFiles()
 
 const wchar_t *MLCallbackTest::GetPassword()
 {
-  return L"";
+  return pass.c_str();
+}
+
+void MLCallbackTest::setPassword(std::wstring newpass)
+{
+    pass = newpass;
 }

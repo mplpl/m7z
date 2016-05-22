@@ -51,12 +51,8 @@ public:
   HRESULT SetPassword(const UString &password);
   STDMETHOD(CryptoGetTextPassword)(BSTR *password);
 
-  bool PasswordIsDefined;
-  UString Password;
-
 private:
   MLExtractCallback *cb;
-
 };
 
 #endif
