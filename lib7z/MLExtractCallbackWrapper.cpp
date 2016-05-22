@@ -39,7 +39,12 @@ STDMETHODIMP MLExtractCallbackWrapper::MessageError(const wchar_t *message)
 
 STDMETHODIMP MLExtractCallbackWrapper::SetOperationResult(Int32 operationResult, bool encrypted)
 {
-  return cb->SetOperationResult(operationResult);
+  if (encrypted && (operationResult == NArchive::NExtract::NOperationResult::kCRCError ||
+                    operationResult == NArchive::NExtract::NOperationResult::kDataError))
+  {
+    operationResult = operationResult + 1000;
+  }
+  return cb->SetOperationResult(operationResult, 1);
 }
 
 HRESULT MLExtractCallbackWrapper::SetPassword(const UString &password)
@@ -69,7 +74,7 @@ HRESULT MLExtractCallbackWrapper::BeforeOpen(const wchar_t *name)
 
 HRESULT MLExtractCallbackWrapper::OpenResult(const wchar_t *name, HRESULT result, bool encrypted)
 {
-    return S_OK;
+  return S_OK;
 }
 
 HRESULT MLExtractCallbackWrapper::ThereAreNoFiles()

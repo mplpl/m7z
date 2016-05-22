@@ -23,7 +23,7 @@ public:
   virtual int SetTotal(unsigned long long size) = 0;
   virtual int DecompressingItem(const wchar_t *name, bool isFolder, int askExtractMode, const unsigned long long *position) = 0;
   virtual int SetCompleted(const unsigned long long *completeValue) = 0;
-  virtual int SetOperationResult(int operationResult) = 0;
+  virtual int SetOperationResult(int operationResult, int kind) = 0;
   virtual int FinishArchive() = 0;
 
   virtual int AskOverwrite(

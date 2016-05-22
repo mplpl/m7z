@@ -45,9 +45,12 @@ public:
         return 0;
     }
     
-    int SetOperationResult(int x) {
+    int SetOperationResult(int x, int kind) {
         if (x != 0) {
-            [delegat error:[NSString stringWithWstring:GetErrorMessage(x)]];
+            if ([delegat error:[NSString stringWithWstring:GetErrorMessage(x, kind)]] == NO)
+            {
+                return x;
+            }
         }
         return 0;
     }
@@ -121,7 +124,7 @@ public:
     std::vector<DirectoryItem> ra;
     int ret = MLListArchive([self.name wstring], ra);
     if (ret != 0) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 0)]];
         return nil;
     }
     
@@ -150,7 +153,7 @@ public:
     CallbackTest cb(self.delegate);
     int ret = MLCompressArchive([self.name wstring], itemsW, cb);
     if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
     }
     return ret;
 }
@@ -167,10 +170,13 @@ public:
     CallbackTest cb(self.delegate);
     int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb);
     if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 1)]];
     }
     return ret;
 }
 
+-(NSString *)errorForCode:(NSInteger)code kind:(NSInteger)kind {
+    return [NSString stringWithWstring:GetErrorMessage(code, kind)];
+}
 
 @end

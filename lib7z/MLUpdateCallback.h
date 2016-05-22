@@ -13,7 +13,7 @@ public:
   virtual int SetTotal(unsigned long long size) = 0;
   virtual int CompressingItem(const wchar_t *name, bool isAnti) = 0;
   virtual int SetCompleted(const unsigned long long *completeValue) = 0;
-  virtual int SetOperationResult(int x) = 0;
+  virtual int SetOperationResult(int x, int kind) = 0;
   virtual int FinishArchive() = 0;
 
   virtual const wchar_t *GetPassword() = 0;

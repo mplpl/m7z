@@ -94,7 +94,7 @@ HRESULT MLUpdateCallbackWrapper::OpenFileError(const wchar_t *name, DWORD system
 
 HRESULT MLUpdateCallbackWrapper::SetOperationResult(Int32 x)
 {
-  return cb->SetOperationResult(x);
+  return cb->SetOperationResult(x, 2);
 }
 
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *password)
