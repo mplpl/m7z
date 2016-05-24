@@ -176,7 +176,7 @@ public:
 }
 
 -(NSString *)errorForCode:(NSInteger)code kind:(NSInteger)kind {
-    return [NSString stringWithWstring:GetErrorMessage(code, kind)];
+    return [NSString stringWithWstring:GetErrorMessage((int)code, (int)kind)];
 }
 
 @end
