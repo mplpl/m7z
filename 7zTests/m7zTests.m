@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../7z/frm7z.h"
+#import "../7z/m7z.h"
 
 @interface frmDelegate : NSObject<ArchiveDelegate>
 @end
@@ -23,8 +23,9 @@
 -(void)done {
     NSLog(@"Done:");
 }
--(void)error:(NSString *)err {
+-(BOOL)error:(NSString *)err {
     NSLog(@"%@", err);
+    return NO;
 }
 -(NSString *)password {
     NSLog(@"Password asked");
