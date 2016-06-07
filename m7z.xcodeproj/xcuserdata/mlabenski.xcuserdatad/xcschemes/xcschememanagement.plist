@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>lib7z 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>lib7z.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>C11C83EA1CF230AC00AF9EC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1A95BD31CF4F43800AB00C2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
