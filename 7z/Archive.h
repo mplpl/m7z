@@ -18,6 +18,7 @@
 @property (readonly) NSString *password;
 @property unsigned long long total;
 @property unsigned long long completed;
+@property (readonly) BOOL shouldBreak;
 
 @end
 
@@ -28,8 +29,10 @@
 
 @property (readonly) NSArray *list;
 -(int)compressItem:(NSArray *)items;
+-(int)compressItem:(NSArray *)items level:(NSInteger)compressionLevel;
 -(int)decompressToDir:(NSString *)dir;
 -(int)decompressItems:(NSArray *)items toDir:(NSString *)dir;
+-(int)deleteItems:(NSArray *)items;
 -(NSString *)errorForCode:(NSInteger)code kind:(NSInteger)kind;
 
 @property (readonly) NSString *name;

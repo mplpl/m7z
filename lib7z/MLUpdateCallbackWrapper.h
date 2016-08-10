@@ -8,22 +8,22 @@
 
 class MLUpdateCallbackWrapper: public IUpdateCallbackUI2
 {
-
+    
 public:
-  bool PasswordIsDefined;
-  UString Password;
-  bool AskPassword;
-  MLUpdateCallback *cb;
-
-  MLUpdateCallbackWrapper(MLUpdateCallback &cb):
-      cb(&cb),
-      PasswordIsDefined(false),
-      AskPassword(false)
-      {}
-
-  ~MLUpdateCallbackWrapper() { Finilize(); }
-
-  INTERFACE_IUpdateCallbackUI2(;)
+    bool PasswordIsDefined;
+    UString Password;
+    bool AskPassword;
+    MLUpdateCallback *cb;
+    
+    MLUpdateCallbackWrapper(MLUpdateCallback &cb):
+        cb(&cb),
+        PasswordIsDefined(false),
+        AskPassword(false)
+    {}
+    
+    ~MLUpdateCallbackWrapper() { Finilize(); }
+    
+    INTERFACE_IUpdateCallbackUI2(;)
 };
 
 #endif

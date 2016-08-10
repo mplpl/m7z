@@ -26,52 +26,52 @@ using namespace std;
 
 int MLCallbackTest::SetTotal(unsigned long long size)
 {
-  wcout << "[SetTotal] " << size << endl;
-  return S_OK;
+    wcout << "[SetTotal] " << size << endl;
+    return S_OK;
 }
 
 int MLCallbackTest::CanNotFindError(const wchar_t *name, int systemError)
 {
-  wcout << "[CanNotFindError] Cannot find  " << name << " (error " << systemError << ")" << endl;
-  return S_FALSE;
+    wcout << "[CanNotFindError] Cannot find  " << name << " (error " << systemError << ")" << endl;
+    return S_FALSE;
 }
 
 int MLCallbackTest::FinishArchive()
 {
-  wcout << "[FinishArchive] Done" << endl;
-  return S_OK;
+    wcout << "[FinishArchive] Done" << endl;
+    return S_OK;
 }
 
 int MLCallbackTest::SetCompleted(const unsigned long long *completeValue)
 {
-  MT_LOCK
-  wcout << "[SetCompleted] " << *completeValue << endl;
-  //wcout << ",";
-  wcout.flush();
-  return S_OK;
+    MT_LOCK
+    wcout << "[SetCompleted] " << *completeValue << endl;
+    //wcout << ",";
+    wcout.flush();
+    return S_OK;
 }
 
 int MLCallbackTest::CompressingItem(const wchar_t *name, bool isAnti)
 {
-  MT_LOCK
-  if(isAnti)
-    wcout << "[CompressingItem] Anti item    " << name << endl;
-  else
-    wcout << "[CompressingItem] Compressing  " << name << endl;
-  return S_OK;
+    MT_LOCK
+    if(isAnti)
+        wcout << "[CompressingItem] Anti item    " << name << endl;
+    else
+        wcout << "[CompressingItem] Compressing  " << name << endl;
+    return S_OK;
 }
 
 int MLCallbackTest::OpenFileError(const wchar_t *name, int systemError)
 {
-  MT_LOCK
-  wcout << "[OpenFileError] " << name << " " << systemError << endl;
-  return S_FALSE;
-  }
+    MT_LOCK
+    wcout << "[OpenFileError] " << name << " " << systemError << endl;
+    return S_FALSE;
+}
 
 int MLCallbackTest::AskOverwrite(
-    const wchar_t *existName, const time_t *existTime, const unsigned long long *existSize,
-    const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize,
-    int *answer)
+                                 const wchar_t *existName, const time_t *existTime, const unsigned long long *existSize,
+                                 const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize,
+                                 int *answer)
 {
     *answer = NOverwriteAnswer::kYesToAll;
     return S_OK;
@@ -93,29 +93,29 @@ int MLCallbackTest::SetOperationResult(int operationResult, int kind)
 {
     switch(operationResult)
     {
-      case NArchive::NExtract::NOperationResult::kOK:
-        wcout << "[SetOperationResult] OK" << endl;
-        break;
-      case NArchive::NExtract::NOperationResult::kUnSupportedMethod:
-        wcout << "[SetOperationResult] kUnSupportedMethod" << endl;
-        break;
-      case NArchive::NExtract::NOperationResult::kCRCError:
-        wcout << "[SetOperationResult] kCRCError" << endl;
-        break;
-      case NArchive::NExtract::NOperationResult::kDataError:
-        wcout << "[SetOperationResult] kDataError" << endl;
-        break;
-      case 1000 + NArchive::NExtract::NOperationResult::kCRCError:
-        wcout << "[SetOperationResult] 1000 + kCRCError" << endl;
-        break;
-      case 1000 + NArchive::NExtract::NOperationResult::kDataError:
-        wcout << "[SetOperationResult] 1000 + kDataError" << endl;
-        break;
-    default:
-        wcout << "[SetOperationResult] UnknownError" << endl;
+        case NArchive::NExtract::NOperationResult::kOK:
+            wcout << "[SetOperationResult] OK" << endl;
+            break;
+        case NArchive::NExtract::NOperationResult::kUnSupportedMethod:
+            wcout << "[SetOperationResult] kUnSupportedMethod" << endl;
+            break;
+        case NArchive::NExtract::NOperationResult::kCRCError:
+            wcout << "[SetOperationResult] kCRCError" << endl;
+            break;
+        case NArchive::NExtract::NOperationResult::kDataError:
+            wcout << "[SetOperationResult] kDataError" << endl;
+            break;
+        case 1000 + NArchive::NExtract::NOperationResult::kCRCError:
+            wcout << "[SetOperationResult] 1000 + kCRCError" << endl;
+            break;
+        case 1000 + NArchive::NExtract::NOperationResult::kDataError:
+            wcout << "[SetOperationResult] 1000 + kDataError" << endl;
+            break;
+        default:
+            wcout << "[SetOperationResult] UnknownError" << endl;
     }
     return (operationResult==0)?S_OK:operationResult;
-
+    
 }
 
 int MLCallbackTest::ThereAreNoFiles()
@@ -125,7 +125,7 @@ int MLCallbackTest::ThereAreNoFiles()
 
 const wchar_t *MLCallbackTest::GetPassword()
 {
-  return pass.c_str();
+    return pass.c_str();
 }
 
 void MLCallbackTest::setPassword(std::wstring newpass)

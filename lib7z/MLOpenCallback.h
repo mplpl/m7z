@@ -8,12 +8,12 @@
 class MLOpenCallback: public IOpenCallbackUI
 {
 public:
-  INTERFACE_IOpenCallbackUI(;)
-
-  bool PasswordIsDefined;
-  bool PasswordWasAsked;
-  UString Password;
-  MLOpenCallback(): PasswordIsDefined(false), PasswordWasAsked(false) {}
+    INTERFACE_IOpenCallbackUI(;)
+    
+    bool PasswordIsDefined;
+    bool PasswordWasAsked;
+    UString Password;
+    MLOpenCallback(): PasswordIsDefined(false), PasswordWasAsked(false) {}
 };
 
 #endif

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "7z/Archive.mm"
-            timestampString = "484753751.402919"
+            timestampString = "492518970.450982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-compressItem:"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "-compressItem:level:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -32,6 +32,100 @@
             startingLineNumber = "34"
             endingLineNumber = "34"
             landmarkName = "CompressingItem(const wchar_t *name, bool isAnti)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "7zTests/m7zTests.m"
+            timestampString = "492441020.68022"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-testCompress"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testCompress]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mlabenski/Dropbox/work/m7z/7zTests/m7zTests.m"
+                  timestampString = "492429038.19696"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "203">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testCompress]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mlabenski/Dropbox/work/m7z/7zTests/m7zTests.m"
+                  timestampString = "492429038.197205"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "744">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testCompress]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mlabenski/Dropbox/work/m7z/7zTests/m7zTests.m"
+                  timestampString = "492429038.197363"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "814">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testCompress]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mlabenski/Dropbox/work/m7z/7zTests/m7zTests.m"
+                  timestampString = "492429038.197579"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "936">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib7z/lib7z.cpp"
+            timestampString = "492442671.278589"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
