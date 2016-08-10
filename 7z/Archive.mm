@@ -32,7 +32,7 @@ public:
     
     int CompressingItem(const wchar_t *name, bool isAnti){
         [delegat item:[NSString stringWithWstring:name]];
-        return 0;
+        return delegat.shouldBreak;
     }
     
     int DecompressingItem(const wchar_t *name, bool isFolder, int askExtractMode, const unsigned long long *position) {
@@ -42,7 +42,7 @@ public:
     
     int SetCompleted(const UInt64 *completeValue) {
         delegat.completed = *completeValue;
-        return 0;
+        return delegat.shouldBreak;
     }
     
     int SetOperationResult(int x, int kind) {
@@ -146,12 +146,16 @@ public:
 }
 
 -(int)compressItem:(NSArray *)items {
+    return [self compressItem:items level:9];
+}
+
+-(int)compressItem:(NSArray *)items level:(NSInteger)compressionLevel {
     std::vector<std::wstring> itemsW;
     for (NSString *item in items) {
         itemsW.push_back([item wstring]);
     }
     CallbackTest cb(self.delegate);
-    int ret = MLCompressArchive([self.name wstring], itemsW, cb);
+    int ret = MLCompressArchive([self.name wstring], itemsW, cb, (int)compressionLevel);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
     }
@@ -171,6 +175,19 @@ public:
     int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 1)]];
+    }
+    return ret;
+}
+
+-(int)deleteItems:(NSArray *)items {
+    std::vector<std::wstring> itemsW;
+    for (NSString *item in items) {
+        itemsW.push_back([item wstring]);
+    }
+    CallbackTest cb(self.delegate);
+    int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb);
+    if (ret) {
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
     }
     return ret;
 }
