@@ -155,7 +155,7 @@ public:
         itemsW.push_back([item wstring]);
     }
     CallbackTest cb(self.delegate);
-    int ret = MLCompressArchive([self.name wstring], itemsW, cb, (int)compressionLevel);
+    int ret = MLCompressArchive([self.name wstring], itemsW, cb, (int)compressionLevel, [self.workDir wstring]);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
     }
@@ -172,7 +172,7 @@ public:
         files.push_back(item.wstring);
     }
     CallbackTest cb(self.delegate);
-    int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb);
+    int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb, [self.workDir wstring]);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 1)]];
     }
@@ -185,7 +185,7 @@ public:
         itemsW.push_back([item wstring]);
     }
     CallbackTest cb(self.delegate);
-    int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb);
+    int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb, [self.workDir wstring]);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
     }

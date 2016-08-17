@@ -37,6 +37,7 @@
 
 @property (readonly) NSString *name;
 @property (assign) id<ArchiveDelegate> delegate;
+@property NSString *workDir;
 
 @end
 

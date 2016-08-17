@@ -174,7 +174,7 @@ HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
 }
 
 
-HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files, MLExtractCallback &callback)
+HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files, MLExtractCallback &callback, std::wstring workDir)
 {
     UString archiveName = archiveNameW.c_str();
     UString outDir = outDirW.c_str();
@@ -279,7 +279,7 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std
 }
 
 
-HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel = 9)
+HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel, std::wstring workDir)
 {
     UString archiveName = archiveNameW.c_str();
     std::vector<UString> files;
@@ -321,7 +321,8 @@ HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     {
         return X_UOINITFAILED;
     }
-    
+    //uo.ArchivePath.TempPrefix = L"/tmp/";
+    uo.WorkingDir = workDir.c_str();
     CUpdateErrorInfo errorInfo;
     
     HRESULT res = UpdateArchive(codecs,
@@ -337,13 +338,13 @@ HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
 
 
 
-HRESULT MLCompressArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel)
+HRESULT MLCompressArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel, std::wstring workDir)
 {
-    return MLGenericCommand(L"a", archiveNameW, filesW, cb, compressionLevel);
+    return MLGenericCommand(L"a", archiveNameW, filesW, cb, compressionLevel, workDir);
 }
 
 
-HRESULT MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb)
+HRESULT MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, std::wstring workDir)
 {
-    return MLGenericCommand(L"d", archiveNameW, filesW, cb);
+    return MLGenericCommand(L"d", archiveNameW, filesW, cb, 9, workDir);
 }
