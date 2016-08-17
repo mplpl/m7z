@@ -21,9 +21,9 @@ public:
 };
 
 extern "C" int MLListArchive(std::wstring archiveName, std::vector<DirectoryItem> &retValue);
-extern "C" int MLCompressArchive(std::wstring archiveName, std::vector<std::wstring> files, MLUpdateCallback &callback, int compressionLevel = 9);
-extern "C" int MLDecompressArchive(std::wstring archiveName, std::wstring outDir, std::vector<std::wstring> files, MLExtractCallback &callback);
-extern "C" int MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb);
+extern "C" int MLCompressArchive(std::wstring archiveName, std::vector<std::wstring> files, MLUpdateCallback &callback, int compressionLevel = 9, std::wstring workDir = L"");
+extern "C" int MLDecompressArchive(std::wstring archiveName, std::wstring outDir, std::vector<std::wstring> files, MLExtractCallback &callback, std::wstring workDir = L"");
+extern "C" int MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, std::wstring workDir = L"");
 extern "C" const wchar_t *GetErrorMessage(int result, int kind);
 
 #endif

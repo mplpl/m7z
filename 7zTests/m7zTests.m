@@ -16,6 +16,7 @@
 
 @synthesize total;
 @synthesize completed;
+@synthesize shouldBreak;
 
 -(void)item:(NSString *)name {
     NSLog(@"%@", name);

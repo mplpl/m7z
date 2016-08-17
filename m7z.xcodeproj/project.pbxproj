@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B8C02511D5A071A007F3894 /* makefile.p7zip in Resources */ = {isa = PBXBuildFile; fileRef = 6B8C02501D5A071A007F3894 /* makefile.p7zip */; };
 		6BA394321CA051AE001FD2C5 /* m7z.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA394311CA051AE001FD2C5 /* m7z.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BA394391CA051AE001FD2C5 /* m7z.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA3942E1CA051AE001FD2C5 /* m7z.framework */; };
 		6BA3943E1CA051AE001FD2C5 /* m7zTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA3943D1CA051AE001FD2C5 /* m7zTests.m */; };
@@ -277,7 +276,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8C02511D5A071A007F3894 /* makefile.p7zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
