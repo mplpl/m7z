@@ -99,7 +99,17 @@ HRESULT MLUpdateCallbackWrapper::SetOperationResult(Int32 x)
 
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *password)
 {
-    return CryptoGetTextPassword(password);
+    const wchar_t *pass = cb->GetPassword();
+    if (pass)
+    {
+        *passwordIsDefined = 1;
+        return StringToBstr(pass, password);
+    }
+    else
+    {
+        *passwordIsDefined = 0;
+        return S_OK;
+    }
 }
 
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword(BSTR *password)

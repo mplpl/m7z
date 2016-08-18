@@ -75,7 +75,7 @@ public:
         NSString *pass = delegat.password;
 
         if (!pass) {
-            return L"";
+            return NULL;
         } else {
             return [pass wcstr];
         }
