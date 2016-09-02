@@ -61,6 +61,7 @@ STDMETHODIMP MLExtractCallbackWrapper::CryptoGetTextPassword(BSTR *password)
     }
     else
     {
+        StringToBstr(L"", password);
         return S_OK;
     }
 }

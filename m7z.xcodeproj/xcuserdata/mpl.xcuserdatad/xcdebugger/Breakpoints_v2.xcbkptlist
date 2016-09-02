@@ -75,7 +75,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "210"
             endingLineNumber = "210"
-            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback)"
+            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback, std::wstring workDir)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -91,7 +91,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
             endingLineNumber = "206"
-            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback)"
+            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback, std::wstring workDir)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -107,7 +107,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
             endingLineNumber = "205"
-            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback)"
+            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback, std::wstring workDir)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
