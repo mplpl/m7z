@@ -226,7 +226,7 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std
         //continue;
         if (files.size())
         {
-            // firstly simly check if given items in on the list (files)
+            // firstly simply check if given items in on the list (files)
             if (std::find(files.begin(), files.end(), std::wstring(filePath)) == files.end()) {
                 // not found
                 
