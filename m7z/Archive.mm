@@ -17,6 +17,8 @@
 #import "MLUpdateCallback.h"
 #import "MLExtractCallback.h"
 
+using namespace lib7z;
+
 class CallbackTest: public MLUpdateCallback, public MLExtractCallback
 {
     
@@ -30,7 +32,7 @@ public:
         return 0;
     }
     
-    int CompressingItem(const wchar_t *name, bool isAnti){
+    int CompressingItem(const wchar_t *name, bool isAnti, int mode){
         [delegat item:[NSString stringWithWstring:name]];
         return delegat.shouldBreak;
     }
@@ -47,7 +49,8 @@ public:
     
     int SetOperationResult(int x, int kind) {
         if (x != 0) {
-            if ([delegat error:[NSString stringWithWstring:GetErrorMessage(x, kind)]] == NO)
+            //if ([delegat error:[NSString stringWithWstring:GetErrorMessage(x, kind)]] == NO)
+            if ([delegat error:[NSString stringWithWstring:GetExtractOperationErrorMessage(x)]] == NO)
             {
                 return x;
             }
@@ -66,7 +69,7 @@ public:
         int *answer) {
         
         //NSLog(@"%@", @"TEST");
-        *answer = AskOverwrite::Answer::kYesToAll;
+        *answer = AskOverwrite::kYesToAll;
         return 0;
     }
     
@@ -124,7 +127,7 @@ public:
     std::vector<DirectoryItem> ra;
     int ret = MLListArchive([self.name wstring], ra);
     if (ret != 0) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 0)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
         return nil;
     }
     
@@ -157,7 +160,7 @@ public:
     CallbackTest cb(self.delegate);
     int ret = MLCompressArchive([self.name wstring], itemsW, cb, (int)compressionLevel, [self.workDir wstring]);
     if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
     }
     return ret;
 }
@@ -174,7 +177,7 @@ public:
     CallbackTest cb(self.delegate);
     int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb, [self.workDir wstring]);
     if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 1)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
     }
     return ret;
 }
@@ -187,13 +190,13 @@ public:
     CallbackTest cb(self.delegate);
     int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb, [self.workDir wstring]);
     if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret, 2)]];
+        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
     }
     return ret;
 }
 
 -(NSString *)errorForCode:(NSInteger)code kind:(NSInteger)kind {
-    return [NSString stringWithWstring:GetErrorMessage((int)code, (int)kind)];
+    return [NSString stringWithWstring:GetErrorMessage((int)code)];
 }
 
 @end

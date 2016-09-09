@@ -7,12 +7,8 @@
 #endif
 
 #include "Common/MyInitGuid.h"
-#include "7zip/UI/Console/UpdateCallbackConsole.h"
-#include "7zip/UI/Console/ExtractCallbackConsole.h"
-#include "Windows/Error.h"
-#include "Windows/PropVariant.h"
-#include "Windows/PropVariantConversions.h"
-#include "Windows/FileDir.h"
+#include "Windows/ErrorMsg.h"
+#include "Windows/PropVariantConv.h"
 #include "7zip/UI/Common/ArchiveCommandLine.h"
 
 #include "lib7z.h"
@@ -22,87 +18,61 @@
 
 #include <vector>
 #include <string>
-#include <sstream>
-#include <algorithm>
 
-using namespace NWindows;
-using namespace NFile;
 
-static const char kEmptyAttribChar = '.';
+namespace lib7z
+{
+
+
 static void GetAttribString(DWORD wa, bool isDir, char *s)
 {
-    s[0] = ((wa & FILE_ATTRIBUTE_DIRECTORY) != 0 || isDir) ? 'D' : kEmptyAttribChar;
-    s[1] = ((wa & FILE_ATTRIBUTE_READONLY) != 0) ? 'R': kEmptyAttribChar;
-    s[2] = ((wa & FILE_ATTRIBUTE_HIDDEN) != 0) ? 'H': kEmptyAttribChar;
-    s[3] = ((wa & FILE_ATTRIBUTE_SYSTEM) != 0) ? 'S': kEmptyAttribChar;
-    s[4] = ((wa & FILE_ATTRIBUTE_ARCHIVE) != 0) ? 'A': kEmptyAttribChar;
+    s[0] = ((wa & FILE_ATTRIBUTE_DIRECTORY) != 0 || isDir) ? 'D' : '.';
+    s[1] = ((wa & FILE_ATTRIBUTE_READONLY) != 0) ? 'R': '.';
+    s[2] = ((wa & FILE_ATTRIBUTE_HIDDEN) != 0) ? 'H': '.';
+    s[3] = ((wa & FILE_ATTRIBUTE_SYSTEM) != 0) ? 'S': '.';
+    s[4] = ((wa & FILE_ATTRIBUTE_ARCHIVE) != 0) ? 'A': '.';
     s[5] = '\0';
 }
 
-static BOOL IsFileTimeZero(CONST FILETIME *lpFileTime)
+std::wstring GetErrorMessage(HRESULT result)
 {
-    return (lpFileTime->dwLowDateTime == 0) && (lpFileTime->dwHighDateTime == 0);
+    switch(result)
+    {
+        case OperationReturnCode::OK:                  return L"OK";
+        case OperationReturnCode::ABORT:               return L"Aborted";
+        case OperationReturnCode::FERROR:              return L"Can not open file as archive";
+        case OperationReturnCode::OUTOFMEMORY:         return L"Can't allocate required memory";
+        case OperationReturnCode::CANTLOADCODECS:      return L"Can't load codecs";
+        case OperationReturnCode::UOINITFAILED:        return L"Can't initialize operation";
+        case OperationReturnCode::CANTCREATEOUTDIR:    return L"Can't create output dir";
+        case OperationReturnCode::CANTFINDARCHIVE:     return L"Can't find archive";
+        default:
+            return std::wstring(NWindows::NError::MyFormatMessage(result));
+    }
 }
 
-#define X_CANTLOADCODECS ((HRESULT)300001)
-#define X_UOINITFAILED ((HRESULT)300002)
-#define X_CANTCREATEOUTDIR ((HRESULT)300003)
-
-//kind: 0-open, 1-extract, 2-pack
-const wchar_t *GetErrorMessage(HRESULT result, int kind)
+std::wstring GetExtractOperationErrorMessage(int result)
 {
-    if (kind == 1) {
-        if (result == NArchive::NExtract::NOperationResult::kUnSupportedMethod) {
-            return L"Unsuported compression method";
-        } else if (result == NArchive::NExtract::NOperationResult::kDataError) {
-            return L"Data error";
-        } else if (result == NArchive::NExtract::NOperationResult::kCRCError) {
-            return L"CRC error";
-        } else if (result == 1000 + NArchive::NExtract::NOperationResult::kDataError) {
-            return L"Data error in encrypted file. Wrong password?";
-        } else if (result == 1000 + NArchive::NExtract::NOperationResult::kCRCError) {
-            return L"CRC error in encrypted file. Wrong password?";
-        }
+    switch (result) {
+        case ExtractOperationResult::kOK:                   return L"OK";
+        case ExtractOperationResult::kUnsupportedMethod:    return L"Unsuported compression method";
+        case ExtractOperationResult::kDataError:            return L"Data error";
+        case ExtractOperationResult::kCRCError:             return L"CRC error";
+        case 1000 + ExtractOperationResult::kDataError:     return L"Data error in encrypted file. Wrong password?";
+        case 1000 + ExtractOperationResult::kCRCError:      return L"CRC error in encrypted file. Wrong password?";
+        case ExtractOperationResult::kUnavailable:          return L"Archive is not available";
+        default:                                            return L"Unknown error";
     }
-    
-    if (result == E_ABORT)
-    {
-        return L"Aborted";
-    }
-    else if (result == S_FALSE)
-    {
-        return L"Can not open file as archive";
-    }
-    else if (result == E_OUTOFMEMORY)
-    {
-        return L"Can't allocate required memory";
-    }
-    else if (result == X_CANTLOADCODECS)
-    {
-        return L"Can't load codecs";
-    }
-    else if (result == X_UOINITFAILED)
-    {
-        return L"Can't initialize operation";
-    }
-    else if (result == X_CANTCREATEOUTDIR)
-    {
-        return L"Can't create output dir";
-    }
-    else
-        return NError::MyFormatMessage(result);
-    
-    return L"Unknown";
 }
 
-HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue)
+ORC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue)
 {
     UString archiveName = archiveNameW.c_str();
-    //NFile::NFind::CFileInfoW fi;
-    //if (!fi.Find(archiveName) || fi.IsDir())
-    //{
-    //  return S_FALSE;
-    //}
+    NWindows::NFile::NFind::CFileInfo fi;
+    if (!fi.Find(archiveName) || fi.IsDir())
+    {
+      return OperationReturnCode::CANTFINDARCHIVE;
+    }
     
     HRESULT result;
     
@@ -111,15 +81,24 @@ HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
     result = codecs->Load();
     if (result != S_OK)
     {
-        return X_CANTLOADCODECS;
+        return OperationReturnCode::CANTLOADCODECS;
     }
     
     CIntVector formatIndices;
-    
+    CObjectVector<COpenType> types;
     MLOpenCallback openCallback;
-    
+    COpenOptions openOptions;
+    CObjectVector<CProperty> props;
+
+    openOptions.codecs = codecs;
+    openOptions.filePath = archiveName;
+    openOptions.excludedFormats = &formatIndices;
+    openOptions.types = &types;
+    openOptions.props = &props;
+
     CArchiveLink archiveLink;
-    result = archiveLink.Open2(codecs, formatIndices, false, NULL, archiveName, &openCallback);
+    //result = archiveLink.Open2(codecs, formatIndices, false, NULL, archiveName, &openCallback);
+    result = archiveLink.Open2(openOptions, &openCallback);
     if (result != S_OK) return result;
     
     const CArc &arc = archiveLink.Arcs.Back();
@@ -133,31 +112,32 @@ HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
         RINOK(res);
         
         bool isFolder;
-        RINOK(IsArchiveItemFolder(archive, i, isFolder));
+        //RINOK(IsArchiveItemFolder(archive, i, isFolder));
         
         
-        NCOM::CPropVariant propSize;
+        NWindows::NCOM::CPropVariant propSize;
         RINOK(arc.Archive->GetProperty(i, kpidSize, &propSize));
-        int size = -1;
-        if (propSize.vt != VT_EMPTY) size = ConvertPropVariantToUInt64(propSize);
+        UInt64 size = -1;
+        if (propSize.vt != VT_EMPTY) ConvertPropVariantToUInt64(propSize, size);
         
-        NCOM::CPropVariant propSizePacked;
+        NWindows::NCOM::CPropVariant propSizePacked;
         RINOK(arc.Archive->GetProperty(i, kpidPackSize, &propSizePacked));
-        int sizePacked = -1;
-        if (propSizePacked.vt != VT_EMPTY) sizePacked = ConvertPropVariantToUInt64(propSizePacked);
+        UInt64 sizePacked = -1;
+        if (propSizePacked.vt != VT_EMPTY) ConvertPropVariantToUInt64(propSizePacked, sizePacked);
         
         UInt32 iAttrs;
-        NCOM::CPropVariant propAttrs;
+        NWindows::NCOM::CPropVariant propAttrs;
         RINOK(arc.Archive->GetProperty(i, kpidAttrib, &propAttrs));
         iAttrs = (propAttrs.vt == VT_EMPTY ? 0 : propAttrs.ulVal);
         char s[8];
         GetAttribString(iAttrs, isFolder, s);
         
-        NCOM::CPropVariant propTime;
+        NWindows::NCOM::CPropVariant propTime;
         RINOK(arc.Archive->GetProperty(i, kpidMTime, &propTime));
         char ftime[32];
-        if (IsFileTimeZero(&propTime.filetime))
+        if ((propTime.filetime.dwLowDateTime == 0) && (propTime.filetime.dwHighDateTime == 0)) {
             ftime[0] = 0;
+        }
         else
         {
             FILETIME localFileTime;
@@ -174,34 +154,42 @@ HRESULT MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
 }
 
 
-HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files, MLExtractCallback &callback, std::wstring workDir)
+ORC MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files, MLExtractCallback &callback, std::wstring workDir)
 {
     UString archiveName = archiveNameW.c_str();
     UString outDir = outDirW.c_str();
     
-    /*NFile::NFind::CFileInfoW fi;
+    NWindows::NFile::NFind::CFileInfo fi;
      if (!fi.Find(archiveName) || fi.IsDir())
      {
      //callback.OpenResult(archiveNameW.c_str(), S_FALSE);
-     return S_FALSE;
-     }*/
-    
+         return OperationReturnCode::CANTFINDARCHIVE;
+     }
+
     CCodecs *codecs = new CCodecs;
     CMyComPtr<IUnknown> compressCodecsInfo = codecs;
     HRESULT result = codecs->Load();
     if (result != S_OK)
     {
-        return X_CANTLOADCODECS;
+        return OperationReturnCode::CANTLOADCODECS;
     }
     
     CIntVector formatIndices;
-    
+    CObjectVector<COpenType> types;
+    CObjectVector<CProperty> props;
     MLOpenCallback openCallback;
     
     MLExtractCallbackWrapper *ecs = new MLExtractCallbackWrapper(callback);
-    
+    COpenOptions openOptions;
+    openOptions.codecs = codecs;
+    openOptions.filePath = archiveName;
+    openOptions.types = &types;
+    openOptions.excludedFormats = &formatIndices;
+    openOptions.props = &props;
+
     CArchiveLink archiveLink;
-    result = archiveLink.Open2(codecs, formatIndices, false, NULL, archiveName, &openCallback);
+    //result = archiveLink.Open2(codecs, formatIndices, false, NULL, archiveName, &openCallback);
+    result = archiveLink.Open2(openOptions, &openCallback);
     if (result != S_OK) return result;
     const CArc &arc = archiveLink.Arcs.Back();
     IInArchive *archive = arc.Archive;
@@ -247,30 +235,31 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std
     }
     if (realIndices.Size() == 0)
     {
-        return ecs->ThereAreNoFiles();
+        //return ecs->ThereAreNoFiles();
     }
     
     if (!outDir.IsEmpty())
-        if (!NFile::NDirectory::CreateComplexDirectory(outDir))
+        if (!NWindows::NFile::NDir::CreateComplexDir(outDir))
         {
             //HRESULT res = ::GetLastError();
             //if (res == S_OK)
             //  res = E_FAIL;
             //errorMessage = ((UString)L"Can not create output directory ") + outDir;
-            return X_CANTCREATEOUTDIR;
+            return OperationReturnCode::CANTCREATEOUTDIR;
         }
     
     UStringVector removePathParts;
     
     CArchiveExtractCallback *extractCallbackSpec = new CArchiveExtractCallback;
     //extractCallbackSpec->InitForMulti(false, NExtract::NPathMode::kFullPathnames, NExtract::NOverwriteMode::kWithoutPrompt);
-    extractCallbackSpec->Init(
+    CExtractNtOptions ntOptions;
+    extractCallbackSpec->Init(ntOptions,
                               NULL,
                               &arc,
                               ecs,
-                              false, false, false,
+                              false, false,
                               outDir,
-                              removePathParts,
+                              removePathParts, false,
                               0);
     result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
     callback.FinishArchive();
@@ -279,7 +268,7 @@ HRESULT MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std
 }
 
 
-HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel, std::wstring workDir)
+ORC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel, std::wstring workDir)
 {
     UString archiveName = archiveNameW.c_str();
     std::vector<UString> files;
@@ -295,10 +284,10 @@ HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     result = codecs->Load();
     if (result != S_OK)
     {
-        return X_CANTLOADCODECS;
+        return OperationReturnCode::CANTLOADCODECS;
     }
     
-    CIntVector formatIndices;
+    CObjectVector<COpenType> formatIndices;
     
     UStringVector commandStrings;
     commandStrings.Add(command.c_str());
@@ -308,8 +297,8 @@ HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     {
         commandStrings.Add(*it);
     }
-    CArchiveCommandLineOptions options;
-    CArchiveCommandLineParser parser;
+    CArcCmdLineOptions options;
+    CArcCmdLineParser parser;
     parser.Parse1(commandStrings, options);
     parser.Parse2(options);
     
@@ -317,17 +306,23 @@ HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     MLOpenCallback openCallback;
     MLUpdateCallbackWrapper callback = MLUpdateCallbackWrapper(cb) ;
     
-    if (!uo.Init(codecs, formatIndices, options.ArchiveName))
+    if (!uo.InitFormatIndex(codecs, formatIndices, options.ArchiveName))
     {
-        return X_UOINITFAILED;
+        return OperationReturnCode::UOINITFAILED;
     }
-    //uo.ArchivePath.TempPrefix = L"/tmp/";
+    
     uo.WorkingDir = workDir.c_str();
     CUpdateErrorInfo errorInfo;
     
     HRESULT res = UpdateArchive(codecs,
-                                options.WildcardCensor, uo,
-                                errorInfo, &openCallback, &callback);
+                                formatIndices,
+                                options.ArchiveName,
+                                options.Censor,
+								uo,
+                                errorInfo,
+								&openCallback,
+								&callback,
+								true);
     
     //if (res)
     //{
@@ -338,13 +333,15 @@ HRESULT MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
 
 
 
-HRESULT MLCompressArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel, std::wstring workDir)
+ORC MLCompressArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, int compressionLevel, std::wstring workDir)
 {
     return MLGenericCommand(L"a", archiveNameW, filesW, cb, compressionLevel, workDir);
 }
 
 
-HRESULT MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, std::wstring workDir)
+ORC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb, std::wstring workDir)
 {
     return MLGenericCommand(L"d", archiveNameW, filesW, cb, 9, workDir);
+}
+    
 }

@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>p7zip.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>C11C83EA1CF230AC00AF9EC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C12DA2041D7DF61E003C8A2B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
