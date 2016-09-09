@@ -1,20 +1,22 @@
 // MLCallbackTest.h
+#include <iostream>
 
 #ifndef __ML_CALLBACK_TEST_H
 #define __ML_CALLBACK_TEST_H
 
-#include "MLUpdateCallback.h"
-#include "MLExtractCallback.h"
+#include "../MLUpdateCallback.h"
+#include "../MLExtractCallback.h"
 #include <string>
 
-class MLCallbackTest: public MLUpdateCallback, public MLExtractCallback
+
+class MLCallbackTest: public lib7z::MLUpdateCallback, public lib7z::MLExtractCallback
 {
     
 public:
-    
+
     int SetTotal(unsigned long long size);
-    int CompressingItem(const wchar_t *name, bool isAnti);
-    int DecompressingItem(const wchar_t *name, bool isFolder, int askExtractMode, const unsigned long long *position);
+    int CompressingItem(const wchar_t *name, bool isAnti, int mode);
+    int DecompressingItem(const wchar_t *name, bool isFolder, int mode, const unsigned long long *position);
     int SetCompleted(const unsigned long long *completeValue);
     int SetOperationResult(int operationResult, int kind);
     int FinishArchive();

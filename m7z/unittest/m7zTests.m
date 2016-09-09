@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../7z/m7z.h"
+#import "../m7z.h"
 
 @interface frmDelegate : NSObject<ArchiveDelegate>
 @end

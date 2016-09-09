@@ -3,70 +3,23 @@
 #include "StdAfx.h"
 #include "MLUpdateCallbackWrapper.h"
 
-#ifndef _7ZIP_ST
 #include "Windows/Synchronization.h"
 static NWindows::NSynchronization::CCriticalSection g_CriticalSection;
 #define MT_LOCK NWindows::NSynchronization::CCriticalSectionLock lock(g_CriticalSection);
-#else
-#define MT_LOCK
-#endif
 
-HRESULT MLUpdateCallbackWrapper::OpenResult(const wchar_t *name, HRESULT result)
-{
-    return S_OK;
-}
+using namespace lib7z;
 
-HRESULT MLUpdateCallbackWrapper::StartScanning()
-{
-    return S_OK;
-}
 
-HRESULT MLUpdateCallbackWrapper::ScanProgress(UInt64  numFolders , UInt64 numFiles, const wchar_t *path)
-{
-    return CheckBreak();
-}
-
-HRESULT MLUpdateCallbackWrapper::CanNotFindError(const wchar_t *name, DWORD systemError)
-{
-    return cb->CanNotFindError(name, systemError);
-}
-
-HRESULT MLUpdateCallbackWrapper::FinishScanning()
-{
-    return S_OK;
-}
-
-HRESULT MLUpdateCallbackWrapper::StartArchive(const wchar_t *name, bool updating)
-{
-    return S_OK;
-}
-
-HRESULT MLUpdateCallbackWrapper::FinishArchive()
-{
-    return cb->FinishArchive();
-}
-
-HRESULT MLUpdateCallbackWrapper::CheckBreak()
-{
-    return S_OK;
-}
-
-HRESULT MLUpdateCallbackWrapper::Finilize()
+HRESULT MLUpdateCallbackWrapper::FinishArchive(const CFinishArchiveStat &st)
 {
     MT_LOCK
-    return S_OK;
-}
-
-HRESULT MLUpdateCallbackWrapper::SetNumFiles(UInt64 numFiles)
-{
-    return S_OK;
+    return cb->FinishArchive();
 }
 
 HRESULT MLUpdateCallbackWrapper::SetTotal(UInt64 size)
 {
     MT_LOCK
-    cb->SetTotal(size);
-    return S_OK;
+    return cb->SetTotal(size);
 }
 
 HRESULT MLUpdateCallbackWrapper::SetCompleted(const UInt64 *completeValue)
@@ -75,30 +28,27 @@ HRESULT MLUpdateCallbackWrapper::SetCompleted(const UInt64 *completeValue)
     return cb->SetCompleted(completeValue);
 }
 
-HRESULT MLUpdateCallbackWrapper::SetRatioInfo(const UInt64 *inSize, const UInt64 * outSize)
-{
-    return S_OK;
-}
-
-HRESULT MLUpdateCallbackWrapper::GetStream(const wchar_t *name, bool isAnti)
+HRESULT MLUpdateCallbackWrapper::GetStream(const wchar_t *name, bool isDir, bool isAnti, UInt32 mode)
 {
     MT_LOCK
-    return cb->CompressingItem(name, isAnti);
+    return cb->CompressingItem(name, isAnti, mode);
 }
 
-HRESULT MLUpdateCallbackWrapper::OpenFileError(const wchar_t *name, DWORD systemError)
+HRESULT MLUpdateCallbackWrapper::OpenFileError(const FString &path, DWORD systemError)
 {
     MT_LOCK
-    return cb->OpenFileError(name, systemError);
+    return cb->OpenFileError(path, systemError);
 }
 
 HRESULT MLUpdateCallbackWrapper::SetOperationResult(Int32 x)
 {
+    MT_LOCK
     return cb->SetOperationResult(x, 2);
 }
 
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *password)
 {
+    MT_LOCK
     const wchar_t *pass = cb->GetPassword();
     if (pass)
     {
@@ -114,6 +64,7 @@ HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword2(Int32 *passwordIsDefined
 
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword(BSTR *password)
 {
+    MT_LOCK
     const wchar_t *pass = cb->GetPassword();
     if (pass)
     {
@@ -124,3 +75,27 @@ HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword(BSTR *password)
         return S_OK;
     }
 }
+
+
+
+
+// ***************************************** IGNORED CALLBACKS *****************************************
+
+
+HRESULT MLUpdateCallbackWrapper::OpenResult(const CCodecs *codecs, const CArchiveLink &arcLink, const wchar_t *name, HRESULT result) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::StartScanning() { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::ScanProgress(const CDirItemsStat &st, const FString &path, bool isDir) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::FinishScanning(const CDirItemsStat &st) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::StartArchive(const wchar_t *name, bool updating) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::CheckBreak() { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::SetNumItems(UInt64 numFiles) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::SetRatioInfo(const UInt64 *inSize, const UInt64 * outSize) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::WriteSfx(const wchar_t *name, UInt64 size)  { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::ShowDeleteFile(const wchar_t *name, bool isDir) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::ReadingFileError(const FString &path, DWORD systemError) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::StartOpenArchive(const wchar_t *name) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::ReportExtractResult(Int32 opRes, Int32 isEncrypted, const wchar_t *name) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::ReportUpdateOpeartion(UInt32 op, const wchar_t *name, bool isDir) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::DeletingAfterArchiving(const FString &path, bool isDir) { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::FinishDeletingAfterArchiving() { return S_OK; }
+HRESULT MLUpdateCallbackWrapper::ScanError(const FString &path, DWORD systemError) { return S_OK; }

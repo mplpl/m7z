@@ -6,24 +6,26 @@
 #include "7zip/UI/Common/Update.h"
 #include "MLUpdateCallback.h"
 
+namespace lib7z
+{
+
 class MLUpdateCallbackWrapper: public IUpdateCallbackUI2
 {
     
 public:
-    bool PasswordIsDefined;
-    UString Password;
-    bool AskPassword;
-    MLUpdateCallback *cb;
     
     MLUpdateCallbackWrapper(MLUpdateCallback &cb):
-        cb(&cb),
-        PasswordIsDefined(false),
-        AskPassword(false)
-    {}
+        cb(&cb) {}
     
-    ~MLUpdateCallbackWrapper() { Finilize(); }
+    virtual ~MLUpdateCallbackWrapper() { }
     
     INTERFACE_IUpdateCallbackUI2(;)
+
+private:
+    MLUpdateCallback *cb;
+    
 };
+    
+}
 
 #endif

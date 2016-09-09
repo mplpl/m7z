@@ -5,15 +5,20 @@
 
 #include "7zip/UI/Common/ArchiveOpenCallback.h"
 
+namespace lib7z
+{
+
 class MLOpenCallback: public IOpenCallbackUI
 {
 public:
     INTERFACE_IOpenCallbackUI(;)
     
     bool PasswordIsDefined;
-    bool PasswordWasAsked;
     UString Password;
-    MLOpenCallback(): PasswordIsDefined(false), PasswordWasAsked(false) {}
-};
+    MLOpenCallback(): PasswordIsDefined(false) {}
 
+    virtual ~MLOpenCallback() {}
+};
+    
+}
 #endif

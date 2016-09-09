@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>7z.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
 		<key>lib7z 2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,17 +12,32 @@
 		<key>lib7z.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<key>lib7z_sample.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>lib7z_unittest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>m7z.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>2</integer>
 		</dict>
-		<key>m7zTests.xcscheme</key>
+		<key>m7z_unittest.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
+		</dict>
+		<key>p7zip_dummy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -42,7 +52,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6BB352A61D818B3100134280</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BC4E61A1D8029EC00B8FB70</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BC4E61E1D802A9F00B8FB70</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C11C83EA1CF230AC00AF9EC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C12DA2041D7DF61E003C8A2B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

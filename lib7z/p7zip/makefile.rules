@@ -1,248 +1,84 @@
-
-myGetTickCount.o : $(P7ZIP_PATH)/CPP/myWindows/myGetTickCount.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/myGetTickCount.cpp
-myAddExeFlag.o : $(P7ZIP_PATH)/CPP/myWindows/myAddExeFlag.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/myAddExeFlag.cpp
-mySplitCommandLine.o : $(P7ZIP_PATH)/CPP/myWindows/mySplitCommandLine.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/mySplitCommandLine.cpp
-wine_date_and_time.o : $(P7ZIP_PATH)/CPP/myWindows/wine_date_and_time.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/wine_date_and_time.cpp
-wine_GetXXXDefaultLangID.o : $(P7ZIP_PATH)/CPP/myWindows/wine_GetXXXDefaultLangID.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/wine_GetXXXDefaultLangID.cpp
-
-StdAfx.h.gch : $(P7ZIP_PATH)/CPP/myWindows/StdAfx.h
+StdAfx.h.gch : ../../../myWindows/StdAfx.h
 	rm -f StdAfx.h.gch
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/StdAfx.h -o StdAfx.h.gch
-
-BenchCon.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/BenchCon.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/BenchCon.cpp
-ConsoleClose.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/ConsoleClose.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/ConsoleClose.cpp
-ExtractCallbackConsole.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/ExtractCallbackConsole.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/ExtractCallbackConsole.cpp
-List.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/List.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/List.cpp
-MainAr.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/MainAr.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/MainAr.cpp
-OpenCallbackConsole.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/OpenCallbackConsole.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/OpenCallbackConsole.cpp
-PercentPrinter.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/PercentPrinter.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/PercentPrinter.cpp
-UpdateCallbackConsole.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/UpdateCallbackConsole.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/UpdateCallbackConsole.cpp
-UserInputUtils.o : $(P7ZIP_PATH)/CPP/7zip/UI/Console/UserInputUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Console/UserInputUtils.cpp
-AlignedBuffer.o : $(P7ZIP_PATH)/CPP/Common/AlignedBuffer.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/AlignedBuffer.cpp
-CommandLineParser.o : $(P7ZIP_PATH)/CPP/Common/CommandLineParser.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/CommandLineParser.cpp
-CRC.o : $(P7ZIP_PATH)/CPP/Common/CRC.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/CRC.cpp
-IntToString.o : $(P7ZIP_PATH)/CPP/Common/IntToString.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/IntToString.cpp
-MyMap.o : $(P7ZIP_PATH)/CPP/Common/MyMap.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyMap.cpp
-MyXml.o : $(P7ZIP_PATH)/CPP/Common/MyXml.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyXml.cpp
-MyWindows.o : $(P7ZIP_PATH)/CPP/Common/MyWindows.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyWindows.cpp
-Random.o : $(P7ZIP_PATH)/CPP/Common/Random.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/Random.cpp
-StdInStream.o : $(P7ZIP_PATH)/CPP/Common/StdInStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StdInStream.cpp
-StdOutStream.o : $(P7ZIP_PATH)/CPP/Common/StdOutStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StdOutStream.cpp
-MyString.o : $(P7ZIP_PATH)/CPP/Common/MyString.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyString.cpp
-StringConvert.o : $(P7ZIP_PATH)/CPP/Common/StringConvert.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StringConvert.cpp
-StringToInt.o : $(P7ZIP_PATH)/CPP/Common/StringToInt.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StringToInt.cpp
-TextConfig.o : $(P7ZIP_PATH)/CPP/Common/TextConfig.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/TextConfig.cpp
-UTFConvert.o : $(P7ZIP_PATH)/CPP/Common/UTFConvert.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/UTFConvert.cpp
-MyVector.o : $(P7ZIP_PATH)/CPP/Common/MyVector.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyVector.cpp
-Wildcard.o : $(P7ZIP_PATH)/CPP/Common/Wildcard.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/Wildcard.cpp
-Clipboard.o : $(P7ZIP_PATH)/CPP/Windows/Clipboard.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Clipboard.cpp
-DLL.o : $(P7ZIP_PATH)/CPP/Windows/DLL.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/DLL.cpp
-Error.o : $(P7ZIP_PATH)/CPP/Windows/Error.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Error.cpp
-FileDir.o : $(P7ZIP_PATH)/CPP/Windows/FileDir.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileDir.cpp
-FileFind.o : $(P7ZIP_PATH)/CPP/Windows/FileFind.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileFind.cpp
-FileIO.o : $(P7ZIP_PATH)/CPP/Windows/FileIO.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileIO.cpp
-FileName.o : $(P7ZIP_PATH)/CPP/Windows/FileName.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileName.cpp
-MemoryLock.o : $(P7ZIP_PATH)/CPP/Windows/MemoryLock.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/MemoryLock.cpp
-PropVariant.o : $(P7ZIP_PATH)/CPP/Windows/PropVariant.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/PropVariant.cpp
-PropVariantConversions.o : $(P7ZIP_PATH)/CPP/Windows/PropVariantConversions.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/PropVariantConversions.cpp
-PropVariantUtils.o : $(P7ZIP_PATH)/CPP/Windows/PropVariantUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/PropVariantUtils.cpp
-Registry.o : $(P7ZIP_PATH)/CPP/Windows/Registry.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Registry.cpp
-Synchronization.o : $(P7ZIP_PATH)/CPP/Windows/Synchronization.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Synchronization.cpp
-Time.o : $(P7ZIP_PATH)/CPP/Windows/Time.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Time.cpp
-System.o : $(P7ZIP_PATH)/CPP/Windows/System.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/System.cpp
-Window.o : $(P7ZIP_PATH)/CPP/Windows/Window.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Window.cpp
-Dialog.o : $(P7ZIP_PATH)/CPP/Windows/Control/Dialog.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Control/Dialog.cpp
-Controls.o : $(P7ZIP_PATH)/CPP/Windows/Control/Controls.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Control/Controls.cpp
-Window2.o : $(P7ZIP_PATH)/CPP/Windows/Control/Window2.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Control/Window2.cpp
-
-CreateCoder.o : $(P7ZIP_PATH)/CPP/7zip/Common/CreateCoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/CreateCoder.cpp
-CWrappers.o : $(P7ZIP_PATH)/CPP/7zip/Common/CWrappers.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/CWrappers.cpp
-CrossThreadProgress.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CrossThreadProgress.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CrossThreadProgress.cpp
-FilePathAutoRename.o : $(P7ZIP_PATH)/CPP/7zip/Common/FilePathAutoRename.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/FilePathAutoRename.cpp
-FileStreams.o : $(P7ZIP_PATH)/CPP/7zip/Common/FileStreams.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/FileStreams.cpp
-FilterCoder.o : $(P7ZIP_PATH)/CPP/7zip/Common/FilterCoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/FilterCoder.cpp
-InBuffer.o : $(P7ZIP_PATH)/CPP/7zip/Common/InBuffer.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/InBuffer.cpp
-InOutTempBuffer.o : $(P7ZIP_PATH)/CPP/7zip/Common/InOutTempBuffer.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/InOutTempBuffer.cpp
-Lang.o : $(P7ZIP_PATH)/CPP/Common/Lang.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/Lang.cpp
-ListFileUtils.o : $(P7ZIP_PATH)/CPP/Common/ListFileUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/ListFileUtils.cpp
-LimitedStreams.o : $(P7ZIP_PATH)/CPP/7zip/Common/LimitedStreams.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/LimitedStreams.cpp
-LockedStream.o : $(P7ZIP_PATH)/CPP/7zip/Common/LockedStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/LockedStream.cpp
-MemBlocks.o : $(P7ZIP_PATH)/CPP/7zip/Common/MemBlocks.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/MemBlocks.cpp
-VirtThread.o : $(P7ZIP_PATH)/CPP/7zip/Common/VirtThread.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/VirtThread.cpp
-MethodId.o : $(P7ZIP_PATH)/CPP/7zip/Common/MethodId.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/MethodId.cpp
-MethodProps.o : $(P7ZIP_PATH)/CPP/7zip/Common/MethodProps.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/MethodProps.cpp
-OffsetStream.o : $(P7ZIP_PATH)/CPP/7zip/Common/OffsetStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/OffsetStream.cpp
-OutBuffer.o : $(P7ZIP_PATH)/CPP/7zip/Common/OutBuffer.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/OutBuffer.cpp
-OutMemStream.o : $(P7ZIP_PATH)/CPP/7zip/Common/OutMemStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/OutMemStream.cpp
-ProgressMt.o : $(P7ZIP_PATH)/CPP/7zip/Common/ProgressMt.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/ProgressMt.cpp
-ProgressUtils.o : $(P7ZIP_PATH)/CPP/7zip/Common/ProgressUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/ProgressUtils.cpp
-StreamBinder.o : $(P7ZIP_PATH)/CPP/7zip/Common/StreamBinder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/StreamBinder.cpp
-StreamObjects.o : $(P7ZIP_PATH)/CPP/7zip/Common/StreamObjects.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/StreamObjects.cpp
-StreamUtils.o : $(P7ZIP_PATH)/CPP/7zip/Common/StreamUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/StreamUtils.cpp
-
-
-CodecExports.o : $(P7ZIP_PATH)/CPP/7zip/Compress/CodecExports.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/CodecExports.cpp
-ArjDecoder1.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ArjDecoder1.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ArjDecoder1.cpp
-ArjDecoder2.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ArjDecoder2.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ArjDecoder2.cpp
-Bcj2Coder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Coder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Coder.cpp
-Bcj2Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Register.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Register.cpp
-BcjCoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BcjCoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BcjCoder.cpp
-BcjRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BcjRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BcjRegister.cpp
-BitlDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BitlDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BitlDecoder.cpp
-BranchCoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BranchCoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BranchCoder.cpp
-BranchMisc.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BranchMisc.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BranchMisc.cpp
-BranchRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BranchRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BranchRegister.cpp
-ByteSwap.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ByteSwap.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ByteSwap.cpp
-BZip2Crc.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Crc.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Crc.cpp
-BZip2Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Decoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Decoder.cpp
-BZip2Encoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Encoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Encoder.cpp
-BZip2Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Register.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Register.cpp
-CopyCoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/CopyCoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/CopyCoder.cpp
-CopyRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/CopyRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/CopyRegister.cpp
-Deflate64Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Deflate64Register.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Deflate64Register.cpp
-DeflateDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateDecoder.cpp
-DeflateEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateEncoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateEncoder.cpp
-DeflateRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateRegister.cpp
-DeltaFilter.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeltaFilter.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeltaFilter.cpp
-ImplodeDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeDecoder.cpp
-ImplodeHuffmanDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeHuffmanDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeHuffmanDecoder.cpp
-LzhDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzhDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzhDecoder.cpp
-LzOutWindow.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzOutWindow.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzOutWindow.cpp
-Lzma2Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Decoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Decoder.cpp
-Lzma2Encoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Encoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Encoder.cpp
-Lzma2Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Register.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Register.cpp
-LzmaDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaDecoder.cpp
-LzmaEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaEncoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaEncoder.cpp
-LzmaRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaRegister.cpp
-PpmdDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdDecoder.cpp
-PpmdEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdEncoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdEncoder.cpp
-PpmdRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdRegister.cpp
-ShrinkDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ShrinkDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ShrinkDecoder.cpp
-ZDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ZDecoder.cpp
-Lzx86Converter.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzx86Converter.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzx86Converter.cpp
-LzxDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzxDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzxDecoder.cpp
-PpmdZip.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdZip.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdZip.cpp
-QuantumDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/QuantumDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/QuantumDecoder.cpp
-ZlibDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibDecoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibDecoder.cpp
-ZlibEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibEncoder.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibEncoder.cpp
+	$(CXX) $(CXXFLAGS) ../../../myWindows/StdAfx.h -o StdAfx.h.gch
+7zBuf2.o : $(P7ZIP_PATH)/C/7zBuf2.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/7zBuf2.c
+7zCrc.o : $(P7ZIP_PATH)/C/7zCrc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/7zCrc.c
+7zCrcOpt.o : $(P7ZIP_PATH)/C/7zCrcOpt.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/7zCrcOpt.c
+7zStream.o : $(P7ZIP_PATH)/C/7zStream.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/7zStream.c
+Aes.o : $(P7ZIP_PATH)/C/Aes.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Aes.c
+Alloc.o : $(P7ZIP_PATH)/C/Alloc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Alloc.c
+Bcj2.o : $(P7ZIP_PATH)/C/Bcj2.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Bcj2.c
+Bcj2Enc.o : $(P7ZIP_PATH)/C/Bcj2Enc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Bcj2Enc.c
+Blake2s.o : $(P7ZIP_PATH)/C/Blake2s.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Blake2s.c
+Bra.o : $(P7ZIP_PATH)/C/Bra.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Bra.c
+Bra86.o : $(P7ZIP_PATH)/C/Bra86.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Bra86.c
+BraIA64.o : $(P7ZIP_PATH)/C/BraIA64.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/BraIA64.c
+BwtSort.o : $(P7ZIP_PATH)/C/BwtSort.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/BwtSort.c
+CpuArch.o : $(P7ZIP_PATH)/C/CpuArch.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/CpuArch.c
+Delta.o : $(P7ZIP_PATH)/C/Delta.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Delta.c
+HuffEnc.o : $(P7ZIP_PATH)/C/HuffEnc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/HuffEnc.c
+LzFind.o : $(P7ZIP_PATH)/C/LzFind.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/LzFind.c
+LzFindMt.o : $(P7ZIP_PATH)/C/LzFindMt.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/LzFindMt.c
+Lzma2Dec.o : $(P7ZIP_PATH)/C/Lzma2Dec.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Lzma2Dec.c
+Lzma2Enc.o : $(P7ZIP_PATH)/C/Lzma2Enc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Lzma2Enc.c
+LzmaDec.o : $(P7ZIP_PATH)/C/LzmaDec.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/LzmaDec.c
+LzmaEnc.o : $(P7ZIP_PATH)/C/LzmaEnc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/LzmaEnc.c
+MtCoder.o : $(P7ZIP_PATH)/C/MtCoder.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/MtCoder.c
+Ppmd7.o : $(P7ZIP_PATH)/C/Ppmd7.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Ppmd7.c
+Ppmd7Dec.o : $(P7ZIP_PATH)/C/Ppmd7Dec.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Ppmd7Dec.c
+Ppmd7Enc.o : $(P7ZIP_PATH)/C/Ppmd7Enc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Ppmd7Enc.c
+Ppmd8.o : $(P7ZIP_PATH)/C/Ppmd8.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Ppmd8.c
+Ppmd8Dec.o : $(P7ZIP_PATH)/C/Ppmd8Dec.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Ppmd8Dec.c
+Ppmd8Enc.o : $(P7ZIP_PATH)/C/Ppmd8Enc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Ppmd8Enc.c
+Sha1.o : $(P7ZIP_PATH)/C/Sha1.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Sha1.c
+Sha256.o : $(P7ZIP_PATH)/C/Sha256.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Sha256.c
+Sort.o : $(P7ZIP_PATH)/C/Sort.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Sort.c
+Threads.o : $(P7ZIP_PATH)/C/Threads.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Threads.c
+Xz.o : $(P7ZIP_PATH)/C/Xz.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/Xz.c
+XzCrc64.o : $(P7ZIP_PATH)/C/XzCrc64.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/XzCrc64.c
+XzCrc64Opt.o : $(P7ZIP_PATH)/C/XzCrc64Opt.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/XzCrc64Opt.c
+XzDec.o : $(P7ZIP_PATH)/C/XzDec.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/XzDec.c
+XzEnc.o : $(P7ZIP_PATH)/C/XzEnc.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/XzEnc.c
+XzIn.o : $(P7ZIP_PATH)/C/XzIn.c
+	$(CC) $(CFLAGS) $(P7ZIP_PATH)/C/XzIn.c
 7zCompressionMode.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zCompressionMode.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zCompressionMode.cpp
 7zDecode.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zDecode.cpp
@@ -253,8 +89,6 @@ ZlibEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibEncoder.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zExtract.cpp
 7zFolderInStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zFolderInStream.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zFolderInStream.cpp
-7zFolderOutStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zFolderOutStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zFolderOutStream.cpp
 7zHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zHandler.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zHandler.cpp
 7zHandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zHandlerOut.cpp
@@ -273,7 +107,128 @@ ZlibEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibEncoder.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zSpecStream.cpp
 7zUpdate.o : $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zUpdate.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/7z/7zUpdate.cpp
-
+ApmHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ApmHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ApmHandler.cpp
+ArHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ArHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ArHandler.cpp
+ArchiveExports.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ArchiveExports.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ArchiveExports.cpp
+ArjHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ArjHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ArjHandler.cpp
+Bz2Handler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Bz2Handler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Bz2Handler.cpp
+CabBlockInStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabBlockInStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabBlockInStream.cpp
+CabHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHandler.cpp
+CabHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHeader.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHeader.cpp
+CabIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabIn.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabIn.cpp
+CabRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabRegister.cpp
+ChmHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmHandler.cpp
+ChmIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmIn.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmIn.cpp
+ComHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ComHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ComHandler.cpp
+CoderMixer2.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CoderMixer2.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CoderMixer2.cpp
+DummyOutStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/DummyOutStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/DummyOutStream.cpp
+FindSignature.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/FindSignature.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/FindSignature.cpp
+HandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/HandlerOut.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/HandlerOut.cpp
+InStreamWithCRC.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/InStreamWithCRC.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/InStreamWithCRC.cpp
+ItemNameUtils.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ItemNameUtils.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ItemNameUtils.cpp
+MultiStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/MultiStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/MultiStream.cpp
+OutStreamWithCRC.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithCRC.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithCRC.cpp
+OutStreamWithSha1.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithSha1.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithSha1.cpp
+ParseProperties.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ParseProperties.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ParseProperties.cpp
+CpioHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/CpioHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/CpioHandler.cpp
+CramfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/CramfsHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/CramfsHandler.cpp
+DeflateProps.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DeflateProps.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DeflateProps.cpp
+DllExports2.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DllExports2.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DllExports2.cpp
+DmgHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DmgHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DmgHandler.cpp
+ElfHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ElfHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ElfHandler.cpp
+ExtHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ExtHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ExtHandler.cpp
+FatHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/FatHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/FatHandler.cpp
+FlvHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/FlvHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/FlvHandler.cpp
+GzHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/GzHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/GzHandler.cpp
+GptHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/GptHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/GptHandler.cpp
+HandlerCont.o : $(P7ZIP_PATH)/CPP/7zip/Archive/HandlerCont.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/HandlerCont.cpp
+HfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/HfsHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/HfsHandler.cpp
+IhexHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/IhexHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/IhexHandler.cpp
+IsoHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHandler.cpp
+IsoHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHeader.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHeader.cpp
+IsoIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoIn.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoIn.cpp
+IsoRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoRegister.cpp
+LzhHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/LzhHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/LzhHandler.cpp
+LzmaHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/LzmaHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/LzmaHandler.cpp
+MachoHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MachoHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MachoHandler.cpp
+MbrHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MbrHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MbrHandler.cpp
+MslzHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MslzHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MslzHandler.cpp
+MubHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MubHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MubHandler.cpp
+NsisDecode.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisDecode.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisDecode.cpp
+NsisHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisHandler.cpp
+NsisIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisIn.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisIn.cpp
+NsisRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisRegister.cpp
+NtfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/NtfsHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/NtfsHandler.cpp
+PeHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/PeHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/PeHandler.cpp
+PpmdHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/PpmdHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/PpmdHandler.cpp
+QcowHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/QcowHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/QcowHandler.cpp
+RarHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarHandler.cpp
+Rar5Handler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/Rar5Handler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/Rar5Handler.cpp
+RpmHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/RpmHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/RpmHandler.cpp
+SplitHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/SplitHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/SplitHandler.cpp
+SquashfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/SquashfsHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/SquashfsHandler.cpp
+SwfHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/SwfHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/SwfHandler.cpp
 TarHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarHandler.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarHandler.cpp
 TarHandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarHandlerOut.cpp
@@ -288,14 +243,38 @@ TarRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarRegister.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarRegister.cpp
 TarUpdate.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarUpdate.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Tar/TarUpdate.cpp
+UdfHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfHandler.cpp
+UdfIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfIn.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfIn.cpp
+UefiHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/UefiHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/UefiHandler.cpp
+VdiHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/VdiHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/VdiHandler.cpp
+VhdHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/VhdHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/VhdHandler.cpp
+VmdkHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/VmdkHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/VmdkHandler.cpp
+WimHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandler.cpp
+WimHandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandlerOut.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandlerOut.cpp
+WimIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimIn.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimIn.cpp
+WimRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimRegister.cpp
+XarHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/XarHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/XarHandler.cpp
+XzHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/XzHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/XzHandler.cpp
+ZHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ZHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ZHandler.cpp
 ZipAddCommon.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipAddCommon.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipAddCommon.cpp
 ZipHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipHandler.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipHandler.cpp
 ZipHandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipHandlerOut.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipHandlerOut.cpp
-ZipHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipHeader.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipHeader.cpp
 ZipIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipIn.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipIn.cpp
 ZipItem.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipItem.cpp
@@ -306,187 +285,184 @@ ZipRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipRegister.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipRegister.cpp
 ZipUpdate.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipUpdate.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Zip/ZipUpdate.cpp
-CoderMixer2.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CoderMixer2.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CoderMixer2.cpp
-CoderMixer2MT.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CoderMixer2MT.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/CoderMixer2MT.cpp
-DummyOutStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/DummyOutStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/DummyOutStream.cpp
-FindSignature.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/FindSignature.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/FindSignature.cpp
-InStreamWithCRC.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/InStreamWithCRC.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/InStreamWithCRC.cpp
-HandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/HandlerOut.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/HandlerOut.cpp
-ItemNameUtils.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ItemNameUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ItemNameUtils.cpp
-MultiStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/MultiStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/MultiStream.cpp
-OutStreamWithCRC.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithCRC.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithCRC.cpp
-OutStreamWithSha1.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithSha1.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/OutStreamWithSha1.cpp
-ParseProperties.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ParseProperties.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Common/ParseProperties.cpp
-
-ArchiveExports.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ArchiveExports.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ArchiveExports.cpp
-DllExports2.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DllExports2.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DllExports2.cpp
-ApmHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ApmHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ApmHandler.cpp
-ArjHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ArjHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ArjHandler.cpp
-DebHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DebHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DebHandler.cpp
-DmgHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DmgHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DmgHandler.cpp
-ElfHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ElfHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ElfHandler.cpp
-FatHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/FatHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/FatHandler.cpp
-FlvHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/FlvHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/FlvHandler.cpp
-MachoHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MachoHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MachoHandler.cpp
-MbrHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MbrHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MbrHandler.cpp
-MslzHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MslzHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MslzHandler.cpp
-MubHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/MubHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/MubHandler.cpp
-NtfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/NtfsHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/NtfsHandler.cpp
-PeHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/PeHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/PeHandler.cpp
-RpmHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/RpmHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/RpmHandler.cpp
-SwfHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/SwfHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/SwfHandler.cpp
-SquashfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/SquashfsHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/SquashfsHandler.cpp
-VhdHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/VhdHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/VhdHandler.cpp
-XarHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/XarHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/XarHandler.cpp
-XzHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/XzHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/XzHandler.cpp
-ZHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/ZHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/ZHandler.cpp
-
-Bz2Handler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Bz2Handler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Bz2Handler.cpp
-DeflateProps.o : $(P7ZIP_PATH)/CPP/7zip/Archive/DeflateProps.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/DeflateProps.cpp
-CpioHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/CpioHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/CpioHandler.cpp
-CramfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/CramfsHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/CramfsHandler.cpp
-GzHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/GzHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/GzHandler.cpp
-LzhHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/LzhHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/LzhHandler.cpp
-LzmaHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/LzmaHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/LzmaHandler.cpp
-PpmdHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/PpmdHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/PpmdHandler.cpp
-SplitHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/SplitHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/SplitHandler.cpp
-
-ZRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Z/ZRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Z/ZRegister.cpp
-
-CabBlockInStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabBlockInStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabBlockInStream.cpp
-CabHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHandler.cpp
-CabHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHeader.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabHeader.cpp
-CabIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabIn.cpp
-CabRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Cab/CabRegister.cpp
-
-ChmHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmHandler.cpp
-ChmHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmHeader.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmHeader.cpp
-ChmIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmIn.cpp
-ChmRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Chm/ChmRegister.cpp
-
-ComHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Com/ComHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Com/ComHandler.cpp
-ComIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Com/ComIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Com/ComIn.cpp
-ComRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Com/ComRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Com/ComRegister.cpp
-
-HfsHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Hfs/HfsHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Hfs/HfsHandler.cpp
-HfsIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Hfs/HfsIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Hfs/HfsIn.cpp
-HfsRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Hfs/HfsRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Hfs/HfsRegister.cpp
-
-IsoHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHandler.cpp
-IsoHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHeader.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoHeader.cpp
-IsoIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoIn.cpp
-IsoRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Iso/IsoRegister.cpp
-
-NsisDecode.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisDecode.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisDecode.cpp
-NsisHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisHandler.cpp
-NsisIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisIn.cpp
-NsisRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Nsis/NsisRegister.cpp
-
-RarHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarHandler.cpp
-RarHeader.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarHeader.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarHeader.cpp
-RarIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarIn.cpp
-RarItem.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarItem.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarItem.cpp
-RarVolumeInStream.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarVolumeInStream.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarVolumeInStream.cpp
-RarRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Rar/RarRegister.cpp
-
-UdfHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfHandler.cpp
-UdfIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfIn.cpp
-UdfRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Udf/UdfRegister.cpp
-
-WimHandler.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandler.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandler.cpp
-WimHandlerOut.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandlerOut.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimHandlerOut.cpp
-WimIn.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimIn.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimIn.cpp
-WimRegister.o : $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Archive/Wim/WimRegister.cpp
-
+CWrappers.o : $(P7ZIP_PATH)/CPP/7zip/Common/CWrappers.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/CWrappers.cpp
+InBuffer.o : $(P7ZIP_PATH)/CPP/7zip/Common/InBuffer.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/InBuffer.cpp
+InOutTempBuffer.o : $(P7ZIP_PATH)/CPP/7zip/Common/InOutTempBuffer.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/InOutTempBuffer.cpp
+MemBlocks.o : $(P7ZIP_PATH)/CPP/7zip/Common/MemBlocks.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/MemBlocks.cpp
+MethodId.o : $(P7ZIP_PATH)/CPP/7zip/Common/MethodId.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/MethodId.cpp
+OffsetStream.o : $(P7ZIP_PATH)/CPP/7zip/Common/OffsetStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/OffsetStream.cpp
+OutBuffer.o : $(P7ZIP_PATH)/CPP/7zip/Common/OutBuffer.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/OutBuffer.cpp
+OutMemStream.o : $(P7ZIP_PATH)/CPP/7zip/Common/OutMemStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/OutMemStream.cpp
+ProgressMt.o : $(P7ZIP_PATH)/CPP/7zip/Common/ProgressMt.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/ProgressMt.cpp
+StreamBinder.o : $(P7ZIP_PATH)/CPP/7zip/Common/StreamBinder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/StreamBinder.cpp
+VirtThread.o : $(P7ZIP_PATH)/CPP/7zip/Common/VirtThread.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/VirtThread.cpp
+BZip2Crc.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Crc.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Crc.cpp
+BZip2Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Decoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Decoder.cpp
+BZip2Encoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Encoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Encoder.cpp
+BZip2Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Register.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BZip2Register.cpp
+Bcj2Coder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Coder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Coder.cpp
+Bcj2Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Register.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Bcj2Register.cpp
+BcjCoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BcjCoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BcjCoder.cpp
+BcjRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BcjRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BcjRegister.cpp
+BitlDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BitlDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BitlDecoder.cpp
+BranchMisc.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BranchMisc.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BranchMisc.cpp
+BranchRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/BranchRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/BranchRegister.cpp
+ByteSwap.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ByteSwap.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ByteSwap.cpp
+CodecExports.o : $(P7ZIP_PATH)/CPP/7zip/Compress/CodecExports.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/CodecExports.cpp
+CopyCoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/CopyCoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/CopyCoder.cpp
+CopyRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/CopyRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/CopyRegister.cpp
+Deflate64Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Deflate64Register.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Deflate64Register.cpp
+DeflateDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateDecoder.cpp
+DeflateEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateEncoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateEncoder.cpp
+DeflateRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeflateRegister.cpp
+DeltaFilter.o : $(P7ZIP_PATH)/CPP/7zip/Compress/DeltaFilter.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/DeltaFilter.cpp
+ImplodeDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeDecoder.cpp
+ImplodeHuffmanDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeHuffmanDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ImplodeHuffmanDecoder.cpp
+LzOutWindow.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzOutWindow.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzOutWindow.cpp
+LzhDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzhDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzhDecoder.cpp
+Lzma2Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Decoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Decoder.cpp
+Lzma2Encoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Encoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Encoder.cpp
+Lzma2Register.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Register.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Lzma2Register.cpp
+LzmaDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaDecoder.cpp
+LzmaEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaEncoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaEncoder.cpp
+LzmaRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmaRegister.cpp
+LzmsDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzmsDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzmsDecoder.cpp
+LzxDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/LzxDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/LzxDecoder.cpp
+PpmdDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdDecoder.cpp
+PpmdEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdEncoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdEncoder.cpp
+PpmdRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdRegister.cpp
+PpmdZip.o : $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdZip.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/PpmdZip.cpp
+QuantumDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/QuantumDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/QuantumDecoder.cpp
+ShrinkDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ShrinkDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ShrinkDecoder.cpp
+ZDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ZDecoder.cpp
+XpressDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/XpressDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/XpressDecoder.cpp
+ZlibDecoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibDecoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibDecoder.cpp
+ZlibEncoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibEncoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/ZlibEncoder.cpp
+7zAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAes.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAes.cpp
+7zAesRegister.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAesRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAesRegister.cpp
+HmacSha1.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/HmacSha1.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/HmacSha1.cpp
+HmacSha256.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/HmacSha256.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/HmacSha256.cpp
+MyAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/MyAes.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/MyAes.cpp
+MyAesReg.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/MyAesReg.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/MyAesReg.cpp
+Pbkdf2HmacSha1.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/Pbkdf2HmacSha1.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/Pbkdf2HmacSha1.cpp
+RandGen.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/RandGen.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/RandGen.cpp
+Rar20Crypto.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/Rar20Crypto.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/Rar20Crypto.cpp
+Rar5Aes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/Rar5Aes.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/Rar5Aes.cpp
+RarAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/RarAes.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/RarAes.cpp
+WzAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/WzAes.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/WzAes.cpp
+ZipCrypto.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipCrypto.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipCrypto.cpp
+ZipStrong.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipStrong.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipStrong.cpp
+CRC.o : $(P7ZIP_PATH)/CPP/Common/CRC.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/CRC.cpp
+CrcReg.o : $(P7ZIP_PATH)/CPP/Common/CrcReg.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/CrcReg.cpp
+DynLimBuf.o : $(P7ZIP_PATH)/CPP/Common/DynLimBuf.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/DynLimBuf.cpp
+IntToString.o : $(P7ZIP_PATH)/CPP/Common/IntToString.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/IntToString.cpp
+MyMap.o : $(P7ZIP_PATH)/CPP/Common/MyMap.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyMap.cpp
+MyString.o : $(P7ZIP_PATH)/CPP/Common/MyString.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyString.cpp
+MyVector.o : $(P7ZIP_PATH)/CPP/Common/MyVector.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyVector.cpp
+MyWindows.o : $(P7ZIP_PATH)/CPP/Common/MyWindows.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyWindows.cpp
+MyXml.o : $(P7ZIP_PATH)/CPP/Common/MyXml.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/MyXml.cpp
+Sha1Reg.o : $(P7ZIP_PATH)/CPP/Common/Sha1Reg.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/Sha1Reg.cpp
+Sha256Reg.o : $(P7ZIP_PATH)/CPP/Common/Sha256Reg.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/Sha256Reg.cpp
+StringConvert.o : $(P7ZIP_PATH)/CPP/Common/StringConvert.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StringConvert.cpp
+StringToInt.o : $(P7ZIP_PATH)/CPP/Common/StringToInt.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StringToInt.cpp
+UTFConvert.o : $(P7ZIP_PATH)/CPP/Common/UTFConvert.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/UTFConvert.cpp
+Wildcard.o : $(P7ZIP_PATH)/CPP/Common/Wildcard.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/Wildcard.cpp
+XzCrc64Reg.o : $(P7ZIP_PATH)/CPP/Common/XzCrc64Reg.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/XzCrc64Reg.cpp
+PropVariantUtils.o : $(P7ZIP_PATH)/CPP/Windows/PropVariantUtils.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/PropVariantUtils.cpp
+Synchronization.o : $(P7ZIP_PATH)/CPP/Windows/Synchronization.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/Synchronization.cpp
+wine_date_and_time.o : $(P7ZIP_PATH)/CPP/myWindows/wine_date_and_time.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/wine_date_and_time.cpp
 ArchiveCommandLine.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveCommandLine.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveCommandLine.cpp
-ArchiveName.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveName.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveName.cpp
 ArchiveExtractCallback.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveExtractCallback.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveExtractCallback.cpp
 ArchiveOpenCallback.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveOpenCallback.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/ArchiveOpenCallback.cpp
-CompressCall.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/CompressCall.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/CompressCall.cpp
 Bench.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/Bench.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/Bench.cpp
 DefaultName.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/DefaultName.cpp
@@ -497,6 +473,8 @@ Extract.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/Extract.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/Extract.cpp
 ExtractingFilePath.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/ExtractingFilePath.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/ExtractingFilePath.cpp
+HashCalc.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/HashCalc.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/HashCalc.cpp
 LoadCodecs.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/LoadCodecs.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/LoadCodecs.cpp
 OpenArchive.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/OpenArchive.cpp
@@ -519,142 +497,60 @@ UpdatePair.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/UpdatePair.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/UpdatePair.cpp
 UpdateProduce.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/UpdateProduce.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/UpdateProduce.cpp
-WorkDir.o : $(P7ZIP_PATH)/CPP/7zip/UI/Common/WorkDir.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/Common/WorkDir.cpp
-ZipRegistry.o : ../Common/ZipRegistry.cpp
-	$(CXX) $(CXXFLAGS) ../Common/ZipRegistry.cpp
-ZipCrypto.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipCrypto.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipCrypto.cpp
-ZipStrong.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipStrong.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/ZipStrong.cpp
-MyAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/MyAes.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/MyAes.cpp
-7zAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAes.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAes.cpp
-7zAesRegister.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAesRegister.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/7zAesRegister.cpp
-WzAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/WzAes.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/WzAes.cpp
-Rar20Crypto.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/Rar20Crypto.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/Rar20Crypto.cpp
-RarAes.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/RarAes.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/RarAes.cpp
-HmacSha1.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/HmacSha1.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/HmacSha1.cpp
-Pbkdf2HmacSha1.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/Pbkdf2HmacSha1.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/Pbkdf2HmacSha1.cpp
-RandGen.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/RandGen.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/RandGen.cpp
-Sha1.o : $(P7ZIP_PATH)/CPP/7zip/Crypto/Sha1.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Crypto/Sha1.cpp
-
-Sort.o : $(P7ZIP_PATH)/CPP/../C/Sort.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Sort.c
-Threads.o : $(P7ZIP_PATH)/CPP/../C/Threads.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Threads.c
-
-Lzma2Dec.o : $(P7ZIP_PATH)/CPP/../C/Lzma2Dec.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Lzma2Dec.c
-Lzma2Enc.o : $(P7ZIP_PATH)/CPP/../C/Lzma2Enc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Lzma2Enc.c
-LzmaEnc.o : $(P7ZIP_PATH)/CPP/../C/LzmaEnc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/LzmaEnc.c
-LzmaDec.o : $(P7ZIP_PATH)/CPP/../C/LzmaDec.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/LzmaDec.c
-
-
-7zBuf2.o : $(P7ZIP_PATH)/CPP/../C/7zBuf2.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/7zBuf2.c
-7zStream.o : $(P7ZIP_PATH)/CPP/../C/7zStream.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/7zStream.c
-Aes.o : $(P7ZIP_PATH)/CPP/../C/Aes.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Aes.c
-Bra.o : $(P7ZIP_PATH)/CPP/../C/Bra.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Bra.c
-Bra86.o : $(P7ZIP_PATH)/CPP/../C/Bra86.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Bra86.c
-BraIA64.o : $(P7ZIP_PATH)/CPP/../C/BraIA64.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/BraIA64.c
-BwtSort.o : $(P7ZIP_PATH)/CPP/../C/BwtSort.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/BwtSort.c
-Alloc.o : $(P7ZIP_PATH)/CPP/../C/Alloc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Alloc.c
-Delta.o : $(P7ZIP_PATH)/CPP/../C/Delta.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Delta.c
-LzFind.o : $(P7ZIP_PATH)/CPP/../C/LzFind.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/LzFind.c
-LzFindMt.o : $(P7ZIP_PATH)/CPP/../C/LzFindMt.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/LzFindMt.c
-HuffEnc.o : $(P7ZIP_PATH)/CPP/../C/HuffEnc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/HuffEnc.c
-MtCoder.o : $(P7ZIP_PATH)/CPP/../C/MtCoder.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/MtCoder.c
-
-Ppmd7.o : $(P7ZIP_PATH)/CPP/../C/Ppmd7.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Ppmd7.c
-Ppmd7Dec.o : $(P7ZIP_PATH)/CPP/../C/Ppmd7Dec.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Ppmd7Dec.c
-Ppmd7Enc.o : $(P7ZIP_PATH)/CPP/../C/Ppmd7Enc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Ppmd7Enc.c
-
-Ppmd8.o : $(P7ZIP_PATH)/CPP/../C/Ppmd8.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Ppmd8.c
-Ppmd8Dec.o : $(P7ZIP_PATH)/CPP/../C/Ppmd8Dec.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Ppmd8Dec.c
-Ppmd8Enc.o : $(P7ZIP_PATH)/CPP/../C/Ppmd8Enc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Ppmd8Enc.c
-
-Sha256.o : $(P7ZIP_PATH)/CPP/../C/Sha256.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Sha256.c
-
-Xz.o : $(P7ZIP_PATH)/CPP/../C/Xz.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/Xz.c
-XzCrc64.o : $(P7ZIP_PATH)/CPP/../C/XzCrc64.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/XzCrc64.c
-XzDec.o : $(P7ZIP_PATH)/CPP/../C/XzDec.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/XzDec.c
-XzEnc.o : $(P7ZIP_PATH)/CPP/../C/XzEnc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/XzEnc.c
-XzIn.o : $(P7ZIP_PATH)/CPP/../C/XzIn.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/XzIn.c
-
-# CRC32, C version
-7zCrc.o : $(P7ZIP_PATH)/CPP/../C/7zCrc.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/7zCrc.c
-7zCrcOpt.o : $(P7ZIP_PATH)/CPP/../C/7zCrcOpt.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/7zCrcOpt.c
-# CRC32, ASM version
-7zCrcT8.o : $(P7ZIP_PATH)/CPP/../C/7zCrcT8.c
-	$(CC) $(CFLAGS) $(P7ZIP_PATH)/CPP/../C/7zCrcT8.c
-
-
-
-#
-FormatUtils.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/FormatUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/FormatUtils.cpp
-ProgramLocation.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ProgramLocation.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ProgramLocation.cpp
-ProgressDialog2.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ProgressDialog2.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ProgressDialog2.cpp
-ProgressDialog2_rc.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ProgressDialog2_rc.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ProgressDialog2_rc.cpp
-MessagesDialog.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/MessagesDialog.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/MessagesDialog.cpp
-MessagesDialog_rc.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/MessagesDialog_rc.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/MessagesDialog_rc.cpp
-OverwriteDialog.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/OverwriteDialog.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/OverwriteDialog.cpp
-OverwriteDialog_rc.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/OverwriteDialog_rc.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/OverwriteDialog_rc.cpp
-PasswordDialog.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/PasswordDialog.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/PasswordDialog.cpp
-PasswordDialog_rc.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/PasswordDialog_rc.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/PasswordDialog_rc.cpp
-ExtractCallback.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ExtractCallback.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/ExtractCallback.cpp
-SplitUtils.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/SplitUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/SplitUtils.cpp
-StringUtils.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/StringUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/StringUtils.cpp
-LangUtils.o : $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/LangUtils.cpp
-	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/UI/FileManager/LangUtils.cpp
+CreateCoder.o : $(P7ZIP_PATH)/CPP/7zip/Common/CreateCoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/CreateCoder.cpp
+FilePathAutoRename.o : $(P7ZIP_PATH)/CPP/7zip/Common/FilePathAutoRename.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/FilePathAutoRename.cpp
+FileStreams.o : $(P7ZIP_PATH)/CPP/7zip/Common/FileStreams.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/FileStreams.cpp
+FilterCoder.o : $(P7ZIP_PATH)/CPP/7zip/Common/FilterCoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/FilterCoder.cpp
+LimitedStreams.o : $(P7ZIP_PATH)/CPP/7zip/Common/LimitedStreams.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/LimitedStreams.cpp
+MethodProps.o : $(P7ZIP_PATH)/CPP/7zip/Common/MethodProps.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/MethodProps.cpp
+ProgressUtils.o : $(P7ZIP_PATH)/CPP/7zip/Common/ProgressUtils.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/ProgressUtils.cpp
+PropId.o : $(P7ZIP_PATH)/CPP/7zip/Common/PropId.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/PropId.cpp
+StreamObjects.o : $(P7ZIP_PATH)/CPP/7zip/Common/StreamObjects.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/StreamObjects.cpp
+StreamUtils.o : $(P7ZIP_PATH)/CPP/7zip/Common/StreamUtils.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/StreamUtils.cpp
+UniqBlocks.o : $(P7ZIP_PATH)/CPP/7zip/Common/UniqBlocks.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Common/UniqBlocks.cpp
+CommandLineParser.o : $(P7ZIP_PATH)/CPP/Common/CommandLineParser.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/CommandLineParser.cpp
+ListFileUtils.o : $(P7ZIP_PATH)/CPP/Common/ListFileUtils.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/ListFileUtils.cpp
+NewHandler.o : $(P7ZIP_PATH)/CPP/Common/NewHandler.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/NewHandler.cpp
+StdInStream.o : $(P7ZIP_PATH)/CPP/Common/StdInStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StdInStream.cpp
+StdOutStream.o : $(P7ZIP_PATH)/CPP/Common/StdOutStream.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Common/StdOutStream.cpp
+DLL.o : $(P7ZIP_PATH)/CPP/Windows/DLL.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/DLL.cpp
+ErrorMsg.o : $(P7ZIP_PATH)/CPP/Windows/ErrorMsg.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/ErrorMsg.cpp
+FileDir.o : $(P7ZIP_PATH)/CPP/Windows/FileDir.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileDir.cpp
+FileFind.o : $(P7ZIP_PATH)/CPP/Windows/FileFind.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileFind.cpp
+FileIO.o : $(P7ZIP_PATH)/CPP/Windows/FileIO.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileIO.cpp
+FileName.o : $(P7ZIP_PATH)/CPP/Windows/FileName.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/FileName.cpp
+PropVariant.o : $(P7ZIP_PATH)/CPP/Windows/PropVariant.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/PropVariant.cpp
+PropVariantConv.o : $(P7ZIP_PATH)/CPP/Windows/PropVariantConv.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/PropVariantConv.cpp
+System.o : $(P7ZIP_PATH)/CPP/Windows/System.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/System.cpp
+TimeUtils.o : $(P7ZIP_PATH)/CPP/Windows/TimeUtils.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/Windows/TimeUtils.cpp
+myAddExeFlag.o : $(P7ZIP_PATH)/CPP/myWindows/myAddExeFlag.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/myAddExeFlag.cpp
+mySplitCommandLine.o : $(P7ZIP_PATH)/CPP/myWindows/mySplitCommandLine.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/mySplitCommandLine.cpp
+	
