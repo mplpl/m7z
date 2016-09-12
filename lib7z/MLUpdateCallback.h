@@ -8,6 +8,7 @@
 #define __MLUPDATE_CALLBACK_H
 
 #include "lib7z_types.h"
+#include "MLListCallback.h"
 
 namespace lib7z
 {
@@ -41,7 +42,7 @@ namespace UpdateOperationResult
 /*!
     Interface used for callback for pack/compress operation.
  */
-class MLUpdateCallback
+class MLUpdateCallback: public virtual MLListCallback
 {
     
 public:
@@ -90,15 +91,7 @@ public:
         \result 0 - continue operation, <>0 - break operation
     */
     virtual ORC FinishArchive() = 0;
-    
-    /*!
-        Asks for password needed to complete the operation. 
-        If file should not be encrypter NULL must be returned.
-
-        \return password or NULL if no encryption is needed
-     */
-    virtual const wchar_t *GetPassword() = 0;
-    
+ 
     /*! to be removed */
     virtual ORC CanNotFindError(const wchar_t *name, int systemError) = 0;
     virtual ORC OpenFileError(const wchar_t *name, int systemError) = 0;

@@ -37,7 +37,7 @@ public:
         return delegat.shouldBreak;
     }
     
-    int DecompressingItem(const wchar_t *name, bool isFolder, int askExtractMode, const unsigned long long *position) {
+    int DecompressingItem(const wchar_t *name, bool isFolder, int mode, const unsigned long long *position) {
         [delegat item:[NSString stringWithWstring:name]];
         return 0;
     }
@@ -68,6 +68,7 @@ public:
         const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize,
         int *answer) {
         
+        //TODO add to interface
         //NSLog(@"%@", @"TEST");
         *answer = AskOverwrite::kYesToAll;
         return 0;
@@ -125,7 +126,8 @@ public:
 -(NSArray *)list {
     
     std::vector<DirectoryItem> ra;
-    int ret = MLListArchive([self.name wstring], ra);
+    CallbackTest cb(self.delegate);
+    int ret = MLListArchive([self.name wstring], ra, cb);
     if (ret != 0) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
         return nil;
@@ -158,7 +160,7 @@ public:
         itemsW.push_back([item wstring]);
     }
     CallbackTest cb(self.delegate);
-    int ret = MLCompressArchive([self.name wstring], itemsW, cb, (int)compressionLevel, [self.workDir wstring]);
+    int ret = MLAddToArchive([self.name wstring], itemsW, cb, false, (int)compressionLevel, [self.workDir wstring]);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
     }
@@ -175,7 +177,7 @@ public:
         files.push_back(item.wstring);
     }
     CallbackTest cb(self.delegate);
-    int ret = MLDecompressArchive([self.name wstring], [dir wstring], files, cb, [self.workDir wstring]);
+    int ret = MLExtractFromArchive([self.name wstring], [dir wstring], files, cb, [self.workDir wstring]);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]];
     }
