@@ -1,13 +1,14 @@
 /*!
     MLExtractCallback.h
  
-    Callback interface for extract/uncompress operation.
+    Callback interface for extract operation.
  */
 
 #ifndef __MLEXTRACTCALLBACK_H
 #define __MLEXTRACTCALLBACK_H
 
 #include "lib7z_types.h"
+#include "MLListCallback.h"
 
 namespace lib7z
 {
@@ -59,7 +60,7 @@ namespace DecompressingItemMode
 /*!
     Interface used for callback for extract/uncompress operation.
  */
-class MLExtractCallback
+class MLExtractCallback: public virtual MLListCallback
 {
 public:
     
@@ -124,13 +125,6 @@ public:
          const wchar_t *existName, const time_t *existTime, const unsigned long long *existSize,
          const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize,
          int *answer) = 0;
-    
-    /*!
-        Asks for password needed to complete the operation.
-     
-        \return password
-     */
-    virtual const wchar_t *GetPassword() = 0;
     
     /*! no longer used - to be removed */
     virtual ORC ThereAreNoFiles() = 0;

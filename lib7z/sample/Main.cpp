@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -137,8 +138,11 @@ void printAll(vector<DirectoryItem> &retValue)
     }
 }
 
-void generateTestFiles(vector<wstring> testFiles)
+void generateTestFiles(vector<wstring> testFiles, std::wstring archDir)
 {
+    std::string archDir1cs(archDir.begin(), archDir.end());
+    mkdir(archDir1cs.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    
     for (vector<wstring>::iterator it = testFiles.begin(); it < testFiles.end(); it++) {
         std::string fname( it->begin(), it->end());
         ofstream fout(fname);
@@ -165,7 +169,6 @@ int main(int numArgs, const char *args[])
     testFiles.push_back(L"/tmp/t1/1.tmp");
     testFiles.push_back(L"/tmp/t1/2.tmp");
     testFiles.push_back(L"/tmp/t1/3.tmp");
-    generateTestFiles(testFiles);
     
     vector<wstring> testFiles2;
     testFiles2.push_back(L"t1/1.tmp");
@@ -176,24 +179,26 @@ int main(int numArgs, const char *args[])
     const wchar_t *archDir2 = L"/tmp/t2";
     const wchar_t *archDir3 = L"/tmp/t3";
     
+    generateTestFiles(testFiles, archDir1);
+
     wcout << "\n\n\n";
     wcout << "Packing directory\n";
     wcout << "*****************************\n";
     files.clear();
     files.push_back(archDir1);
-    result = MLCompressArchive(arch1, files, ucallback);
+    result = MLAddToArchive(arch1, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result, 2) << ")\n";
+        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     wcout << "\n\n\n";
     wcout << "Listing\n";
     wcout << "*****************************\n";
     retValue.clear();
-    result = MLListArchive(arch1, retValue);
+    result = MLListArchive(arch1, retValue, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result, 0) << ")\n";
+        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     printAll(retValue);
     
@@ -203,19 +208,19 @@ int main(int numArgs, const char *args[])
     files.clear();
     files.push_back(testFiles[0]);
     files.push_back(testFiles[2]);
-    result = MLCompressArchive(arch3, files, ucallback);
+    result = MLAddToArchive(arch3, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result, 2) << ")\n";
+        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     wcout << "\n\n\n";
     wcout << "Listing\n";
     wcout << "*****************************\n";
     retValue.clear();
-    result = MLListArchive(arch3, retValue);
+    result = MLListArchive(arch3, retValue, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result, 0) << ")\n";
+        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     printAll(retValue);
 
@@ -225,10 +230,10 @@ int main(int numArgs, const char *args[])
     files.clear();
     files.push_back(testFiles2[1]);
     files.push_back(testFiles2[2]);
-    result = MLDecompressArchive(arch1, archDir2, files, ucallback);
+    result = MLExtractFromArchive(arch1, archDir2, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result, 1) << ")\n";
+        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     wcout << "\n\n\n";
     wcout << "Packing with password\n";
@@ -236,19 +241,19 @@ int main(int numArgs, const char *args[])
     files.clear();
     files.push_back(archDir1);
     ucallback.setPassword(L"test");
-    result = MLCompressArchive(arch2, files, ucallback);
+    result = MLAddToArchive(arch2, files, ucallback, true);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result, 2) << ")\n";
+        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
 
     wcout << "\n\n\n";
     wcout << "Listing\n";
     wcout << "*****************************\n";
     retValue.clear();
-    result = MLListArchive(arch2, retValue);
+    result = MLListArchive(arch2, retValue, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result, 0) << ")\n";
+        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     printAll(retValue);
     
@@ -256,11 +261,10 @@ int main(int numArgs, const char *args[])
     wcout << "Unpacking encrypted with password\n";
     wcout << "*****************************\n";
     files.clear();
-    ucallback.setPassword(L"test");
-    result = MLDecompressArchive(arch2, archDir3, files, ucallback);
+    result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result, 1) << ")\n";
+        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")\n";
     
     return 0;
     

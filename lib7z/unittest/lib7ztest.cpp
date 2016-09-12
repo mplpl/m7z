@@ -91,7 +91,7 @@ class lib7zTest : public ::testing::Test
 		int list(std::wstring arch)
 		{
 			std::vector<DirectoryItem> retValue;
-		    int result = MLListArchive(arch, retValue);
+		    int result = MLListArchive(arch, retValue, ucallback);
 		    EXPECT_EQ(result, 0) << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")";
 		    //printAll(retValue);
 		    return retValue.size();
@@ -106,7 +106,7 @@ TEST_F(lib7zTest, PackingAndList)
 {
 	std::vector<std::wstring> files;
     files.push_back(archDir1);
-    int result = MLCompressArchive(arch1, files, ucallback);
+    int result = MLAddToArchive(arch1, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
 
     ASSERT_EQ(list(arch1), 4) << "Incorrect number of items listes";
@@ -117,7 +117,7 @@ TEST_F(lib7zTest, PackingSelectedAndList)
 	std::vector<std::wstring> files;
     files.push_back(testFiles[0]);
     files.push_back(testFiles[2]);
-    int result = MLCompressArchive(arch3, files, ucallback);
+    int result = MLAddToArchive(arch3, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
     
     ASSERT_EQ(list(arch3), 2) << "Incorrect number of items listes";
@@ -127,13 +127,13 @@ TEST_F(lib7zTest, UnpackSelected)
 {
 	std::vector<std::wstring> files;
 	files.push_back(archDir1);
-	int result = MLCompressArchive(arch2, files, ucallback);
+	int result = MLAddToArchive(arch2, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
     
 	files.clear();
 	files.push_back(testFiles2[1]);
     files.push_back(testFiles2[2]);
-    result = MLDecompressArchive(arch2, archDir2, files, ucallback);
+    result = MLExtractFromArchive(arch2, archDir2, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
 
 }
@@ -143,19 +143,35 @@ TEST_F(lib7zTest, PackAndUnpackEncrypted)
 	std::vector<std::wstring> files;
     files.push_back(archDir1);
     ucallback.setPassword(L"test");
-    int result = MLCompressArchive(arch2, files, ucallback);
+    int result = MLAddToArchive(arch2, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
 
     files.clear();
     ucallback.setPassword(L"test");
-    result = MLDecompressArchive(arch2, archDir3, files, ucallback);
+    result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
     EXPECT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
     
     files.clear();
     ucallback.setPassword(L"");
-    result = MLDecompressArchive(arch2, archDir3, files, ucallback);
+    result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
     EXPECT_EQ(result, 1002) << "Incorrect return while extracting encrypted archive with wrong password("
     	 << result << ":" << GetErrorMessage(result) << ")\n";
 }
 
+TEST_F(lib7zTest, PackAndListHeaderEncrypted)
+{
+    std::vector<std::wstring> files;
+    files.push_back(archDir1);
+    ucallback.setPassword(L"test");
+    int result = MLAddToArchive(arch2, files, ucallback, true);
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+
+    ASSERT_EQ(list(arch2), 4) << "Incorrect number of items listes";
+    
+    // try wrong password
+    ucallback.setPassword(L"testXXX");
+    std::vector<DirectoryItem> retValue;
+    int lresult = MLListArchive(arch2, retValue, ucallback);
+    ASSERT_EQ(lresult, 1) << "Encrypted archive listed even with wrong password";
+}
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B320FE21D86B444005D6930 /* MLListCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B320FE11D86B444005D6930 /* MLListCallback.h */; };
 		6BA394321CA051AE001FD2C5 /* m7z.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA394311CA051AE001FD2C5 /* m7z.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BA394391CA051AE001FD2C5 /* m7z.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA3942E1CA051AE001FD2C5 /* m7z.framework */; };
 		6BA3943E1CA051AE001FD2C5 /* m7zTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA3943D1CA051AE001FD2C5 /* m7zTests.m */; };
@@ -482,7 +483,7 @@
 		C12DBFE01D7DFB60003C8A2B /* PipeLen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C12DBE031D7DFB60003C8A2B /* PipeLen.cpp */; };
 		C12DBFE11D7DFB60003C8A2B /* pl32.asm in Sources */ = {isa = PBXBuildFile; fileRef = C12DBE041D7DFB60003C8A2B /* pl32.asm */; };
 		C1CB94DE1CF2006300F45681 /* MLExtractCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94D91CF2006300F45681 /* MLExtractCallbackWrapper.h */; };
-		C1CB94E01CF2006300F45681 /* MLOpenCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94DB1CF2006300F45681 /* MLOpenCallback.h */; };
+		C1CB94E01CF2006300F45681 /* MLListCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94DB1CF2006300F45681 /* MLListCallbackWrapper.h */; };
 		C1CB94E11CF2006300F45681 /* MLUpdateCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94DC1CF2006300F45681 /* MLUpdateCallbackWrapper.h */; };
 		C1EFB7601CC1A8D300AE417D /* lib7z.h in Headers */ = {isa = PBXBuildFile; fileRef = C1EFB75D1CC1A8D300AE417D /* lib7z.h */; };
 		C1EFB7611CC1A8D300AE417D /* MLExtractCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C1EFB75E1CC1A8D300AE417D /* MLExtractCallback.h */; };
@@ -513,6 +514,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B320FE11D86B444005D6930 /* MLListCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLListCallback.h; path = lib7z/MLListCallback.h; sourceTree = "<group>"; };
 		6B8C024E1D5A070D007F3894 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = lib7z/makefile; sourceTree = "<group>"; usesTabs = 1; };
 		6BA3942E1CA051AE001FD2C5 /* m7z.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = m7z.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BA394311CA051AE001FD2C5 /* m7z.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = m7z.h; sourceTree = "<group>"; };
@@ -1820,8 +1822,8 @@
 		C16E95EE1CDA7E2B00A26E86 /* MLExtractCallbackWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLExtractCallbackWrapper.cpp; path = lib7z/MLExtractCallbackWrapper.cpp; sourceTree = "<group>"; };
 		C16E95EF1CDA7E2B00A26E86 /* MLUpdateCallbackWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLUpdateCallbackWrapper.cpp; path = lib7z/MLUpdateCallbackWrapper.cpp; sourceTree = "<group>"; };
 		C1CB94D91CF2006300F45681 /* MLExtractCallbackWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLExtractCallbackWrapper.h; path = lib7z/MLExtractCallbackWrapper.h; sourceTree = "<group>"; };
-		C1CB94DA1CF2006300F45681 /* MLOpenCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLOpenCallback.cpp; path = lib7z/MLOpenCallback.cpp; sourceTree = "<group>"; };
-		C1CB94DB1CF2006300F45681 /* MLOpenCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLOpenCallback.h; path = lib7z/MLOpenCallback.h; sourceTree = "<group>"; };
+		C1CB94DA1CF2006300F45681 /* MLListCallbackWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLListCallbackWrapper.cpp; path = lib7z/MLListCallbackWrapper.cpp; sourceTree = "<group>"; };
+		C1CB94DB1CF2006300F45681 /* MLListCallbackWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLListCallbackWrapper.h; path = lib7z/MLListCallbackWrapper.h; sourceTree = "<group>"; };
 		C1CB94DC1CF2006300F45681 /* MLUpdateCallbackWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLUpdateCallbackWrapper.h; path = lib7z/MLUpdateCallbackWrapper.h; sourceTree = "<group>"; };
 		C1EFB75D1CC1A8D300AE417D /* lib7z.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lib7z.h; path = lib7z/lib7z.h; sourceTree = "<group>"; };
 		C1EFB75E1CC1A8D300AE417D /* MLExtractCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLExtractCallback.h; path = lib7z/MLExtractCallback.h; sourceTree = "<group>"; };
@@ -4267,6 +4269,7 @@
 			children = (
 				C1EFB75D1CC1A8D300AE417D /* lib7z.h */,
 				6BB352A41D817BEA00134280 /* lib7z_types.h */,
+				6B320FE11D86B444005D6930 /* MLListCallback.h */,
 				C1EFB75E1CC1A8D300AE417D /* MLExtractCallback.h */,
 				C1EFB75F1CC1A8D300AE417D /* MLUpdateCallback.h */,
 			);
@@ -4278,12 +4281,12 @@
 			children = (
 				6BC4E6221D802F0800B8FB70 /* p7zip */,
 				6BC4E6151D80262B00B8FB70 /* sample */,
-				C12DBFE31D7E13E3003C8A2B /* interface */,
 				C12DBFE21D7E09D3003C8A2B /* unittest */,
+				C12DBFE31D7E13E3003C8A2B /* interface */,
 				6B8C024E1D5A070D007F3894 /* makefile */,
 				C16E95EB1CDA7E2B00A26E86 /* lib7z.cpp */,
-				C1CB94DB1CF2006300F45681 /* MLOpenCallback.h */,
-				C1CB94DA1CF2006300F45681 /* MLOpenCallback.cpp */,
+				C1CB94DB1CF2006300F45681 /* MLListCallbackWrapper.h */,
+				C1CB94DA1CF2006300F45681 /* MLListCallbackWrapper.cpp */,
 				C1CB94D91CF2006300F45681 /* MLExtractCallbackWrapper.h */,
 				C16E95EE1CDA7E2B00A26E86 /* MLExtractCallbackWrapper.cpp */,
 				C1CB94DC1CF2006300F45681 /* MLUpdateCallbackWrapper.h */,
@@ -4300,13 +4303,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B320FE21D86B444005D6930 /* MLListCallback.h in Headers */,
 				C1EFB7621CC1A8D300AE417D /* MLUpdateCallback.h in Headers */,
 				C1EFB7611CC1A8D300AE417D /* MLExtractCallback.h in Headers */,
 				C1CB94E11CF2006300F45681 /* MLUpdateCallbackWrapper.h in Headers */,
 				6BA394321CA051AE001FD2C5 /* m7z.h in Headers */,
 				C1EFB7601CC1A8D300AE417D /* lib7z.h in Headers */,
 				6BA3944E1CA05586001FD2C5 /* Archive.h in Headers */,
-				C1CB94E01CF2006300F45681 /* MLOpenCallback.h in Headers */,
+				C1CB94E01CF2006300F45681 /* MLListCallbackWrapper.h in Headers */,
 				6BA394521CA056DC001FD2C5 /* Item.h in Headers */,
 				6BB352A51D817BEA00134280 /* lib7z_types.h in Headers */,
 				C1CB94DE1CF2006300F45681 /* MLExtractCallbackWrapper.h in Headers */,
@@ -4338,7 +4342,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = /Users/mlabenski/Dropbox/work/m7z/lib7z/sample;
+			buildWorkingDirectory = lib7z/sample;
 			dependencies = (
 			);
 			name = lib7z_sample;

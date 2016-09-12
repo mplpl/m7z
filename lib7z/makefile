@@ -35,7 +35,7 @@ LDFLAGS=\
 
 OBJS = \
 	lib7z.o \
-	MLOpenCallback.o \
+	MLListCallbackWrapper.o \
 	MLExtractCallbackWrapper.o \
 	MLUpdateCallbackWrapper.o \
 

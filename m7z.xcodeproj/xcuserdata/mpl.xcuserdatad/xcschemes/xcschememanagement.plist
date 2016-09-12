@@ -9,6 +9,16 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>lib7z_sample.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>lib7z_unittest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>m7z.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +43,16 @@
 			<true/>
 		</dict>
 		<key>6BA394371CA051AE001FD2C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BC4E61A1D8029EC00B8FB70</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BC4E61E1D802A9F00B8FB70</key>
 		<dict>
 			<key>primary</key>
 			<true/>

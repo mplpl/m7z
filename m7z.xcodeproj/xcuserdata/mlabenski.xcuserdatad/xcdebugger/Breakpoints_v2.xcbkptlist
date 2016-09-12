@@ -119,38 +119,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "lib7z/lib7z.cpp"
-            timestampString = "495034476.411604"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "MLDecompressArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector&lt;std::wstring&gt; files, MLExtractCallback &amp;callback, std::wstring workDir)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "lib7z/lib7z.cpp"
-            timestampString = "495034476.411604"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector&lt;std::wstring&gt; filesW, MLUpdateCallback &amp;cb, int compressionLevel, std::wstring workDir)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "lib7z/p7zip/p7zip_16.02/CPP/7zip/UI/Common/Update.cpp"
             timestampString = "495021579.646816"
             startingColumnNumber = "9223372036854775807"
@@ -159,38 +127,6 @@
             endingLineNumber = "1111"
             landmarkName = "UpdateArchive( CCodecs *codecs, const CObjectVector&lt;COpenType&gt; &amp;types, const UString &amp;cmdArcPath2, NWildcard::CCensor &amp;censor, CUpdateOptions &amp;options, CUpdateErrorInfo &amp;errorInfo, IOpenCallbackUI *openCallback, IUpdateCallbackUI2 *callback, bool needSetPath)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "m7z/Archive.mm"
-            timestampString = "495026444.681712"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "SetOperationResult(int x, int kind)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "lib7z/MLOpenCallback.cpp"
-            timestampString = "495034471.610484"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "MLOpenCallback::Open_CryptoGetTextPassword(BSTR *password)"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
