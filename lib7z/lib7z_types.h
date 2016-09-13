@@ -18,14 +18,14 @@ namespace lib7z
 {
 
 
-typedef int ORC;    /*!< Return type for all function to perform operation on archives. */
+typedef int LIB7ZRC;    /*!< Return type for all function to perform operation on archives. */
 
 /*! 
-    Enum with defined ORC values. In addition to values below, user
+    Enum with defined LIB7ZRC values. In addition to values below, user
     defined codes can be returned by callbacks and that is propagated
     as return values from called lib7z function.
  */
-namespace OperationReturnCode {
+namespace Lib7zReturnCode {
     
     enum {
         OK                  = 0x00000000L,

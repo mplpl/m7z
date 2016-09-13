@@ -11,7 +11,7 @@
 #import "Item.h"
 
 //! Project version number for m7z.
-FOUNDATION_EXPORT double frm7zVersionNumber;
+FOUNDATION_EXPORT double m7zVersionNumber;
 
 //! Project version string for m7z.
-FOUNDATION_EXPORT const unsigned char frm7zVersionString[];
+FOUNDATION_EXPORT const unsigned char m7zVersionString[];

@@ -54,7 +54,7 @@ public:
         \param size total operation size in bytes
         \result 0 - continue operation, <>0 - break operation
      */
-    virtual ORC SetTotal(unsigned long long size) = 0;
+    virtual LIB7ZRC SetTotal(unsigned long long size) = 0;
     
     /*!
         Notifies about starting compression of items with given name.
@@ -65,7 +65,7 @@ public:
         \param mode see CompressingItemMode
         \result 0 - continue operation, <>0 - break operation
      */
-    virtual ORC CompressingItem(const wchar_t *name, bool isAnti, int mode) = 0;
+    virtual LIB7ZRC CompressingItem(const wchar_t *name, bool isAnti, int mode) = 0;
     
     /*!
         Notifiles about operation process (partial completion).
@@ -74,7 +74,7 @@ public:
         reported by SetTotal)
         \result 0 - continue operation, <>0 - break operation
      */
-    virtual ORC SetCompleted(const unsigned long long *completeValue) = 0;
+    virtual LIB7ZRC SetCompleted(const unsigned long long *completeValue) = 0;
     
     /*!
         Notifies about operation result.
@@ -83,18 +83,18 @@ public:
         \param kind always '2' which indicated that operation is 'Update'
         \result 0 - continue operation, <>0 - break operation
          */
-    virtual ORC SetOperationResult(int operationResult, int kind) = 0;
+    virtual LIB7ZRC SetOperationResult(int operationResult, int kind) = 0;
     
     /*!
         Notifies about completion of the given operation.
 
         \result 0 - continue operation, <>0 - break operation
     */
-    virtual ORC FinishArchive() = 0;
+    virtual LIB7ZRC FinishArchive() = 0;
  
     /*! to be removed */
-    virtual ORC CanNotFindError(const wchar_t *name, int systemError) = 0;
-    virtual ORC OpenFileError(const wchar_t *name, int systemError) = 0;
+    virtual LIB7ZRC CanNotFindError(const wchar_t *name, int systemError) = 0;
+    virtual LIB7ZRC OpenFileError(const wchar_t *name, int systemError) = 0;
 };
 
     

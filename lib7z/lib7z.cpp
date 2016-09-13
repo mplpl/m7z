@@ -65,8 +65,16 @@ std::wstring GetExtractOperationErrorMessage(int result)
         default:                                            return L"Unknown error";
     }
 }
-
-ORC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue, MLListCallback &callback)
+    
+std::wstring GetUpdateOperationErrorMessage(int result)
+{
+    switch (result) {
+        case UpdateOperationResult::kOK:                    return L"OK";
+        default:                                            return L"Update error";
+    }
+}
+    
+LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue, MLListCallback &callback)
 {
     UString archiveName = archiveNameW.c_str();
     NWindows::NFile::NFind::CFileInfo fi;
@@ -154,7 +162,7 @@ ORC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValu
 }
 
 
-ORC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files,
+LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files,
                         MLExtractCallback &callback, std::wstring workDir)
 {
     UString archiveName = archiveNameW.c_str();
@@ -253,7 +261,7 @@ ORC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, std::v
 }
 
 
-ORC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
+LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                      bool encryptHeader, int compressionLevel, std::wstring workDir)
 {
     UString archiveName = archiveNameW.c_str();
@@ -314,14 +322,14 @@ ORC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vecto
 
 
 
-ORC MLAddToArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
+LIB7ZRC MLAddToArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                       bool encryptHeader, int compressionLevel, std::wstring workDir)
 {
     return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir);
 }
 
 
-ORC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
+LIB7ZRC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                         std::wstring workDir)
 {
     return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir);

@@ -8,7 +8,7 @@
 
 #import "Item.h"
 
-@implementation Item
+@implementation M7ZItem
 
 - (instancetype)initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs {
     
