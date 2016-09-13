@@ -1,6 +1,6 @@
 //
-//  NSObject+NSString_wchar.h
-//  7z
+//  NSString+wstring.h
+//  m7z
 //
 //  Created by mlabenski on 21/03/16.
 //  Copyright © 2016 mlabenski. All rights reserved.

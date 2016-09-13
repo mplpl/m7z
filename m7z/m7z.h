@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Archive.h"
-#import "Item.h"
+#import "M7ZArchive.h"
+#import "M7ZItem.h"
 
 //! Project version number for m7z.
 FOUNDATION_EXPORT double m7zVersionNumber;
