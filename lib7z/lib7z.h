@@ -20,10 +20,10 @@ namespace lib7z
  
     \param archiveName path to archive file
     \retValue output variable used to return content of archive
-    \return 0 = OK, <>0 = error - one of standard errors (see OperationReturnCode) or user defined
+    \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
         error returned from callback function.
  */
-extern ORC MLListArchive(std::wstring archiveName, std::vector<DirectoryItem> &retValue,
+extern LIB7ZRC MLListArchive(std::wstring archiveName, std::vector<DirectoryItem> &retValue,
                          MLListCallback &callback);
 
 /*!
@@ -39,10 +39,10 @@ extern ORC MLListArchive(std::wstring archiveName, std::vector<DirectoryItem> &r
         and 9 is the highest compression
     \param workDir directory where temporary files will be created - blank mean 'current directory'
     \param encryptHeader should archive header be encrypted (that encrypt file names)
-    \return 0 = OK, <>0 = error - one of standard errors (see OperationReturnCode) or user defined
+    \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
         error returned from callback function.
  */
-extern ORC MLAddToArchive(std::wstring archiveName, std::vector<std::wstring> files,
+extern LIB7ZRC MLAddToArchive(std::wstring archiveName, std::vector<std::wstring> files,
                              MLUpdateCallback &callback, bool encryptHeader = false,
                              int compressionLevel = 9, std::wstring workDir = L"");
 
@@ -58,10 +58,10 @@ extern ORC MLAddToArchive(std::wstring archiveName, std::vector<std::wstring> fi
         is empty, entire archive will be unpacked
     \param callback callback object used to communicate progress and errors
     \param workDir directory where temporary files will be created - blank mean 'current directory'
-    \return 0 = OK, <>0 = error - one of standard errors (see OperationReturnCode) or user defined
+    \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
         error returned from callback function.
  */
-extern ORC MLExtractFromArchive(std::wstring archiveName, std::wstring outDir, std::vector<std::wstring> files,
+extern LIB7ZRC MLExtractFromArchive(std::wstring archiveName, std::wstring outDir, std::vector<std::wstring> files,
                                      MLExtractCallback &callback, std::wstring workDir = L"");
 
 /*!
@@ -71,10 +71,10 @@ extern ORC MLExtractFromArchive(std::wstring archiveName, std::wstring outDir, s
     \param files items to be deleted from archive - if an item is not in archive it will be ignored
     \param callback object used to communicate progress and errors
     \param workDir directory where temporary files will be created - blank mean 'current directory'
-    \return 0 = OK, <>0 = error - one of standard errors (see OperationReturnCode) or user defined
+    \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
         error returned from callback function.
  */
-extern ORC MLDeleteFromArchive(std::wstring archiveName, std::vector<std::wstring> files,
+extern LIB7ZRC MLDeleteFromArchive(std::wstring archiveName, std::vector<std::wstring> files,
                                      MLUpdateCallback &callback, std::wstring workDir = L"");
 
 /*!
@@ -92,6 +92,14 @@ extern std::wstring GetErrorMessage(int result);
     \return error message
  */
 extern std::wstring GetExtractOperationErrorMessage(int result);
+
+/*!
+    Get error message related with update operation.
+ 
+    \param result one of UpdateOperationResult
+    \return error message
+ */
+extern std::wstring GetUpdateOperationErrorMessage(int result);
 
 }
 

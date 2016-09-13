@@ -37,6 +37,7 @@ public:
     
     void setPassword(std::wstring newpass);
     
+    int askOverwriteCounter;
 private:
     std::wstring pass;
 };

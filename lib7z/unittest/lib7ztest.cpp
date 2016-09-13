@@ -48,7 +48,7 @@ class lib7zTest : public ::testing::Test
 		    for (auto it = testFiles.begin(); it < testFiles.end(); it++) {
 		        std::string fname( it->begin(), it->end());
 		        std::ofstream fout(fname);
-		        for (int i = 0; i < 300000; i++)
+		        for (int i = 0; i < 10000; i++)
 		        {
 		            fout << "wferfjhefjkvhdfhivwerqepojvqs,c xsfvjsfhvqwr";
 		        }
@@ -72,13 +72,19 @@ class lib7zTest : public ::testing::Test
 		    remove(arch3cs.c_str());
 
 		    std::string archDir1cs(archDir1.begin(), archDir1.end());
-			remove(archDir1cs.c_str());
+            std::ostringstream os1;
+            os1 << "rm -rf " << archDir1cs;
+            system(os1.str().c_str());
 			
-			std::string archDir2cs(archDir2.begin(), archDir2.end());
-			remove(archDir1cs.c_str());
+            std::string archDir2cs(archDir2.begin(), archDir2.end());
+            std::ostringstream os2;
+            os2 << "rm -rf " << archDir2cs;
+            system(os2.str().c_str());
 			
 			std::string archDir3cs(archDir3.begin(), archDir3.end());
-			remove(archDir1cs.c_str());
+            std::ostringstream os3;
+            os3 << "rm -rf " << archDir3cs;
+            system(os3.str().c_str());
 		}
 
 		void printAll(std::vector<DirectoryItem> &retValue)
@@ -123,7 +129,7 @@ TEST_F(lib7zTest, PackingSelectedAndList)
     ASSERT_EQ(list(arch3), 2) << "Incorrect number of items listes";
 }
 
-TEST_F(lib7zTest, UnpackSelected) 
+TEST_F(lib7zTest, ExtractSelected)
 {
 	std::vector<std::wstring> files;
 	files.push_back(archDir1);
@@ -138,7 +144,7 @@ TEST_F(lib7zTest, UnpackSelected)
 
 }
 
-TEST_F(lib7zTest, PackAndUnpackEncrypted) 
+TEST_F(lib7zTest, PackAndExtractEncrypted)
 {
 	std::vector<std::wstring> files;
     files.push_back(archDir1);
@@ -158,7 +164,7 @@ TEST_F(lib7zTest, PackAndUnpackEncrypted)
     	 << result << ":" << GetErrorMessage(result) << ")\n";
 }
 
-TEST_F(lib7zTest, PackAndListHeaderEncrypted)
+TEST_F(lib7zTest, PackAndListWithHeaderEncrypted)
 {
     std::vector<std::wstring> files;
     files.push_back(archDir1);
@@ -173,5 +179,25 @@ TEST_F(lib7zTest, PackAndListHeaderEncrypted)
     std::vector<DirectoryItem> retValue;
     int lresult = MLListArchive(arch2, retValue, ucallback);
     ASSERT_EQ(lresult, 1) << "Encrypted archive listed even with wrong password";
+}
+
+TEST_F(lib7zTest, DoubleExtract)
+{
+    std::vector<std::wstring> files;
+    files.push_back(testFiles[1]);
+    int result = MLAddToArchive(arch2, files, ucallback);
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    
+    files.clear();
+    result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
+    
+    files.clear();
+    ucallback.askOverwriteCounter = 0;
+    result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
+    
+    ASSERT_EQ(ucallback.askOverwriteCounter, 1) << "AskOverwrite called incorrect number of times";
+
 }
 

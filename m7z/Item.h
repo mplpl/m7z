@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Item : NSObject
+@interface M7ZItem : NSObject
 
 - (instancetype)initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs;
 

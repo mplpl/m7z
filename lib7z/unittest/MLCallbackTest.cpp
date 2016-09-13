@@ -75,7 +75,8 @@ int MLCallbackTest::AskOverwrite(
                                  const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize,
                                  int *answer)
 {
-    *answer = lib7z::AskOverwrite::kYesToAll;
+    *answer = lib7z::AskOverwrite::kYes;
+    askOverwriteCounter++;
     return S_OK;
 }
 

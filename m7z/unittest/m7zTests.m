@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "../m7z.h"
 
-@interface frmDelegate : NSObject<ArchiveDelegate>
+@interface frmDelegate : NSObject<M7ZArchiveDelegate>
 @end
 
 @implementation frmDelegate
@@ -18,20 +18,27 @@
 @synthesize completed;
 @synthesize shouldBreak;
 
--(void)item:(NSString *)name {
-    NSLog(@"%@", name);
+-(void)item:(NSString *)name mode:(int)mode {
+    NSLog(@"%@ mode %d", name, mode);
 }
 -(void)done {
     NSLog(@"Done:");
 }
--(BOOL)error:(NSString *)err {
-    NSLog(@"%@", err);
+-(BOOL)error:(NSString *)err resultCode:(int)resultCode {
+    NSLog(@"%@ resultCode %d", err, resultCode);
     return NO;
 }
 -(NSString *)password {
     NSLog(@"Password asked");
     return @"";
 }
+
+-(int)shouldOverwriteItem:(NSString *)name date:(NSDate *)date size:(unsigned long long)size
+                  newName:(NSString *)newName newDate:(NSDate *)newDate newSize:(unsigned long long)newSize {
+    
+    return M7Z_AO_Yes;
+}
+
 @end
 
 @interface frm7zTests : XCTestCase
@@ -98,55 +105,56 @@
 }
 
 - (void)testCompress {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
     archive.delegate = self.delegate;
-    XCTAssert([archive compressItem:self.items] == 0);
+    XCTAssert([archive addItems:self.items] == 0);
 }
 
 - (void)testCompressDir {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
     archive.delegate = self.delegate;
-    XCTAssert([archive compressItem:@[self.subDir]] == 0);
+    XCTAssert([archive addItems:@[self.subDir]] == 0);
 }
 
 - (void)testList {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
-    XCTAssert([archive compressItem:self.items] == 0);
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
     
-    NSArray *arr;
-    XCTAssert((arr = [archive list]) != nil);
-    for (Item *item in arr) {
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    XCTAssert(([archive listItemsTo:arr]) == 0);
+    for (M7ZItem *item in arr) {
         NSLog(@"%@ %d %d %@ %@", item.name, item.size, item.sizeCompressed, item.date, item.attrs);
     }
     
 }
 
 - (void)testListErr {
-    Archive *archive = [[Archive alloc] initWithName:self.missingArchName];
-    XCTAssert([archive list] == nil);
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.missingArchName];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    XCTAssert([archive listItemsTo:arr] != 0);
 }
 
 - (void)testDecompress {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
-    XCTAssert([archive compressItem:self.items] == 0);
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
     archive.delegate = self.delegate;
-    XCTAssert([archive decompressToDir:self.unpackDir] == 0);
+    XCTAssert([archive extractAllToDir:self.unpackDir] == 0);
 }
 
 - (void)testDecompressSelected {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
-    XCTAssert([archive compressItem:self.items] == 0);
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
     archive.delegate = self.delegate;
     
-    XCTAssert([archive decompressItems:_itemsToUnpack toDir:self.unpackDir] == 0);
+    XCTAssert([archive extractItems:_itemsToUnpack toDir:self.unpackDir] == 0);
 }
 
 - (void)testDecompressDir {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
-    XCTAssert([archive compressItem:@[self.subDir]] == 0);
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:@[self.subDir]] == 0);
     archive.delegate = self.delegate;
     
-    XCTAssert([archive decompressItems:@[_subDirToUnpack] toDir:self.unpackDir] == 0);
+    XCTAssert([archive extractItems:@[_subDirToUnpack] toDir:self.unpackDir] == 0);
     NSFileManager *fm = [NSFileManager defaultManager];
     NSError *err;
     NSArray *ret = [fm contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@/%@", self.unpackDir, _subDirToUnpack] error:&err];
@@ -154,13 +162,13 @@
 }
 
 - (void)testDelete {
-    Archive *archive = [[Archive alloc] initWithName:self.archName];
-    XCTAssert([archive compressItem:self.items] == 0);
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
     archive.delegate = self.delegate;
     
     XCTAssert([archive deleteItems:@[_itemsToUnpack[0]]] == 0);
     
-    XCTAssert([archive decompressToDir:self.unpackDir] == 0);
+    XCTAssert([archive extractAllToDir:self.unpackDir] == 0);
     NSFileManager *fm = [NSFileManager defaultManager];
     NSError *err;
     NSArray *ret = [fm contentsOfDirectoryAtPath:self.unpackDir error:&err];
