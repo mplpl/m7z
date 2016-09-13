@@ -1,13 +1,13 @@
 //
-//  Archive.m
-//  7z
+//  M7ZArchive.m
+//  m7z
 //
 //  Created by mlabenski on 21/03/16.
 //  Copyright © 2016 mlabenski. All rights reserved.
 //
 
-#import "Archive.h"
-#import "Item.h"
+#import "M7ZArchive.h"
+#import "M7ZItem.h"
 #import "NSString+wstring.h"
 
 #import <string>

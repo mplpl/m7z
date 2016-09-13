@@ -1,12 +1,12 @@
 //
-//  Item.m
-//  7z
+//  M7ZItem.m
+//  m7z
 //
 //  Created by mlabenski on 21/03/16.
 //  Copyright © 2016 mlabenski. All rights reserved.
 //
 
-#import "Item.h"
+#import "M7ZItem.h"
 
 @implementation M7ZItem
 

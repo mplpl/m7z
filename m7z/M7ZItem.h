@@ -1,6 +1,6 @@
 //
-//  Item.h
-//  7z
+//  M7ZItem.h
+//  m7z
 //
 //  Created by mlabenski on 21/03/16.
 //  Copyright © 2016 mlabenski. All rights reserved.
