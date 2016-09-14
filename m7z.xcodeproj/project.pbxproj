@@ -17,7 +17,7 @@
 		6BA394561CA05A00001FD2C5 /* NSString+wstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA394541CA05A00001FD2C5 /* NSString+wstring.h */; };
 		6BA394571CA05A00001FD2C5 /* NSString+wstring.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6BA394551CA05A00001FD2C5 /* NSString+wstring.mm */; };
 		6BB352A51D817BEA00134280 /* lib7z_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BB352A41D817BEA00134280 /* lib7z_types.h */; };
-		6BBBF3571D8838A70002FC42 /* M7ZItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BBBF3561D8838A70002FC42 /* M7ZItem.h */; };
+		6BBBF3571D8838A70002FC42 /* M7ZItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BBBF3561D8838A70002FC42 /* M7ZItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BC4E6291D806F8A00B8FB70 /* lib7z.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16E95EB1CDA7E2B00A26E86 /* lib7z.cpp */; };
 		C12DBE131D7DFB60003C8A2B /* 7zAsm.asm in Sources */ = {isa = PBXBuildFile; fileRef = C12DB8941D7DFB5E003C8A2B /* 7zAsm.asm */; };
 		C12DBE141D7DFB60003C8A2B /* 7zCrcOpt_asm.asm in Sources */ = {isa = PBXBuildFile; fileRef = C12DB8951D7DFB5E003C8A2B /* 7zCrcOpt_asm.asm */; };
@@ -4305,13 +4305,13 @@
 			files = (
 				6B320FE21D86B444005D6930 /* MLListCallback.h in Headers */,
 				C1EFB7621CC1A8D300AE417D /* MLUpdateCallback.h in Headers */,
+				6BBBF3571D8838A70002FC42 /* M7ZItem.h in Headers */,
 				C1EFB7611CC1A8D300AE417D /* MLExtractCallback.h in Headers */,
 				C1CB94E11CF2006300F45681 /* MLUpdateCallbackWrapper.h in Headers */,
 				6BA394321CA051AE001FD2C5 /* m7z.h in Headers */,
 				C1EFB7601CC1A8D300AE417D /* lib7z.h in Headers */,
 				6BA3944E1CA05586001FD2C5 /* M7ZArchive.h in Headers */,
 				C1CB94E01CF2006300F45681 /* MLListCallbackWrapper.h in Headers */,
-				6BBBF3571D8838A70002FC42 /* M7ZItem.h in Headers */,
 				6BB352A51D817BEA00134280 /* lib7z_types.h in Headers */,
 				C1CB94DE1CF2006300F45681 /* MLExtractCallbackWrapper.h in Headers */,
 				6BA394561CA05A00001FD2C5 /* NSString+wstring.h in Headers */,

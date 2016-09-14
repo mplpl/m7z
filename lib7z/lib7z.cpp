@@ -19,7 +19,6 @@
 #include <vector>
 #include <string>
 
-
 namespace lib7z
 {
 
@@ -39,14 +38,14 @@ std::wstring GetErrorMessage(HRESULT result)
 {
     switch(result)
     {
-        case OperationReturnCode::OK:                  return L"OK";
-        case OperationReturnCode::ABORT:               return L"Aborted";
-        case OperationReturnCode::FERROR:              return L"Can not open file as archive";
-        case OperationReturnCode::OUTOFMEMORY:         return L"Can't allocate required memory";
-        case OperationReturnCode::CANTLOADCODECS:      return L"Can't load codecs";
-        case OperationReturnCode::UOINITFAILED:        return L"Can't initialize operation";
-        case OperationReturnCode::CANTCREATEOUTDIR:    return L"Can't create output dir";
-        case OperationReturnCode::CANTFINDARCHIVE:     return L"Can't find archive";
+        case Lib7zReturnCode::OK:                  return L"OK";
+        case Lib7zReturnCode::ABORT:               return L"Aborted";
+        case Lib7zReturnCode::FERROR:              return L"Can not open file as archive";
+        case Lib7zReturnCode::OUTOFMEMORY:         return L"Can't allocate required memory";
+        case Lib7zReturnCode::CANTLOADCODECS:      return L"Can't load codecs";
+        case Lib7zReturnCode::UOINITFAILED:        return L"Can't initialize operation";
+        case Lib7zReturnCode::CANTCREATEOUTDIR:    return L"Can't create output dir";
+        case Lib7zReturnCode::CANTFINDARCHIVE:     return L"Can't find archive";
         default:
             return std::wstring(NWindows::NError::MyFormatMessage(result));
     }
@@ -80,7 +79,7 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
     NWindows::NFile::NFind::CFileInfo fi;
     if (!fi.Find(archiveName) || fi.IsDir())
     {
-      return OperationReturnCode::CANTFINDARCHIVE;
+      return Lib7zReturnCode::CANTFINDARCHIVE;
     }
     
     HRESULT result;
@@ -88,7 +87,7 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
     CCodecs codecs;
     if (codecs.Load() != S_OK)
     {
-        return OperationReturnCode::CANTLOADCODECS;
+        return Lib7zReturnCode::CANTLOADCODECS;
     }
     
     CIntVector formatIndices;
@@ -154,7 +153,14 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
             //format is: YYYY-MM-DD hh:mm:ss
         }
         
-        DirectoryItem di(std::wstring(sPath), size, sizePacked, std::string(ftime), std::string(s));
+        NWindows::NCOM::CPropVariant propEncrypted;
+        RINOK(arc.Archive->GetProperty(i, kpidEncrypted, &propEncrypted));
+        bool encrypted = false;
+        if (propEncrypted.boolVal) {
+            encrypted = true;
+        }
+        
+        DirectoryItem di(std::wstring(sPath), size, sizePacked, std::string(ftime), std::string(s), encrypted);
         retValue.push_back(di);
     }
     
@@ -171,7 +177,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     NWindows::NFile::NFind::CFileInfo fi;
     if (!fi.Find(archiveName) || fi.IsDir())
     {
-        return OperationReturnCode::CANTFINDARCHIVE;
+        return Lib7zReturnCode::CANTFINDARCHIVE;
     }
     
     HRESULT result;
@@ -179,7 +185,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     CCodecs codecs;
     if (codecs.Load() != S_OK)
     {
-        return OperationReturnCode::CANTLOADCODECS;
+        return Lib7zReturnCode::CANTLOADCODECS;
     }
     
     CIntVector formatIndices;
@@ -239,7 +245,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     
     if (!outDir.IsEmpty() && !NWindows::NFile::NDir::CreateComplexDir(outDir))
     {
-        return OperationReturnCode::CANTCREATEOUTDIR;
+        return Lib7zReturnCode::CANTCREATEOUTDIR;
     }
     
     UStringVector removePathParts;
@@ -274,7 +280,7 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     CCodecs codecs;
     if (codecs.Load() != S_OK)
     {
-        return OperationReturnCode::CANTLOADCODECS;
+        return Lib7zReturnCode::CANTLOADCODECS;
     }
     
     UStringVector commandStrings;
@@ -301,7 +307,7 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     
     if (!uo.InitFormatIndex(&codecs, formatIndices, options.ArchiveName))
     {
-        return OperationReturnCode::UOINITFAILED;
+        return Lib7zReturnCode::UOINITFAILED;
     }
     
     uo.WorkingDir = workDir.c_str();

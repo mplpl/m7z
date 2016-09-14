@@ -134,7 +134,9 @@ private:
 void printAll(vector<DirectoryItem> &retValue)
 {
     for (vector<DirectoryItem>::iterator it = retValue.begin(); it < retValue.end(); it++) {
-        wcout << it->name.c_str() << "    " << it->size << "     " << it->sizeCompressed << "     " << it->attrs.c_str() << "     " << it->date.c_str() << "\n";
+        wcout << it->name.c_str() << "    " << it->size << "     " << it->sizeCompressed << "     "
+            << it->attrs.c_str() << "     " << it->date.c_str()
+            << "     " << ((it->encrypted)?"E":"") << "\n";
     }
 }
 

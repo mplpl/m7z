@@ -54,8 +54,9 @@ public:
     /*!
         Basic constructor that sets all the instance variables.
      */
-    DirectoryItem(std::wstring _name, int _size, int _sizeCompressed, std::string _date, std::string _attrs):
-    name(_name), size(_size), sizeCompressed(_sizeCompressed), date(_date), attrs(_attrs) {}
+    DirectoryItem(std::wstring _name, int _size, int _sizeCompressed, std::string _date, std::string _attrs, bool encrypted):
+    name(_name), size(_size), sizeCompressed(_sizeCompressed), date(_date),
+    attrs(_attrs), encrypted(encrypted) {}
     
 public:
     
@@ -64,6 +65,7 @@ public:
     int sizeCompressed;     /*!< item compressed size in bytes */
     std::string date;       /*!< item modification date */
     std::string attrs;      /*!< items attributes (in plain string) */
+    bool encrypted;
 };
     
 }
