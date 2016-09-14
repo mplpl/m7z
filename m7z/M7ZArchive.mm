@@ -145,7 +145,8 @@ public:
                                            size:di.size
                                  sizeCompressed:di.sizeCompressed
                                            date:@(di.date.c_str())
-                                          attrs:@(di.attrs.c_str())];
+                                          attrs:@(di.attrs.c_str())
+                                      encrypted:di.encrypted];
         [output addObject:item];
     }
     
@@ -167,7 +168,7 @@ public:
         itemsW.push_back([item wstring]);
     }
     M7ZArchiveCallback cb(self.delegate);
-    int ret = MLAddToArchive([self.name wstring], itemsW, cb, false, (int)compressionLevel, [self.workDir wstring]);
+    int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel, [self.workDir wstring]);
     if (ret) {
         [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]
                   resultCode:M7Z_ORC_OtherError];
