@@ -10,12 +10,13 @@
 
 @interface M7ZItem : NSObject
 
-- (instancetype)initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs;
+- (instancetype)initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs encrypted:(BOOL)encrypted;
 
 @property (readonly) NSString *name;
 @property (readonly) int size;
 @property (readonly) int sizeCompressed;
 @property (readonly) NSString *date;
 @property (readonly) NSString *attrs;
+@property (readonly) BOOL encrypted;
 
 @end
