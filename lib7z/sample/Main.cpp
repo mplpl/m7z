@@ -71,7 +71,7 @@ public:
 
     int SetOperationResult(int operationResult, int kind) 
     {
-        OUT << "[SetOperationResult] " << lib7z::GetExtractOperationErrorMessage(operationResult) << endl;
+        OUT << "[SetOperationResult] " << operationResult << endl;
         return 0;
     }
 
@@ -191,7 +191,7 @@ int main(int numArgs, const char *args[])
     result = MLAddToArchive(arch1, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while compressing archive (" << result << ":" << result << ")\n";
     
     wcout << "\n\n\n";
     wcout << "Listing\n";
@@ -200,7 +200,7 @@ int main(int numArgs, const char *args[])
     result = MLListArchive(arch1, retValue, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while listing archive (" << result << ":" << result << ")\n";
     
     printAll(retValue);
     
@@ -213,7 +213,7 @@ int main(int numArgs, const char *args[])
     result = MLAddToArchive(arch3, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while compressing archive (" << result << ":" << result << ")\n";
     
     wcout << "\n\n\n";
     wcout << "Listing\n";
@@ -222,7 +222,7 @@ int main(int numArgs, const char *args[])
     result = MLListArchive(arch3, retValue, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while listing archive (" << result << ":" << result << ")\n";
     
     printAll(retValue);
 
@@ -235,7 +235,7 @@ int main(int numArgs, const char *args[])
     result = MLExtractFromArchive(arch1, archDir2, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while extracting archive (" << result << ":" << result << ")\n";
     
     wcout << "\n\n\n";
     wcout << "Packing with password\n";
@@ -246,7 +246,7 @@ int main(int numArgs, const char *args[])
     result = MLAddToArchive(arch2, files, ucallback, true);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while compressing archive (" << result << ":" << result << ")\n";
 
     wcout << "\n\n\n";
     wcout << "Listing\n";
@@ -255,7 +255,7 @@ int main(int numArgs, const char *args[])
     result = MLListArchive(arch2, retValue, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while listing archive (" << result << ":" << result << ")\n";
     
     printAll(retValue);
     
@@ -266,7 +266,7 @@ int main(int numArgs, const char *args[])
     result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
     wcout << "*****************************\n";
     if (result)
-        wcout << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")\n";
+        wcout << "Error while extracting archive (" << result << ":" << result << ")\n";
     
     return 0;
     

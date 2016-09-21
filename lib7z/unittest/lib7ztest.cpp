@@ -105,7 +105,7 @@ class lib7zTest : public ::testing::Test
 		{
 			std::vector<DirectoryItem> retValue;
 		    int result = MLListArchive(arch, retValue, ucallback);
-		    EXPECT_EQ(result, 0) << "Error while listing archive (" << result << ":" << GetErrorMessage(result) << ")";
+		    EXPECT_EQ(result, 0) << "Error while listing archive (" << result << ":" << result << ")";
 		    //printAll(retValue);
 		    return retValue.size();
 		}
@@ -120,7 +120,7 @@ TEST_F(lib7zTest, PackingAndList)
 	std::vector<std::wstring> files;
     files.push_back(archDir1);
     int result = MLAddToArchive(arch1, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
 
     ASSERT_EQ(list(arch1), 4) << "Incorrect number of items listes";
 }
@@ -131,7 +131,7 @@ TEST_F(lib7zTest, PackingSelectedAndList)
     files.push_back(testFiles[0]);
     files.push_back(testFiles[2]);
     int result = MLAddToArchive(arch3, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
     
     ASSERT_EQ(list(arch3), 2) << "Incorrect number of items listes";
 }
@@ -141,13 +141,13 @@ TEST_F(lib7zTest, ExtractSelected)
 	std::vector<std::wstring> files;
 	files.push_back(archDir1);
 	int result = MLAddToArchive(arch2, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
     
 	files.clear();
 	files.push_back(testFiles2[1]);
     files.push_back(testFiles2[2]);
     result = MLExtractFromArchive(arch2, archDir2, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
 
 }
 
@@ -157,18 +157,18 @@ TEST_F(lib7zTest, PackAndExtractEncrypted)
     files.push_back(archDir1);
     ucallback.setPassword(L"test");
     int result = MLAddToArchive(arch2, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
 
     files.clear();
     ucallback.setPassword(L"test");
     result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
-    EXPECT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
+    EXPECT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
     
     files.clear();
     ucallback.setPassword(L"");
     result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
-    EXPECT_EQ(result, 1002) << "Incorrect return while extracting encrypted archive with wrong password("
-    	 << result << ":" << GetErrorMessage(result) << ")\n";
+    EXPECT_EQ(result, ExtractOperationResult::kDataErrorPassword) << "Incorrect return while extracting encrypted archive with wrong password("
+    	 << result << ":" << result << ")\n";
 }
 
 TEST_F(lib7zTest, PackAndListWithHeaderEncrypted)
@@ -177,7 +177,7 @@ TEST_F(lib7zTest, PackAndListWithHeaderEncrypted)
     files.push_back(archDir1);
     ucallback.setPassword(L"test");
     int result = MLAddToArchive(arch2, files, ucallback, true);
-    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
 
     ASSERT_EQ(list(arch2), 4) << "Incorrect number of items listes";
     
@@ -193,16 +193,16 @@ TEST_F(lib7zTest, DoubleExtract)
     std::vector<std::wstring> files;
     files.push_back(testFiles[1]);
     int result = MLAddToArchive(arch2, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
     
     files.clear();
     result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
     
     files.clear();
     ucallback.askOverwriteCounter = 0;
     result = MLExtractFromArchive(arch2, archDir3, files, ucallback);
-    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << GetErrorMessage(result) << ")";
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
     
     ASSERT_EQ(ucallback.askOverwriteCounter, 1) << "AskOverwrite called incorrect number of times";
 
