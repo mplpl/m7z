@@ -44,7 +44,9 @@ namespace ExtractOperationResult
         kDataAfterEnd,
         kIsNotArc,
         kHeadersError,
-        kWrongPassword
+        kWrongPassword,
+        kDataErrorPassword = kDataError + 100,
+        kCRCErrorPassword = kCRCError + 100
     };
 }
 

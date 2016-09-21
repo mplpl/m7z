@@ -60,7 +60,7 @@ MLExtractCallbackWrapper::SetOperationResult(Int32 operationResult, Int32 encryp
     if (encrypted && (operationResult == NArchive::NExtract::NOperationResult::kCRCError ||
                       operationResult == NArchive::NExtract::NOperationResult::kDataError))
     {
-        operationResult = operationResult + 1000;
+        operationResult = operationResult + 100;
     }
     return cb->SetOperationResult(operationResult, 1);
 }

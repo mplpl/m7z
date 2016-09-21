@@ -77,30 +77,6 @@ extern LIB7ZRC MLExtractFromArchive(std::wstring archiveName, std::wstring outDi
 extern LIB7ZRC MLDeleteFromArchive(std::wstring archiveName, std::vector<std::wstring> files,
                                      MLUpdateCallback &callback, std::wstring workDir = L"");
 
-/*!
-    Get error message for code returned by function from this library.
- 
-    \param result return code from function
-    \return error message
- */
-extern std::wstring GetErrorMessage(int result);
-    
-/*!
-    Get error message related with extract operation.
- 
-    \param result one of ExtractOperationResult
-    \return error message
- */
-extern std::wstring GetExtractOperationErrorMessage(int result);
-
-/*!
-    Get error message related with update operation.
- 
-    \param result one of UpdateOperationResult
-    \return error message
- */
-extern std::wstring GetUpdateOperationErrorMessage(int result);
-
 }
 
 #endif

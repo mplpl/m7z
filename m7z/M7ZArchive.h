@@ -28,16 +28,19 @@ enum M7ZReturnCode
 enum M7ZOperationResultCode
 {
     M7Z_ORC_OK                = 0,
-    M7Z_ORC_UnsupportedMethod = 1000,  //extract
-    M7Z_ORC_DataError,                 //extract
-    M7Z_ORC_CRCError,                  //extract
-    M7Z_ORC_Unavailable,               //extract
-    M7Z_ORC_UnexpectedEnd,             //extract
-    M7Z_ORC_DataAfterEnd,              //extract
-    M7Z_ORC_IsNotArc,                  //extract
-    M7Z_ORC_HeadersError,              //extract
-    M7Z_ORC_WrongPassword,             //extract
-    M7Z_ORC_UpdateError        = 2000, //update
+    M7Z_ORC_UnsupportedMethod = 1000,                           //extract
+    M7Z_ORC_DataError,                                          //extract
+    M7Z_ORC_CRCError,                                           //extract
+    M7Z_ORC_Unavailable,                                        //extract
+    M7Z_ORC_UnexpectedEnd,                                      //extract
+    M7Z_ORC_DataAfterEnd,                                       //extract
+    M7Z_ORC_IsNotArc,                                           //extract
+    M7Z_ORC_HeadersError,                                       //extract
+    M7Z_ORC_WrongPassword,                                      //extract
+    M7Z_ORC_DataErrorPassword = M7Z_ORC_DataError + 100,        //extract
+    M7Z_ORC_CRCErrorPassword  = M7Z_ORC_CRCError + 100,         //extract
+
+    M7Z_ORC_UpdateError        = 2000,                          //update
     M7Z_ORC_OtherError         = 3000
 };
 
@@ -68,16 +71,52 @@ enum M7ZAskOverwrite
 
 @protocol M7ZArchiveDelegate <NSObject>
 
+/**
+    Called when operation processing starts for a new item (file or directory).
+    @param name name of item (file or directory)
+    @param mode type of operation that will be executed on the item - one of M7ZItemMode
+ */
 -(void)item:(NSString *)name mode:(int)mode;
--(BOOL)error:(NSString *)err resultCode:(int)resultCode;
+
+/**
+    Called on error
+    @param operationResultCode error that occured - one of M7ZOperationResultCode
+ */
+-(BOOL)error:(int)operationResultCode;
+
+/**
+    Called when a file need to be overwritted to ask the user what to do.
+    @param name exsting file name
+    @param date existing file modification date
+    @param size existing file size
+    @param newName new file name
+    @param newDate new file modification date
+    @param newSize new file size
+    @return decision what to do - one of M7ZAskOverwrite
+ */
 -(int)shouldOverwriteItem:(NSString *)name date:(NSDate *)date size:(unsigned long long)size
                   newName:(NSString *)newName newDate:(NSDate *)newDate
                   newSize:(unsigned long long)newSize;
 -(void)done;
 
+/**
+    Password to be used during extract/update operation.
+ */
 @property (readonly) NSString *password;
+
+/**
+    Total about of bytes that need to be handled to complete the operation.
+ */
 @property unsigned long long total;
+
+/**
+    Number of bytes already handled in order to complete the operation.
+ */
 @property unsigned long long completed;
+
+/**
+    Should on-going operation be interrupted as soon as possible.
+ */
 @property (readonly) BOOL shouldBreak;
 
 @end
@@ -94,7 +133,6 @@ enum M7ZAskOverwrite
 -(int)extractAllToDir:(NSString *)dir;
 -(int)extractItems:(NSArray *)items toDir:(NSString *)dir;
 -(int)deleteItems:(NSArray *)items;
--(NSString *)errorForCode:(NSInteger)code;
 
 @property (readonly) NSString *name;
 @property (assign) id<M7ZArchiveDelegate> delegate;

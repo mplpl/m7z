@@ -101,7 +101,7 @@ int MLCallbackTest::MessageError(const wchar_t *message)
 
 int MLCallbackTest::SetOperationResult(int operationResult, int kind)
 {
-    OUT << "[SetOperationResult] " << lib7z::GetExtractOperationErrorMessage(operationResult) << endl;
+    OUT << "[SetOperationResult] " << operationResult << endl;
     return (operationResult==0)?S_OK:operationResult;
     
 }

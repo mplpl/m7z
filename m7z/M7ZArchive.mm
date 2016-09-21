@@ -54,11 +54,11 @@ public:
         switch (kind)
         {
             case 1:
-                ret = [delegat error:[NSString stringWithWstring:GetExtractOperationErrorMessage(x)] resultCode:1000 + x];
+                ret = [delegat error:1000 + x];
                 break;
                 
             case 2:
-                ret = [delegat error:[NSString stringWithWstring:GetUpdateOperationErrorMessage(x)] resultCode:2000 + x];
+                ret = [delegat error:2000 + x];
                 break;
         }
         
@@ -96,20 +96,17 @@ public:
     }
 
     int OpenFileError(const wchar_t *name, int systemError) {
-        [delegat error:[NSString stringWithFormat:@"Open file error %@", [NSString stringWithWstring:name]]
-            resultCode:M7Z_ORC_OtherError];
+        [delegat error:M7Z_ORC_OtherError];
         return 0;
     }
     
     int CanNotFindError(const wchar_t *name, int systemError) {
-        [delegat error:[NSString stringWithFormat:@"Can not find error %@", [NSString stringWithWstring:name]]
-            resultCode:M7Z_ORC_OtherError];
+        [delegat error:M7Z_ORC_OtherError];
         return 0;
     }
     
     int MessageError(const wchar_t *message) {
-        [delegat error:[NSString stringWithFormat:@"Error: %@", [NSString stringWithWstring:message]]
-            resultCode:M7Z_ORC_OtherError];
+        [delegat error:M7Z_ORC_OtherError];
         return 0;
     }
 };
@@ -132,8 +129,6 @@ public:
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLListArchive([self.name wstring], ra, cb);
     if (ret != 0) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]
-                  resultCode:M7Z_ORC_OtherError];
         return ret;
     }
     
@@ -169,10 +164,6 @@ public:
     }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel, [self.workDir wstring]);
-    if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]
-                  resultCode:M7Z_ORC_OtherError];
-    }
     return ret;
 }
 
@@ -187,10 +178,6 @@ public:
     }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLExtractFromArchive([self.name wstring], [dir wstring], files, cb, [self.workDir wstring]);
-    if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]
-                  resultCode:M7Z_ORC_OtherError];
-    }
     return ret;
 }
 
@@ -201,15 +188,7 @@ public:
     }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb, [self.workDir wstring]);
-    if (ret) {
-        [self.delegate error:[NSString stringWithWstring:GetErrorMessage(ret)]
-                  resultCode:M7Z_ORC_OtherError];
-    }
     return ret;
-}
-
--(NSString *)errorForCode:(NSInteger)code {
-    return [NSString stringWithWstring:GetErrorMessage((int)code)];
 }
 
 @end

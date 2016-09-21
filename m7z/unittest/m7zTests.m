@@ -24,8 +24,8 @@
 -(void)done {
     NSLog(@"Done:");
 }
--(BOOL)error:(NSString *)err resultCode:(int)resultCode {
-    NSLog(@"%@ resultCode %d", err, resultCode);
+-(BOOL)error:(int)operationResultCode {
+    NSLog(@"Error %d", operationResultCode);
     return NO;
 }
 -(NSString *)password {

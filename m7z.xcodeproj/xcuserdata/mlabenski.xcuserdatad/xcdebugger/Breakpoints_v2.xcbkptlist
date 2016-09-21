@@ -129,21 +129,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "lib7z/unittest/MLCallbackTest.cpp"
-            timestampString = "495379444.816766"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "MLCallbackTest::AskOverwrite( const wchar_t *existName, const time_t *existTime, const unsigned long long *existSize, const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize, int *answer)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

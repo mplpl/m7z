@@ -34,45 +34,6 @@ static void GetAttribString(DWORD wa, bool isDir, char *s)
     s[4] = ((wa & FILE_ATTRIBUTE_ARCHIVE)   != 0) ? 'A': '.';
     s[5] = 0;
 }
-
-std::wstring GetErrorMessage(HRESULT result)
-{
-    switch(result)
-    {
-        case Lib7zReturnCode::OK:                  return L"OK";
-        case Lib7zReturnCode::ABORT:               return L"Aborted";
-        case Lib7zReturnCode::FERROR:              return L"Can not open file as archive";
-        case Lib7zReturnCode::OUTOFMEMORY:         return L"Can't allocate required memory";
-        case Lib7zReturnCode::CANTLOADCODECS:      return L"Can't load codecs";
-        case Lib7zReturnCode::UOINITFAILED:        return L"Can't initialize operation";
-        case Lib7zReturnCode::CANTCREATEOUTDIR:    return L"Can't create output dir";
-        case Lib7zReturnCode::CANTFINDARCHIVE:     return L"Can't find archive";
-        default:
-            return std::wstring(NWindows::NError::MyFormatMessage(result));
-    }
-}
-
-std::wstring GetExtractOperationErrorMessage(int result)
-{
-    switch (result) {
-        case ExtractOperationResult::kOK:                   return L"OK";
-        case ExtractOperationResult::kUnsupportedMethod:    return L"Unsuported compression method";
-        case ExtractOperationResult::kDataError:            return L"Data error";
-        case ExtractOperationResult::kCRCError:             return L"CRC error";
-        case 1000 + ExtractOperationResult::kDataError:     return L"Data error in encrypted file. Wrong password?";
-        case 1000 + ExtractOperationResult::kCRCError:      return L"CRC error in encrypted file. Wrong password?";
-        case ExtractOperationResult::kUnavailable:          return L"Archive is not available";
-        default:                                            return L"Unknown error";
-    }
-}
-    
-std::wstring GetUpdateOperationErrorMessage(int result)
-{
-    switch (result) {
-        case UpdateOperationResult::kOK:                    return L"OK";
-        default:                                            return L"Update error";
-    }
-}
     
 LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue, MLListCallback &callback)
 {
