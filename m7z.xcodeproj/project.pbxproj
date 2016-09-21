@@ -530,11 +530,11 @@
 		6BB352A41D817BEA00134280 /* lib7z_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lib7z_types.h; path = lib7z/lib7z_types.h; sourceTree = "<group>"; };
 		6BBBF3561D8838A70002FC42 /* M7ZItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M7ZItem.h; sourceTree = "<group>"; };
 		6BC4E60D1D80260F00B8FB70 /* lib7ztest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lib7ztest.cpp; sourceTree = "<group>"; };
-		6BC4E60E1D80260F00B8FB70 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		6BC4E60E1D80260F00B8FB70 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; usesTabs = 1; };
 		6BC4E60F1D80260F00B8FB70 /* MLCallbackTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MLCallbackTest.cpp; sourceTree = "<group>"; };
 		6BC4E6101D80260F00B8FB70 /* MLCallbackTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCallbackTest.h; sourceTree = "<group>"; };
 		6BC4E6161D80263900B8FB70 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = lib7z/sample/Main.cpp; sourceTree = "<group>"; };
-		6BC4E6171D80263900B8FB70 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = lib7z/sample/makefile; sourceTree = "<group>"; };
+		6BC4E6171D80263900B8FB70 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = lib7z/sample/makefile; sourceTree = "<group>"; usesTabs = 1; };
 		6BC4E6231D802F6000B8FB70 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
 		6BC4E6241D802F6000B8FB70 /* makefile.list */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = makefile.list; sourceTree = "<group>"; usesTabs = 1; wrapsLines = 1; };
 		6BC4E6251D802F6000B8FB70 /* makefile.rules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = makefile.rules; sourceTree = "<group>"; };
@@ -5022,7 +5022,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -5062,7 +5062,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";
