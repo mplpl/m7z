@@ -10,30 +10,37 @@ using namespace lib7z;
 
 class lib7zTest : public ::testing::Test 
 {
-	protected:
-		virtual void SetUp() 
-		{
-			generateTestFiles();
-		}
-
-		virtual void TearDown() 
-		{
-			deleteTestFiles();
-
-		}
-
+    protected:
 
 		std::wstring arch1 = L"/tmp/1.7z";
     	std::wstring arch2 = L"/tmp/2.7z";
     	std::wstring arch3 = L"/tmp/3.7z";
     
-    	std::vector<std::wstring> testFiles = {L"/tmp/t1/1.tmp", L"/tmp/t1/2.tmp", L"/tmp/t1/3.tmp"};
-		std::vector<std::wstring> testFiles2 = {L"t1/1.tmp", L"t1/2.tmp", L"t1/3.tmp"};
-
-		std::wstring archDir1 = L"/tmp/t1";
+        std::vector<std::wstring> testFiles = {L"/tmp/t1/1.tmp", L"/tmp/t1/2.tmp", L"/tmp/t1/3.tmp"};
+        std::vector<std::wstring> testFiles2 ={L"t1/1.tmp", L"t1/2.tmp", L"t1/3.tmp"};
+    
+        std::wstring archDir1 = L"/tmp/t1";
     	std::wstring archDir2 = L"/tmp/t2";
     	std::wstring archDir3 = L"/tmp/t3";
 
+        virtual void SetUp()
+        {
+            //testFiles.push_back(L"/tmp/t1/1.tmp");
+            //testFiles.push_back(L"/tmp/t1/2.tmp");
+            //testFiles.push_back(L"/tmp/t1/3.tmp");
+            
+            //testFiles2.push_back(L"t1/1.tmp");
+            //testFiles2.push_back(L"t1/2.tmp");
+            //testFiles2.push_back(L"t1/3.tmp");
+                                
+            generateTestFiles();
+        }
+        
+        virtual void TearDown() 
+        {
+            deleteTestFiles();
+        }
+                            
     	void generateTestFiles()
 		{
 			std::string archDir1cs(archDir1.begin(), archDir1.end());
@@ -47,7 +54,7 @@ class lib7zTest : public ::testing::Test
 			
 		    for (auto it = testFiles.begin(); it < testFiles.end(); it++) {
 		        std::string fname( it->begin(), it->end());
-		        std::ofstream fout(fname);
+		        std::ofstream fout(fname.c_str());
 		        for (int i = 0; i < 10000; i++)
 		        {
 		            fout << "wferfjhefjkvhdfhivwerqepojvqs,c xsfvjsfhvqwr";

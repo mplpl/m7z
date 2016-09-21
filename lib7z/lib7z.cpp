@@ -18,6 +18,7 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 
 namespace lib7z
 {
@@ -285,7 +286,10 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     
     UStringVector commandStrings;
     commandStrings.Add(command.c_str());
-    commandStrings.Add((L"-mx" + std::to_wstring(compressionLevel)).c_str());
+    std::wstringstream wstr;
+    wstr << L"-mx" << compressionLevel;
+    //commandStrings.Add((L"-mx" + std::to_wstring(compressionLevel)).c_str());
+    commandStrings.Add(wstr.str().c_str());
     if (encryptHeader)
     {
         commandStrings.Add(L"-mhe");

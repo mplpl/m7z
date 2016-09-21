@@ -147,7 +147,7 @@ void generateTestFiles(vector<wstring> testFiles, std::wstring archDir)
     
     for (vector<wstring>::iterator it = testFiles.begin(); it < testFiles.end(); it++) {
         std::string fname( it->begin(), it->end());
-        ofstream fout(fname);
+        ofstream fout(fname.c_str());
         for (int i = 0; i < 300000; i++)
         {
             fout << "wferfjhefjkvhdfhivwerqepojvqs,c xsfvjsfhvqwr";

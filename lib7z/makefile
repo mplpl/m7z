@@ -21,7 +21,8 @@ CXXFLAGS= \
 	-D_UNICODE \
 	-DUNIX_USE_WIN_FILE \
 	-Wno-logical-op-parentheses \
-	-Wno-c++11-extensions
+	-Wno-c++11-extensions \
+	-stdlib=libc++
 
 CXXFLAGS_REL= \
 	-O
