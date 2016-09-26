@@ -28,7 +28,7 @@ enum M7ZReturnCode
 enum M7ZOperationResultCode
 {
     M7Z_ORC_OK                = 0,
-    M7Z_ORC_UnsupportedMethod = 1000,                           //extract
+    M7Z_ORC_UnsupportedMethod = 1001,                           //extract
     M7Z_ORC_DataError,                                          //extract
     M7Z_ORC_CRCError,                                           //extract
     M7Z_ORC_Unavailable,                                        //extract
@@ -40,7 +40,7 @@ enum M7ZOperationResultCode
     M7Z_ORC_DataErrorPassword = M7Z_ORC_DataError + 100,        //extract
     M7Z_ORC_CRCErrorPassword  = M7Z_ORC_CRCError + 100,         //extract
 
-    M7Z_ORC_UpdateError        = 2000,                          //update
+    M7Z_ORC_UpdateError        = 2001,                          //update
     M7Z_ORC_OtherError         = 3000
 };
 
