@@ -192,8 +192,10 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
                 {
                     auto res = std::mismatch(it->begin(), it->end(), std::wstring(filePath).begin());
                     if (res.first == it->end())
+                    {
                         found = true;
                         break;
+                    }
                 }
                 if (!found) continue;
             }
@@ -224,7 +226,6 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
                               0);
     result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
     callback.FinishArchive();
-    
     return result;
 }
 
