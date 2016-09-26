@@ -54,11 +54,13 @@ public:
         switch (kind)
         {
             case 1:
-                ret = [delegat error:1000 + x];
+                x = x + 1000;
+                ret = [delegat error:x];
                 break;
                 
             case 2:
-                ret = [delegat error:2000 + x];
+                x = x + 2000;
+                ret = [delegat error:x];
                 break;
         }
         
