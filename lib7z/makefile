@@ -22,7 +22,8 @@ CXXFLAGS= \
 	-DUNIX_USE_WIN_FILE \
 	-Wno-logical-op-parentheses \
 	-Wno-c++11-extensions \
-	-stdlib=libc++
+	-stdlib=libc++ \
+	-mmacosx-version-min=10.7
 
 CXXFLAGS_REL= \
 	-O

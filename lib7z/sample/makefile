@@ -1,7 +1,7 @@
 PROG=sample
 M7Z_DIR=../
 
-CXXFLAGS += -std=c++11 -stdlib=libc++
+CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7
 
 .PHONY: all
 all: $(PROG)

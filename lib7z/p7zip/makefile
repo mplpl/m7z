@@ -9,7 +9,8 @@ COMMON_FLAGS= \
 	-DBREAK_HANDLER \
 	-DUNICODE \
 	-D_UNICODE \
-	-DUNIX_USE_WIN_FILE
+	-DUNIX_USE_WIN_FILE \
+	-mmacosx-version-min=10.7
 
 include $(P7ZIP_PATH)/makefile.crc32
 include $(P7ZIP_PATH)/makefile.macosx_llvm_64bits
