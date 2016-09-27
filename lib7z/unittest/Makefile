@@ -25,7 +25,7 @@ USER_DIR = ./
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-CXXFLAGS += -g -O0 -Wall -Wextra -std=c++11 -stdlib=libc++
+CXXFLAGS += -g -O0 -Wall -Wextra -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
@@ -70,8 +70,6 @@ gtest_main.a : gtest-all.o gtest_main.o
 # Builds a sample test.  A test should link with either gtest.a or
 # gtest_main.a, depending on whether it defines its own main()
 # function.
-
-osx_target : export MACOSX_DEPLOYMENT_TARGET = 10.9
 
 lib7ztest.o : $(USER_DIR)/lib7ztest.cpp $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/lib7ztest.cpp
