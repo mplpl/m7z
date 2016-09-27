@@ -15,6 +15,7 @@ class lib7zTest : public ::testing::Test
 		std::wstring arch1 = L"/tmp/1.7z";
     	std::wstring arch2 = L"/tmp/2.7z";
     	std::wstring arch3 = L"/tmp/3.7z";
+        std::wstring arch4 = L"/tmp/4.bz2";
     
         std::vector<std::wstring> testFiles = {L"/tmp/t1/1.tmp", L"/tmp/t1/2.tmp", L"/tmp/t1/3.tmp"};
         std::vector<std::wstring> testFiles2 ={L"t1/1.tmp", L"t1/2.tmp", L"t1/3.tmp"};
@@ -77,6 +78,9 @@ class lib7zTest : public ::testing::Test
 
 		    std::string arch3cs(arch3.begin(), arch3.end());
 		    remove(arch3cs.c_str());
+            
+            std::string arch4cs(arch4.begin(), arch4.end());
+            remove(arch4cs.c_str());
 
 		    std::string archDir1cs(archDir1.begin(), archDir1.end());
             std::ostringstream os1;
@@ -208,3 +212,15 @@ TEST_F(lib7zTest, DoubleExtract)
 
 }
 
+TEST_F(lib7zTest, Bz2Test)
+{
+    // I found an issue with older version of m7z about EXC_BAD_ACCESS during extract
+    std::vector<std::wstring> files;
+    files.push_back(testFiles[1]);
+    int result = MLAddToArchive(arch4, files, ucallback);
+    ASSERT_EQ(result, 0) << "Error while compressing bz2 archive (" << result << ":" << result << ")";
+    
+    files.clear();
+    result = MLExtractFromArchive(arch4, archDir3, files, ucallback);
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
+}

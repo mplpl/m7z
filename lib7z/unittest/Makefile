@@ -79,5 +79,5 @@ lib7ztest.o : $(USER_DIR)/lib7ztest.cpp $(GTEST_HEADERS)
 MLCallbackTest.o : $(USER_DIR)/MLCallbackTest.cpp $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -Wno-unused-parameter -c $(USER_DIR)/MLCallbackTest.cpp
 
-lib7ztest : lib7ztest.o MLCallbackTest.o gtest_main.a
+lib7ztest : lib7ztest.o MLCallbackTest.o gtest_main.a ../lib7z.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread ../lib7z.a -framework CoreFoundation -all_load $^ -o $@

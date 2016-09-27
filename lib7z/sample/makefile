@@ -6,7 +6,7 @@ CXXFLAGS += -std=c++11 -stdlib=libc++
 .PHONY: all
 all: $(PROG)
 
-$(PROG): Main.o
+$(PROG): Main.o ../lib7z.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread ../lib7z.a -framework CoreFoundation -all_load $^ -o $@
 
 Main.o : Main.cpp
