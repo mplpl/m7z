@@ -212,9 +212,15 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
         return Lib7zReturnCode::CANTCREATEOUTDIR;
     }
     
-    UStringVector removePathParts;
     MLExtractCallbackWrapper *ecs = new MLExtractCallbackWrapper(callback);
+    // hold ComPtr reference for autorelease
+    CMyComPtr<IFolderArchiveExtractCallback> ecb = ecs;
+    
     CArchiveExtractCallback *extractCallbackSpec = new CArchiveExtractCallback();
+    // hold ComPtr reference for autorelease - without this bz2 extract crashes (EXC_BAD_ACCESS)
+    CMyComPtr<IProgress> ec = (IArchiveExtractCallback*)extractCallbackSpec;
+    
+    UStringVector removePathParts;
     CExtractNtOptions ntOptions;
     extractCallbackSpec->Init(ntOptions,
                               NULL,
@@ -224,6 +230,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
                               outDir,
                               removePathParts, false,
                               0);
+    
     result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
     callback.FinishArchive();
     return result;
@@ -250,7 +257,6 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     commandStrings.Add(command.c_str());
     std::wstringstream wstr;
     wstr << L"-mx" << compressionLevel;
-    //commandStrings.Add((L"-mx" + std::to_wstring(compressionLevel)).c_str());
     commandStrings.Add(wstr.str().c_str());
     if (encryptHeader)
     {
