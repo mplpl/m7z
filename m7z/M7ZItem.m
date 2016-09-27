@@ -10,7 +10,8 @@
 
 @implementation M7ZItem
 
-- (instancetype)initWithName:(NSString *)name size:(int)size sizeCompressed:(int)sizeCompressed date:(NSString *)date attrs:(NSString *)attrs encrypted:(BOOL)encrypted {
+- (instancetype)initWithName:(NSString *)name size:(unsigned long long)size sizeCompressed:(unsigned long long)sizeCompressed
+                        date:(NSString *)date attrs:(NSString *)attrs encrypted:(BOOL)encrypted {
     
     if (self = [super init]) {
         
