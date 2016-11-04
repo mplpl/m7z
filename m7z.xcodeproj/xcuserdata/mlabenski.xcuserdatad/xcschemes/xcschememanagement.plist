@@ -32,7 +32,7 @@
 		<key>m7zTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 		<key>m7z_unittest.xcscheme</key>
 		<dict>
