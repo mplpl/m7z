@@ -232,7 +232,13 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
                               0);
     
     result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
+    
+    if (result == S_OK)
+    {
+        extractCallbackSpec->SetDirsTimes();
+    }
     callback.FinishArchive();
+    
     return result;
 }
 
