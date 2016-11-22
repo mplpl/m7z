@@ -1,0 +1,17 @@
+diff -u -r p7zip_16.02/CPP/Windows/FileFind.cpp p7zip_src/CPP/Windows/FileFind.cpp
+--- p7zip_16.02/CPP/Windows/FileFind.cpp	2015-11-09 15:30:40.000000000 +0100
++++ p7zip_src/CPP/Windows/FileFind.cpp	2016-09-09 10:42:25.000000000 +0200
+@@ -306,6 +306,13 @@
+  
+   my_windows_split_path(nameWindowToUnix(wildcard),_directory,_pattern);
+   
++  //ML1
++  try {
++    if (!fillin_CFileInfo(fi,_directory,_pattern,false)) {
++      return true;
++    }
++  } catch (...) {}
++    
+   TRACEN((printf("CFindFile::FindFirst : %s (dirname=%s,pattern=%s)\n",wildcard,(const char *)_directory,(const char *)_pattern)))
+ 
+   _dirp = ::opendir((const char *)_directory);
