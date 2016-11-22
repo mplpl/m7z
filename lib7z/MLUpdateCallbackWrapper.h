@@ -1,4 +1,5 @@
 // UpdateCallbackWrapper.h
+// Copyright @ 2016 MPL. All rights reserved.
 
 #ifndef __MLUPDATE_CALLBACK_WRAPPER_H
 #define __MLUPDATE_CALLBACK_WRAPPER_H

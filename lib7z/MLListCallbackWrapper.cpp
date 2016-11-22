@@ -1,4 +1,5 @@
 // OpenCallbackConsole.cpp
+// Copyright @ 2016 MPL. All rights reserved.
 
 #include "StdAfx.h"
 

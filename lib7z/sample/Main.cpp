@@ -1,3 +1,5 @@
+// Copyright @ 2016 MPL. All rights reserved.
+
 #include <lib7z.h>
 #include <iostream>
 #include <fstream>

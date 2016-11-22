@@ -1,6 +1,7 @@
 /*!
     C++ iterface of lib7z library
  */
+// Copyright @ 2016 MPL. All rights reserved.
 
 #ifndef __LIB7Z_H__
 #define __LIB7Z_H__

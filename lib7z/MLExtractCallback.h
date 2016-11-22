@@ -3,6 +3,7 @@
  
     Callback interface for extract operation.
  */
+// Copyright @ 2016 MPL. All rights reserved.
 
 #ifndef __MLEXTRACTCALLBACK_H
 #define __MLEXTRACTCALLBACK_H

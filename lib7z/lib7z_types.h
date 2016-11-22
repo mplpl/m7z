@@ -2,8 +2,8 @@
 //  lib7z_types.h
 //  m7z
 //
-//  Created by mlabenski on 08/09/16.
-//  Copyright © 2016 mlabenski. All rights reserved.
+//  Created by MPL on 08/09/16.
+//  Copyright © 2016 MPL. All rights reserved.
 //
 
 /*!

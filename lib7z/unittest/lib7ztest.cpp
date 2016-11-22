@@ -1,3 +1,5 @@
+// Copyright @ 2016 MPL. All rights reserved.
+
 #include <string>
 #include "gtest/gtest.h"
 #include "../lib7z.h"
