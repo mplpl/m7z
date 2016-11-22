@@ -17,6 +17,7 @@
 		6BA394561CA05A00001FD2C5 /* NSString+wstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA394541CA05A00001FD2C5 /* NSString+wstring.h */; };
 		6BA394571CA05A00001FD2C5 /* NSString+wstring.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6BA394551CA05A00001FD2C5 /* NSString+wstring.mm */; };
 		6BB352A51D817BEA00134280 /* lib7z_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BB352A41D817BEA00134280 /* lib7z_types.h */; };
+		6BBBCC771DE4436400EEE565 /* p7zip_16.02.patch in Resources */ = {isa = PBXBuildFile; fileRef = 6BBBCC761DE4436400EEE565 /* p7zip_16.02.patch */; };
 		6BBBF3571D8838A70002FC42 /* M7ZItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BBBF3561D8838A70002FC42 /* M7ZItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BC4E6291D806F8A00B8FB70 /* lib7z.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16E95EB1CDA7E2B00A26E86 /* lib7z.cpp */; };
 		C12DBE131D7DFB60003C8A2B /* 7zAsm.asm in Sources */ = {isa = PBXBuildFile; fileRef = C12DB8941D7DFB5E003C8A2B /* 7zAsm.asm */; };
@@ -528,6 +529,7 @@
 		6BA394541CA05A00001FD2C5 /* NSString+wstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+wstring.h"; sourceTree = "<group>"; };
 		6BA394551CA05A00001FD2C5 /* NSString+wstring.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+wstring.mm"; sourceTree = "<group>"; };
 		6BB352A41D817BEA00134280 /* lib7z_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lib7z_types.h; path = lib7z/lib7z_types.h; sourceTree = "<group>"; };
+		6BBBCC761DE4436400EEE565 /* p7zip_16.02.patch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = p7zip_16.02.patch; path = lib7z/p7zip_16.02.patch; sourceTree = "<group>"; };
 		6BBBF3561D8838A70002FC42 /* M7ZItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M7ZItem.h; sourceTree = "<group>"; };
 		6BC4E60D1D80260F00B8FB70 /* lib7ztest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lib7ztest.cpp; sourceTree = "<group>"; };
 		6BC4E60E1D80260F00B8FB70 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; usesTabs = 1; };
@@ -4279,6 +4281,7 @@
 		C1C24C4C1CA09DA000F54EA9 /* lib7z */ = {
 			isa = PBXGroup;
 			children = (
+				6BBBCC761DE4436400EEE565 /* p7zip_16.02.patch */,
 				6BC4E6221D802F0800B8FB70 /* p7zip */,
 				6BC4E6151D80262B00B8FB70 /* sample */,
 				C12DBFE21D7E09D3003C8A2B /* unittest */,
@@ -4475,6 +4478,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BBBCC771DE4436400EEE565 /* p7zip_16.02.patch in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
