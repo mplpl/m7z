@@ -2,8 +2,8 @@
 //  m7z.h
 //  m7z
 //
-//  Created by mlabenski on 21/03/16.
-//  Copyright © 2016 mlabenski. All rights reserved.
+//  Created by MPL on 21/03/16.
+//  Copyright © 2016 MPL. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

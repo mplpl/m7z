@@ -3,6 +3,7 @@
     
     Callback interface for pack/compress operation.
 */
+// Copyright @ 2016 MPL. All rights reserved.
 
 #ifndef __MLUPDATE_CALLBACK_H
 #define __MLUPDATE_CALLBACK_H
