@@ -17,8 +17,6 @@
 		6BA394561CA05A00001FD2C5 /* NSString+wstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA394541CA05A00001FD2C5 /* NSString+wstring.h */; };
 		6BA394571CA05A00001FD2C5 /* NSString+wstring.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6BA394551CA05A00001FD2C5 /* NSString+wstring.mm */; };
 		6BB352A51D817BEA00134280 /* lib7z_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BB352A41D817BEA00134280 /* lib7z_types.h */; };
-		6BBBCC771DE4436400EEE565 /* p7zip_16.02.patch in Resources */ = {isa = PBXBuildFile; fileRef = 6BBBCC761DE4436400EEE565 /* p7zip_16.02.patch */; };
-		6BBBCC7B1DE447D400EEE565 /* LICENSE.md in Sources */ = {isa = PBXBuildFile; fileRef = 6BBBCC7A1DE447D400EEE565 /* LICENSE.md */; };
 		6BBBF3571D8838A70002FC42 /* M7ZItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BBBF3561D8838A70002FC42 /* M7ZItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BC4E6291D806F8A00B8FB70 /* lib7z.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16E95EB1CDA7E2B00A26E86 /* lib7z.cpp */; };
 		C12DBE131D7DFB60003C8A2B /* 7zAsm.asm in Sources */ = {isa = PBXBuildFile; fileRef = C12DB8941D7DFB5E003C8A2B /* 7zAsm.asm */; };
@@ -4481,7 +4479,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BBBCC771DE4436400EEE565 /* p7zip_16.02.patch in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4499,7 +4496,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BBBCC7B1DE447D400EEE565 /* LICENSE.md in Sources */,
 				6BA394531CA056DC001FD2C5 /* M7ZItem.m in Sources */,
 				6BA3944F1CA05586001FD2C5 /* M7ZArchive.mm in Sources */,
 				6BA394571CA05A00001FD2C5 /* NSString+wstring.mm in Sources */,
