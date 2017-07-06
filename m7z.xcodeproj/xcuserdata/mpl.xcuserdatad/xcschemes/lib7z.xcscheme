@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -55,6 +55,15 @@
          runnableDebuggingMode = "0"
          FilePath = "/Users/mpl/Documents/workspace/m7z/lib7z/test">
       </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C1A95BD31CF4F43800AB00C2"
+            BuildableName = "lib7z"
+            BlueprintName = "lib7z"
+            ReferencedContainer = "container:m7z.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
