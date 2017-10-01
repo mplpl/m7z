@@ -189,7 +189,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
                 
                 // now check if it is substring (subdirectory) of files on the list (using files2)
                 bool found = false;
-                for (std::vector<std::wstring>::iterator it = files.begin(); it < files.end(); it++)
+                for (std::vector<std::wstring>::iterator it = files2.begin(); it < files2.end(); it++)
                 {
                     auto res = std::mismatch(it->begin(), it->end(), std::wstring(filePath).begin());
                     if (res.first == it->end())
@@ -221,7 +221,22 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     // hold ComPtr reference for autorelease - without this bz2 extract crashes (EXC_BAD_ACCESS)
     CMyComPtr<IProgress> ec = (IArchiveExtractCallback*)extractCallbackSpec;
     
+    // removePathParts allows cutting out base path of extracted path
+    // for instance if I'm unpacking file x/y/z.txt, I only want z.txt in dest directory
+    // and not full x/y/z.txt - removePathParts defines what is x/y
+    // as there is only one parameters, all the items to be extrcted need to be in
+    // the same base direcory in the archive and I'm only getting it from the first
+    // item to unpack
+    // if unpacking all, removePathParts should be left empty
     UStringVector removePathParts;
+    if (files.size())
+    {
+        SplitPathToParts(files.begin()->c_str(), removePathParts);
+        if (!removePathParts.IsEmpty())
+        {
+            removePathParts.DeleteBack();
+        }
+    }
     CExtractNtOptions ntOptions;
     extractCallbackSpec->Init(ntOptions,
                               NULL,
@@ -231,6 +246,11 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
                               outDir,
                               removePathParts, false,
                               0);
+    
+    // pathMode allows to strip pathes and only extract files to destination directory
+    // unfortunatelly when extracting a dir it takes items out of this dir so that
+    // they will be located directly at destination - therefore I'm not using it here
+    extractCallbackSpec->InitForMulti(false, NExtract::NPathMode::EEnum::kFullPaths, NExtract::NOverwriteMode::EEnum::kAsk);
     
     result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
     

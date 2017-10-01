@@ -212,11 +212,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lib7z/lib7z.cpp"
-            timestampString = "494795004.575015"
+            timestampString = "527350757.613924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348">
+            startingLineNumber = "366"
+            endingLineNumber = "366">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -226,11 +226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lib7z/lib7z.cpp"
-            timestampString = "494795800.425063"
+            timestampString = "527350757.613924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector&lt;std::wstring&gt; filesW, MLUpdateCallback &amp;cb, bool encryptHeader, int compressionLevel, std::wstring workDir)"
             landmarkType = "9">
          </BreakpointContent>
@@ -263,8 +263,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
             endingLineNumber = "60"
-            landmarkName = "MLExtractCallbackWrapper::CryptoGetTextPassword(BSTR *password)"
-            landmarkType = "5">
+            landmarkName = "MLExtractCallbackWrapper::MessageError(const wchar_t *message)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -278,9 +278,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "MLExtractCallbackWrapper::SetTotal(UInt64 x)"
-            landmarkType = "5">
+            endingLineNumber = "13">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -313,6 +311,164 @@
             endingLineNumber = "11"
             landmarkName = "MLOpenCallback::Open_CryptoGetTextPassword(BSTR *password)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib7z/unittest/lib7ztest.cpp"
+            timestampString = "527289343.965966"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "TEST_F(lib7zTest, DoubleExtract)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib7z/lib7z.cpp"
+            timestampString = "527350757.613924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
+            landmarkName = "MLAddToArchive(std::wstring archiveNameW, std::vector&lt;std::wstring&gt; filesW, MLUpdateCallback &amp;cb, bool encryptHeader, int compressionLevel, std::wstring workDir)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib7z/unittest/MLCallbackTest.cpp"
+            timestampString = "527289471.436203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "MLCallbackTest::AskOverwrite( const wchar_t *existName, const time_t *existTime, const unsigned long long *existSize, const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize, int *answer)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "m7z/unittest/m7zTests.m"
+            timestampString = "527290290.754983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-shouldOverwriteItem:date:size:newName:newDate:newSize:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "m7z/unittest/m7zTests.m"
+            timestampString = "527290369.116604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-testDecompressSelectedDouble"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testDecompressSelectedDouble]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mpl/Documents/m7z/m7z/unittest/m7zTests.m"
+                  timestampString = "527290466.328251"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "4181">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testDecompressSelectedDouble]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mpl/Documents/m7z/m7z/unittest/m7zTests.m"
+                  timestampString = "527290466.332887"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "5748">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testDecompressSelectedDouble]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mpl/Documents/m7z/m7z/unittest/m7zTests.m"
+                  timestampString = "527290466.33652"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "5821">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[frm7zTests testDecompressSelectedDouble]"
+                  moduleName = "m7zTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mpl/Documents/m7z/m7z/unittest/m7zTests.m"
+                  timestampString = "527290466.342368"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "5949">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib7z/MLExtractCallbackWrapper.cpp"
+            timestampString = "527292495.258917"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "MLExtractCallbackWrapper::AskOverwrite( const wchar_t *existName, const FILETIME *x, const UInt64 *y, const wchar_t *newName, const FILETIME *a, const UInt64 *b, Int32 *answer)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

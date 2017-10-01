@@ -5,6 +5,7 @@
 #include "MLExtractCallback.h"
 #include "MLExtractCallbackWrapper.h"
 #include <iostream>
+#include <Windows/TimeUtils.h>
 
 #include "Windows/Synchronization.h"
 static NWindows::NSynchronization::CCriticalSection g_CriticalSection;
@@ -34,8 +35,13 @@ MLExtractCallbackWrapper::AskOverwrite(
     Int32 *answer)
 {
     MT_LOCK
-    //TODO: convert time
-    return cb->AskOverwrite(existName, 0, y, newName, 0, b, answer);
+    UInt32 time1;
+    UInt32 time2;
+    NWindows::NTime::FileTimeToUnixTime(*x, time1);
+    NWindows::NTime::FileTimeToUnixTime(*a, time2);
+    time_t utime1 = time1;
+    time_t utime2 = time2;
+    return cb->AskOverwrite(existName, &utime1, y, newName, &utime2, b, answer);
 }
 
 STDMETHODIMP

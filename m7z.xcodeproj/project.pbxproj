@@ -4332,7 +4332,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = /Users/mlabenski/Dropbox/work/m7z/lib7z/unittest;
+			buildWorkingDirectory = /Users/mpl/Documents/m7z/lib7z/unittest;
 			dependencies = (
 			);
 			name = lib7z_unittest;

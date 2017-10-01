@@ -10,6 +10,7 @@
 #import "../m7z.h"
 
 @interface frmDelegate : NSObject<M7ZArchiveDelegate>
+@property int askedOverwrite;
 @end
 
 @implementation frmDelegate
@@ -17,6 +18,7 @@
 @synthesize total;
 @synthesize completed;
 @synthesize shouldBreak;
+@synthesize askedOverwrite;
 
 -(void)item:(NSString *)name mode:(int)mode {
     NSLog(@"%@ mode %d", name, mode);
@@ -36,6 +38,7 @@
 -(int)shouldOverwriteItem:(NSString *)name date:(NSDate *)date size:(unsigned long long)size
                   newName:(NSString *)newName newDate:(NSDate *)newDate newSize:(unsigned long long)newSize {
     
+    askedOverwrite++;
     return M7Z_AO_Yes;
 }
 
@@ -159,6 +162,18 @@
     NSError *err;
     NSArray *ret = [fm contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@/%@", self.unpackDir, _subDirToUnpack] error:&err];
     XCTAssert(ret.count == _subDirItems.count);
+}
+
+- (void)testDecompressSelectedDouble {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
+    archive.delegate = self.delegate;
+    XCTAssert([archive extractItems:_itemsToUnpack toDir:self.unpackDir] == 0);
+    archive = [[M7ZArchive alloc] initWithName:self.archName];
+    archive.delegate = self.delegate;
+    self.delegate.askedOverwrite = 0;
+    XCTAssert([archive extractItems:_itemsToUnpack toDir:self.unpackDir] == 0);
+    XCTAssert(self.delegate.askedOverwrite == _itemsToUnpack.count);
 }
 
 - (void)testDelete {
