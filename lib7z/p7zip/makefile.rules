@@ -553,4 +553,15 @@ myAddExeFlag.o : $(P7ZIP_PATH)/CPP/myWindows/myAddExeFlag.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/myAddExeFlag.cpp
 mySplitCommandLine.o : $(P7ZIP_PATH)/CPP/myWindows/mySplitCommandLine.cpp
 	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/myWindows/mySplitCommandLine.cpp
-	
+Rar1Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Rar1Decoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Rar1Decoder.cpp
+Rar2Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Rar2Decoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Rar2Decoder.cpp
+Rar3Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Rar3Decoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Rar3Decoder.cpp
+Rar3Vm.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Rar3Vm.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Rar3Vm.cpp
+Rar5Decoder.o : $(P7ZIP_PATH)/CPP/7zip/Compress/Rar5Decoder.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/Rar5Decoder.cpp
+RarCodecsRegister.o : $(P7ZIP_PATH)/CPP/7zip/Compress/RarCodecsRegister.cpp
+	$(CXX) $(CXXFLAGS) $(P7ZIP_PATH)/CPP/7zip/Compress/RarCodecsRegister.cpp

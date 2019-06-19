@@ -274,4 +274,10 @@ PropVariantConv.o \
 TimeUtils.o \
 myAddExeFlag.o \
 mySplitCommandLine.o \
+Rar1Decoder.o \
+Rar2Decoder.o \
+Rar3Decoder.o \
+Rar3Vm.o \
+Rar5Decoder.o \
+RarCodecsRegister.o \
 
