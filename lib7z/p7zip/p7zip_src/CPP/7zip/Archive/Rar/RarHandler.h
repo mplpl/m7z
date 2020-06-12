@@ -69,6 +69,7 @@ struct CRefItem
 
 class CHandler:
   public IInArchive,
+  public ISetProperties,
   PUBLIC_ISetCompressCodecsInfo
   public CMyUnknownImp
 {
@@ -81,6 +82,7 @@ class CHandler:
   UInt32 _warningFlags;
   bool _isArc;
   UString _missingVolName;
+  iconv_t _convBaseToUtf8 = (iconv_t)-1;
 
   DECL_EXTERNAL_CODECS_VARS
 
@@ -100,14 +102,21 @@ class CHandler:
       const UInt64 *maxCheckStartPosition,
       IArchiveOpenCallback *openCallback);
 
+  ~CHandler()
+  {
+    if (_convBaseToUtf8 != (iconv_t)-1)
+      iconv_close(_convBaseToUtf8);
+  }
 public:
   MY_QUERYINTERFACE_BEGIN2(IInArchive)
+  MY_QUERYINTERFACE_ENTRY(ISetProperties)
   QUERY_ENTRY_ISetCompressCodecsInfo
   MY_QUERYINTERFACE_END
   MY_ADDREF_RELEASE
   
   INTERFACE_IInArchive(;)
 
+  STDMETHOD(SetProperties)(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps);
   DECL_ISetCompressCodecsInfo
 };
 

@@ -583,18 +583,29 @@ HRESULT CArc::GetNextItem(CItem &item, bool &filled)
 
 class CHandler:
   public IInArchive,
+  public ISetProperties,
   public CMyUnknownImp
 {
   CObjectVector<CItem> _items;
   CMyComPtr<IInStream> _stream;
   UInt64 _phySize;
   CArc _arc;
+  iconv_t _convBaseToUtf8 = (iconv_t)-1;
 public:
-  MY_UNKNOWN_IMP1(IInArchive)
-
+  MY_QUERYINTERFACE_BEGIN2(IInArchive)
+  MY_QUERYINTERFACE_ENTRY(ISetProperties)
+  MY_QUERYINTERFACE_END
+  MY_ADDREF_RELEASE
+    
   INTERFACE_IInArchive(;)
 
   HRESULT Open2(IInStream *inStream, IArchiveOpenCallback *callback);
+  ~CHandler()
+  {
+    if (_convBaseToUtf8 != (iconv_t)-1)
+      iconv_close(_convBaseToUtf8);
+  }
+  STDMETHOD(SetProperties)(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps);
 };
 
 static const Byte kArcProps[] =
@@ -703,7 +714,10 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   const CItem &item = _items[index];
   switch (propID)
   {
-    case kpidPath:  prop = NItemName::GetOSName(MultiByteToUnicodeString(item.Name, CP_OEMCP)); break;
+    case kpidPath:
+          prop = NItemName::GetOSName((_convBaseToUtf8 == (iconv_t)-1) ?
+                                      MultiByteToUnicodeString(item.Name, CP_OEMCP) :
+                                      MultiByteToUnicodeString3(item.Name, _convBaseToUtf8)); break;
     case kpidIsDir:  prop = item.IsDir(); break;
     case kpidSize:  prop = item.Size; break;
     case kpidPackSize:  prop = item.PackSize; break;
@@ -963,6 +977,33 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   
   return S_OK;
   COM_TRY_END
+}
+
+STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps)
+{
+  for (UInt32 i = 0; i < numProps; i++)
+  {
+    UString name = names[i];
+    name.MakeLower_Ascii();
+    if (name.IsEmpty())
+      return E_INVALIDARG;
+
+    const PROPVARIANT &prop = values[i];
+
+    if (name.IsEqualTo("cps"))
+    {
+      if (prop.vt == VT_BSTR)
+      {
+        AString codePage = UnicodeStringToMultiByte(prop.bstrVal);
+        _convBaseToUtf8 = iconv_open("UTF-8-MAC", codePage);
+      }
+    }
+    else
+    {
+      return E_INVALIDARG;
+    }
+  }
+  return S_OK;
 }
 
 static const Byte k_Signature[] = { kSig0, kSig1 };

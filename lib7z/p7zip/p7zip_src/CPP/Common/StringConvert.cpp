@@ -39,7 +39,7 @@ UString MultiByteToUnicodeString(const AString &srcString, UINT codePage)
          resultString += (wchar_t)uc; // FIXME
        }
 
-       CFRelease(cfpath2);  
+       CFRelease(cfpath2);
 
        return resultString;
     }
@@ -74,7 +74,7 @@ AString UnicodeStringToMultiByte(const UString &srcString, UINT codePage)
     
     CFStringGetCString(cfpath2,(char *)utf8,4096,kCFStringEncodingUTF8);
 
-    CFRelease(cfpath2);  
+    CFRelease(cfpath2);
 
     return AString(utf8);
   }
@@ -218,3 +218,43 @@ void UnicodeStringToMultiByte2(AString &dest, const UString &srcString, UINT cod
   dest = UnicodeStringToMultiByte(srcString,codePage);
 }
 
+UString MultiByteToUnicodeString3(const AString &srcString, iconv_t convBase)
+{
+    if (srcString.IsEmpty() || convBase == 0 || convBase == (iconv_t)-1)
+    {
+        return MultiByteToUnicodeString(srcString, 0);
+    }
+    
+    UString resultString;
+    CFStringRef cfpath;
+    const char * path = &srcString[0];
+    
+    char out[1024];
+    char *outPtr = out;
+    size_t outSize = 1024;
+    char *inPtr = (char *)&srcString[0];
+    size_t inSize = strlen(path);
+
+    iconv(convBase, &inPtr, &inSize, &outPtr, &outSize);
+    *outPtr = 0;
+    
+    return MultiByteToUnicodeString(out, 0);
+}
+
+AString UnicodeStringToMultiByte3(const UString &srcString, iconv_t convBase)
+{
+    AString utf8 = UnicodeStringToMultiByte(srcString, 0);
+    if (convBase == 0 || convBase == (iconv_t)-1) {
+        return utf8;
+    }
+    
+    char out[1024];
+    char *outPtr = out;
+    size_t outSize = 1024;
+    char *inPtr = (char *)&utf8[0];;
+    size_t inSize = strlen(utf8);
+
+    iconv(convBase, &inPtr, &inSize, &outPtr, &outSize);
+    *outPtr = 0;
+    return AString(out);
+}

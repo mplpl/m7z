@@ -1,5 +1,5 @@
 // Main.cpp
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2020 MPL. All rights reserved.
 
 #include "StdAfx.h"
 
@@ -21,6 +21,8 @@
 #include <string>
 #include <sstream>
 
+#include <iconv.h>
+
 namespace lib7z
 {
 
@@ -35,9 +37,9 @@ static void GetAttribString(DWORD wa, bool isDir, char *s)
     s[4] = ((wa & FILE_ATTRIBUTE_ARCHIVE)   != 0) ? 'A': '.';
     s[5] = 0;
 }
-    
-LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue, MLListCallback &callback)
-{
+   
+LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &retValue, MLListCallback &callback, std::wstring encoding)
+{    
     UString archiveName = archiveNameW.c_str();
     NWindows::NFile::NFind::CFileInfo fi;
     if (!fi.Find(archiveName) || fi.IsDir())
@@ -58,7 +60,11 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
     MLListCallbackWrapper openCallback(callback);
     COpenOptions openOptions;
     CObjectVector<CProperty> props;
-
+    if (!encoding.empty())
+    {
+        CProperty prop ={L"cps", encoding.c_str()};
+        props.Add(prop);
+    }
     openOptions.codecs = &codecs;
     openOptions.filePath = archiveName;
     openOptions.excludedFormats = &formatIndices;
@@ -132,7 +138,7 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
 
 
 LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files,
-                        MLExtractCallback &callback, std::wstring workDir)
+                        MLExtractCallback &callback, std::wstring workDir, std::wstring encoding)
 {
     UString archiveName = archiveNameW.c_str();
     UString outDir = outDirW.c_str();
@@ -154,6 +160,11 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     CIntVector formatIndices;
     CObjectVector<COpenType> types;
     CObjectVector<CProperty> props;
+    if (!encoding.empty())
+    {
+        CProperty prop ={L"cps", L"CP852"};
+        props.Add(prop);
+    }
     MLListCallbackWrapper openCallback(callback);
     COpenOptions openOptions;
     openOptions.codecs = &codecs;
@@ -265,7 +276,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
 
 
 LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
-                     bool encryptHeader, int compressionLevel, std::wstring workDir)
+                     bool encryptHeader, int compressionLevel, std::wstring workDir, std::wstring encoding)
 {
     UString archiveName = archiveNameW.c_str();
     std::vector<UString> files;
@@ -293,6 +304,10 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     for (std::vector<UString>::iterator it = files.begin(); it < files.end(); it++)
     {
         commandStrings.Add(*it);
+    }
+    if (!encoding.empty())
+    {
+        commandStrings.Add(L"-mcps=CP852");
     }
     CArcCmdLineOptions options;
     CArcCmdLineParser parser;
@@ -328,16 +343,31 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
 
 
 LIB7ZRC MLAddToArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
-                      bool encryptHeader, int compressionLevel, std::wstring workDir)
+                       bool encryptHeader, int compressionLevel, std::wstring workDir,
+                       std::wstring encoding)
 {
-    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir);
+    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir, encoding);
 }
 
 
 LIB7ZRC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
-                        std::wstring workDir)
+                        std::wstring workDir, std::wstring encoding)
 {
-    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir);
+    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding);
 }
     
+int do_one(unsigned int count, const char * const *names, void *arg) {
+    std::vector<std::wstring> *arr = (std::vector<std::wstring> *)arg;
+    std::wstringstream s;
+    s << iconv_canonicalize(names[0]);
+    arr->push_back(s.str());
+    return 0;
+}
+
+const std::vector<std::wstring> MLSupportedEncodings() {
+    std::vector<std::wstring> ret;
+    iconvlist(&do_one, &ret);
+    return ret;
+}
+
 }

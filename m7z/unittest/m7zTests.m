@@ -190,4 +190,16 @@
     XCTAssert(ret.count == _items.count - 1);
 }
 
+/*
+- (void)testConv {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:@"/Users/mpl/encoding_test_file/test.rar" encoding:@"CP852"];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    XCTAssert(([archive listItemsTo:arr]) == 0);
+    for (M7ZItem *s in arr) {
+        NSLog(@"%@", s.name);
+    }
+    //unsigned ret = [archive addItems:@[@"/Users/mpl/ąęśćĄĘŚĆŁł_new.txt"]];
+}
+*/
+
 @end
