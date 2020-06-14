@@ -235,7 +235,16 @@ UString MultiByteToUnicodeString3(const AString &srcString, iconv_t convBase)
     char *inPtr = (char *)&srcString[0];
     size_t inSize = strlen(path);
 
-    iconv(convBase, &inPtr, &inSize, &outPtr, &outSize);
+    while (iconv(convBase, &inPtr, &inSize, &outPtr, &outSize) == (size_t)-1)
+    {
+      if (!outSize || !inSize) break;
+      *outPtr = '?';
+      outPtr++;
+      outSize--;
+      inPtr++;
+      inSize--;
+      if (!outSize || !inSize) break;
+    }
     *outPtr = 0;
     
     return MultiByteToUnicodeString(out, 0);
@@ -254,7 +263,34 @@ AString UnicodeStringToMultiByte3(const UString &srcString, iconv_t convBase)
     char *inPtr = (char *)&utf8[0];;
     size_t inSize = strlen(utf8);
 
-    iconv(convBase, &inPtr, &inSize, &outPtr, &outSize);
+    while (iconv(convBase, &inPtr, &inSize, &outPtr, &outSize) == (size_t)-1)
+    {
+      if (!outSize || !inSize) break;
+      *outPtr = '?';
+      outPtr++;
+      outSize--;
+      int chw = 1;
+      unsigned char cp = (unsigned char)(*inPtr);
+      if (cp < 0x80)
+      {
+        chw = 1;
+      }
+      else if (cp < 0xe0)
+      {
+        chw = 2;
+      }
+      else if (cp < 0xf0)
+      {
+        chw = 3;
+      }
+      else
+      {
+        chw = 4;
+      }
+      inPtr += chw;
+      inSize -= chw;
+      if (!outSize || !inSize) break;
+    }
     *outPtr = 0;
     return AString(out);
 }
