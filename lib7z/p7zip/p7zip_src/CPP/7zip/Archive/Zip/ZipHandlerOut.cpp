@@ -180,8 +180,16 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           MultiByteToUnicodeString(ui.Name, codePage) != name));
 #else
 	// FIXME
-        ui.Name = UnicodeStringToMultiByte(name, CP_OEMCP);
-        tryUtf8 = (!m_ForceLocal);
+        if (_convBaseFromUtf8 == (iconv_t)-1)
+        {
+          ui.Name = UnicodeStringToMultiByte(name, CP_OEMCP);
+          tryUtf8 = (!m_ForceLocal);
+        }
+        else
+        {
+          ui.Name = UnicodeStringToMultiByte3(name, _convBaseFromUtf8);
+          tryUtf8 = false;
+        }
 #endif
       }
 
@@ -432,6 +440,15 @@ STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
       RINOK(ParsePropToUInt32(L"", prop, cp));
       _forceCodePage = true;
       _specifiedCodePage = cp;
+    }
+    else if (name.IsEqualTo("cps"))
+    {
+      if (prop.vt == VT_BSTR)
+      {
+        AString codePage = UnicodeStringToMultiByte(prop.bstrVal);
+        _convBaseToUtf8 = iconv_open("UTF-8-MAC", codePage);
+        _convBaseFromUtf8 = iconv_open(codePage, "UTF-8-MAC");
+      }
     }
     else if (name.IsEqualTo("rsfx"))
     {

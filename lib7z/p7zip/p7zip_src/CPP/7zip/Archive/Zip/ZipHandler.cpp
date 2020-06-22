@@ -272,7 +272,10 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidPath:
     {
       UString res;
-      item.GetUnicodeString(res, item.Name, false, _forceCodePage, _specifiedCodePage);
+      if (_convBaseToUtf8 == (iconv_t)-1)
+        item.GetUnicodeString(res, item.Name, false, _forceCodePage, _specifiedCodePage);
+      else
+        res = MultiByteToUnicodeString3(item.Name, _convBaseToUtf8);
       NItemName::ConvertToOSName2(res);
       prop = res;
       break;

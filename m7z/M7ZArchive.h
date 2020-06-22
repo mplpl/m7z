@@ -124,7 +124,8 @@ enum M7ZAskOverwrite
 
 @interface M7ZArchive : NSObject
 
-- (instancetype)initWithName:(NSString *)name;
+-(instancetype)initWithName:(NSString *)name;
+-(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding;
 
 -(int)listItemsTo:(NSMutableArray *)output;
 -(int)addItems:(NSArray *)items;
@@ -135,8 +136,11 @@ enum M7ZAskOverwrite
 -(int)deleteItems:(NSArray *)items;
 
 @property (readonly) NSString *name;
+@property (readonly) NSString *encoding;
 @property (assign) id<M7ZArchiveDelegate> delegate;
 @property NSString *workDir;
+
++(NSArray<NSString *> *)supportedEncodings;
 
 @end
 

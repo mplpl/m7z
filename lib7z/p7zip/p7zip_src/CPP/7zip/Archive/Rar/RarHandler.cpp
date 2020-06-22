@@ -974,7 +974,11 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         u = mainItem->GetName();
       u += item.GetName();
       */
-      prop = (const wchar_t *)NItemName::WinNameToOSName(item.GetName());
+        if (_convBaseToUtf8 == (iconv_t)-1) {
+          prop = (const wchar_t *)NItemName::WinNameToOSName(item.GetName());
+        } else {
+            prop = (const wchar_t *)NItemName::WinNameToOSName(MultiByteToUnicodeString3(item.Name, _convBaseToUtf8));
+        }
       break;
     }
     case kpidIsDir: prop = item.IsDir(); break;
@@ -1741,6 +1745,33 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   
   return S_OK;
   COM_TRY_END
+}
+
+STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps)
+{
+  for (UInt32 i = 0; i < numProps; i++)
+  {
+    UString name = names[i];
+    name.MakeLower_Ascii();
+    if (name.IsEmpty())
+      return E_INVALIDARG;
+
+    const PROPVARIANT &prop = values[i];
+
+    if (name.IsEqualTo("cps"))
+    {
+        if (prop.vt == VT_BSTR)
+        {
+          AString codePage = UnicodeStringToMultiByte(prop.bstrVal);
+          _convBaseToUtf8 = iconv_open("UTF-8-MAC", codePage);
+        }
+    }
+    else
+    {
+      return E_INVALIDARG;
+    }
+  }
+  return S_OK;
 }
 
 IMPL_ISetCompressCodecsInfo

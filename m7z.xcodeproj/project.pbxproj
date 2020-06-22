@@ -482,6 +482,7 @@
 		C12DBFDF1D7DFB60003C8A2B /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = C12DBDFF1D7DFB60003C8A2B /* makefile */; };
 		C12DBFE01D7DFB60003C8A2B /* PipeLen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C12DBE031D7DFB60003C8A2B /* PipeLen.cpp */; };
 		C12DBFE11D7DFB60003C8A2B /* pl32.asm in Sources */ = {isa = PBXBuildFile; fileRef = C12DBE041D7DFB60003C8A2B /* pl32.asm */; };
+		C16EEB46248E371800C1F115 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C16EEB45248E370C00C1F115 /* libiconv.tbd */; };
 		C1CB94DE1CF2006300F45681 /* MLExtractCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94D91CF2006300F45681 /* MLExtractCallbackWrapper.h */; };
 		C1CB94E01CF2006300F45681 /* MLListCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94DB1CF2006300F45681 /* MLListCallbackWrapper.h */; };
 		C1CB94E11CF2006300F45681 /* MLUpdateCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CB94DC1CF2006300F45681 /* MLUpdateCallbackWrapper.h */; };
@@ -1823,6 +1824,7 @@
 		C16E95EB1CDA7E2B00A26E86 /* lib7z.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lib7z.cpp; path = lib7z/lib7z.cpp; sourceTree = "<group>"; };
 		C16E95EE1CDA7E2B00A26E86 /* MLExtractCallbackWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLExtractCallbackWrapper.cpp; path = lib7z/MLExtractCallbackWrapper.cpp; sourceTree = "<group>"; };
 		C16E95EF1CDA7E2B00A26E86 /* MLUpdateCallbackWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLUpdateCallbackWrapper.cpp; path = lib7z/MLUpdateCallbackWrapper.cpp; sourceTree = "<group>"; };
+		C16EEB45248E370C00C1F115 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		C1CB94D91CF2006300F45681 /* MLExtractCallbackWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLExtractCallbackWrapper.h; path = lib7z/MLExtractCallbackWrapper.h; sourceTree = "<group>"; };
 		C1CB94DA1CF2006300F45681 /* MLListCallbackWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLListCallbackWrapper.cpp; path = lib7z/MLListCallbackWrapper.cpp; sourceTree = "<group>"; };
 		C1CB94DB1CF2006300F45681 /* MLListCallbackWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLListCallbackWrapper.h; path = lib7z/MLListCallbackWrapper.h; sourceTree = "<group>"; };
@@ -1838,6 +1840,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C16EEB46248E371800C1F115 /* libiconv.tbd in Frameworks */,
 				C1EFB7641CC1A8F800AE417D /* lib7z.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1870,6 +1873,7 @@
 				C1C24C4C1CA09DA000F54EA9 /* lib7z */,
 				6BA394301CA051AE001FD2C5 /* m7z */,
 				6BA3942F1CA051AE001FD2C5 /* Products */,
+				C16EEB44248E370C00C1F115 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -4279,6 +4283,14 @@
 			name = interface;
 			sourceTree = "<group>";
 		};
+		C16EEB44248E370C00C1F115 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C16EEB45248E370C00C1F115 /* libiconv.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C1C24C4C1CA09DA000F54EA9 /* lib7z */ = {
 			isa = PBXGroup;
 			children = (
@@ -4457,6 +4469,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 6BA394241CA051AD001FD2C5;
@@ -5096,11 +5109,11 @@
 					"$(PROJECT_DIR)/m7z",
 					"$(PROJECT_DIR)/lib7z",
 				);
+				MARKETING_VERSION = 16.02.R4;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = mpl.m7z;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5123,11 +5136,11 @@
 					"$(PROJECT_DIR)/m7z",
 					"$(PROJECT_DIR)/lib7z",
 				);
+				MARKETING_VERSION = 16.02.R4;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = mpl.m7z;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

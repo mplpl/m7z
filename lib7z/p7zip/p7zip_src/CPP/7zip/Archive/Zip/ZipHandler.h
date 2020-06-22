@@ -9,6 +9,8 @@
 
 #include "../../Common/CreateCoder.h"
 
+#include <iconv.h>
+
 #include "ZipIn.h"
 #include "ZipCompressionMode.h"
 
@@ -52,6 +54,8 @@ private:
   bool m_ForceUtf8;
   bool _forceCodePage;
   UInt32 _specifiedCodePage;
+  iconv_t _convBaseToUtf8 = (iconv_t)-1;
+  iconv_t _convBaseFromUtf8 = (iconv_t)-1;
 
   DECL_EXTERNAL_CODECS_VARS
 
@@ -66,6 +70,14 @@ private:
     m_ForceUtf8 = false;
     _forceCodePage = false;
     _specifiedCodePage = CP_OEMCP;
+  }
+    
+  ~CHandler()
+  {
+    if (_convBaseToUtf8 != (iconv_t)-1)
+      iconv_close(_convBaseToUtf8);
+    if (_convBaseFromUtf8 != (iconv_t)-1)
+      iconv_close(_convBaseFromUtf8);
   }
 };
 

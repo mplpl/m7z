@@ -5,6 +5,10 @@
 
 #include "MyString.h"
 #include "MyWindows.h"
+#include <iconv.h>
+
+UString MultiByteToUnicodeString3(const AString &srcString, iconv_t convBase);
+AString UnicodeStringToMultiByte3(const UString &srcString, iconv_t convBase);
 
 UString MultiByteToUnicodeString(const AString &srcString, UINT codePage = CP_ACP);
 

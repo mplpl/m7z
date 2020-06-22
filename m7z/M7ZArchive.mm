@@ -17,6 +17,8 @@
 #import "MLUpdateCallback.h"
 #import "MLExtractCallback.h"
 
+#import <iconv.h>
+
 using namespace lib7z;
 
 class M7ZArchiveCallback: public MLUpdateCallback, public MLExtractCallback
@@ -125,11 +127,22 @@ public:
     return self;
 }
 
+-(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding {
+    
+    if (self = [super init]) {
+        _name = name;
+        _encoding = encoding;
+    }
+    
+    return self;
+}
+
+
 -(int)listItemsTo:(NSMutableArray *)output {
     
     std::vector<DirectoryItem> ra;
     M7ZArchiveCallback cb(self.delegate);
-    int ret = MLListArchive([self.name wstring], ra, cb);
+    int ret = MLListArchive([self.name wstring], ra, cb, [self.encoding wstring]);
     if (ret != 0) {
         return ret;
     }
@@ -165,7 +178,8 @@ public:
         itemsW.push_back([item wstring]);
     }
     M7ZArchiveCallback cb(self.delegate);
-    int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel, [self.workDir wstring]);
+    int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel,
+                             [self.workDir wstring], [self.encoding wstring]);
     return ret;
 }
 
@@ -179,7 +193,8 @@ public:
         files.push_back(item.wstring);
     }
     M7ZArchiveCallback cb(self.delegate);
-    int ret = MLExtractFromArchive([self.name wstring], [dir wstring], files, cb, [self.workDir wstring]);
+    int ret = MLExtractFromArchive([self.name wstring], [dir wstring], files, cb,
+                                   [self.workDir wstring], [self.encoding wstring]);
     return ret;
 }
 
@@ -189,8 +204,27 @@ public:
         itemsW.push_back([item wstring]);
     }
     M7ZArchiveCallback cb(self.delegate);
-    int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb, [self.workDir wstring]);
+    int ret = MLDeleteFromArchive([self.name wstring], itemsW, cb, [self.workDir wstring],
+                                  [self.encoding wstring]);
     return ret;
 }
+
+int do_one(unsigned int count, const    char * const *names, void *arg) {
+    NSMutableArray<NSString *> *arr = (__bridge NSMutableArray *)arg;
+    [arr addObject:[NSString stringWithUTF8String:iconv_canonicalize(names[0])]];
+    return 0;
+}
+
++(NSArray<NSString *> *)supportedEncodings {
+    
+    std::vector<std::wstring> encs = MLSupportedEncodings();
+    NSMutableArray<NSString *> *ret = [[NSMutableArray alloc] init];
+    
+    for (std::vector<std::wstring>::iterator it = encs.begin(); it < encs.end(); it++) {
+        [ret addObject:[NSString stringWithWstring:*it]];
+    }
+    return ret;
+}
+
 
 @end
