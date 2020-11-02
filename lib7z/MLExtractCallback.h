@@ -3,7 +3,7 @@
  
     Callback interface for extract operation.
  */
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2020 MPL. All rights reserved.
 
 #ifndef __MLEXTRACTCALLBACK_H
 #define __MLEXTRACTCALLBACK_H
@@ -133,7 +133,7 @@ public:
         Notifies about error occured during operation.
      
         \param message error message
-        \result 0 - continue operation, <>0 - break operation
+        \result 0 - continue operation, <>0 - an error (if handling may wary, not always abort!)
      */
     virtual LIB7ZRC MessageError(const wchar_t *message) = 0;
 };

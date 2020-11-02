@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016 MPL. All rights reserved.
+//  Copyright © 2016-2020 MPL. All rights reserved.
 //
 
 #import "M7ZArchive.h"
@@ -110,8 +110,7 @@ public:
     }
     
     int MessageError(const wchar_t *message) {
-        [delegat error:M7Z_ORC_OtherError];
-        return 0;
+        return ([delegat error:M7Z_ORC_OtherError]) ? 0 : M7Z_RC_FAIL;
     }
 };
 

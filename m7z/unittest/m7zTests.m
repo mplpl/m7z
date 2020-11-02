@@ -3,7 +3,7 @@
 //  7zTests
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016 MPL. All rights reserved.
+//  Copyright © 2016-2020 MPL. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -54,6 +54,7 @@
 @property (readonly) NSArray *subDirItems;
 @property (readonly) NSString *subDirToUnpack;
 @property (readonly) NSString *unpackDir;
+@property (readonly) NSString *lockedDir;
 @property (readonly) frmDelegate *delegate;
 @end
 
@@ -70,6 +71,7 @@
     _subDir = @"/tmp/a";
     _subDirItems = @[@"/tmp/a/1.txt", @"/tmp/a/2.txt", @"/tmp/a/3.txt"];
     _subDirToUnpack = @"a";
+    _lockedDir = @"/tmp/b_locked";
     
     NSError *err;
     for (NSString *item in self.items) {
@@ -89,6 +91,12 @@
     
     [fm removeItemAtPath:self.missingArchName error:&err];
     [fm removeItemAtPath:self.unpackDir error:&err];
+    
+    [fm removeItemAtPath:_lockedDir error:&err];
+    [fm createDirectoryAtPath:_lockedDir withIntermediateDirectories:YES attributes:nil error:&err];
+    NSTask *task =[NSTask launchedTaskWithLaunchPath:@"/usr/bin/chflags" arguments:@[@"uchg", _lockedDir]];
+    [task waitUntilExit];
+    // NOTE: to check is a file is locked/immutable you can use 'ls -lO'
     
     _delegate = [[frmDelegate alloc] init];
 }
@@ -201,5 +209,13 @@
     //unsigned ret = [archive addItems:@[@"/Users/mpl/ąęśćĄĘŚĆŁł_new.txt"]];
 }
 */
+
+-(void)testDecompressToLocked {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:@[self.subDir]] == 0);
+    archive.delegate = self.delegate;
+    
+    XCTAssert([archive extractItems:@[_subDirToUnpack] toDir:self.lockedDir] == M7Z_RC_FAIL);
+}
 
 @end
