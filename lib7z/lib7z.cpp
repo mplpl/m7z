@@ -162,7 +162,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     CObjectVector<CProperty> props;
     if (!encoding.empty())
     {
-        CProperty prop ={L"cps", L"CP852"};
+        CProperty prop ={L"cps", encoding.c_str()};
         props.Add(prop);
     }
     MLListCallbackWrapper openCallback(callback);
@@ -307,7 +307,8 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     }
     if (!encoding.empty())
     {
-        commandStrings.Add(L"-mcps=CP852");
+        wstr << L"-mcps=" << encoding.c_str();
+        commandStrings.Add(wstr.str().c_str());
     }
     CArcCmdLineOptions options;
     CArcCmdLineParser parser;
