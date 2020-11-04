@@ -88,14 +88,14 @@ public:
         return 0;
     }
     
-    const wchar_t *GetPassword() {
+    const std::wstring GetPassword() {
         
         NSString *pass = delegat.password;
 
         if (!pass) {
-            return NULL;
+            return L"";
         } else {
-            return [pass wcstr];
+            return [pass wstring];
         }
     }
 

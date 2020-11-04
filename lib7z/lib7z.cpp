@@ -263,12 +263,17 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     // they will be located directly at destination - therefore I'm not using it here
     extractCallbackSpec->InitForMulti(false, NExtract::NPathMode::EEnum::kFullPaths, NExtract::NOverwriteMode::EEnum::kAsk);
     
-    result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
+    try {
+        result = archive->Extract(&realIndices.Front(), realIndices.Size(), false, extractCallbackSpec);
     
-    if (result == S_OK)
-    {
-        extractCallbackSpec->SetDirsTimes();
+        if (result == S_OK)
+        {
+            extractCallbackSpec->SetDirsTimes();
+        }
+    } catch (...) {
+        result = Lib7zReturnCode::FAIL; // turns into M7Z_RC_FAIL
     }
+    
     callback.FinishArchive();
     
     return result;
@@ -329,17 +334,22 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     uo.WorkingDir = workDir.c_str();
     CUpdateErrorInfo errorInfo;
     
-    HRESULT res = UpdateArchive(&codecs,
-                                formatIndices,
-                                options.ArchiveName,
-                                options.Censor,
-								uo,
-                                errorInfo,
-								&openCallback,
-								&callback,
-								true);
-    
-    return res;
+    try {
+        HRESULT res = UpdateArchive(&codecs,
+                                    formatIndices,
+                                    options.ArchiveName,
+                                    options.Censor,
+                                    uo,
+                                    errorInfo,
+                                    &openCallback,
+                                    &callback,
+                                    true);
+        
+        return res;
+        
+    } catch (...) {
+        return Lib7zReturnCode::FAIL; // turns into M7Z_RC_FAIL
+    }
 }
 
 

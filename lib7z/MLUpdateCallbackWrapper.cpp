@@ -1,5 +1,5 @@
 // UpdateCallbackConsole.cpp
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2020 MPL. All rights reserved.
 
 #include "StdAfx.h"
 #include "MLUpdateCallbackWrapper.h"
@@ -50,11 +50,11 @@ HRESULT MLUpdateCallbackWrapper::SetOperationResult(Int32 x)
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *password)
 {
     MT_LOCK
-    const wchar_t *pass = cb->GetPassword();
-    if (pass)
+    const std::wstring pass = cb->GetPassword();
+    if (!pass.empty())
     {
         *passwordIsDefined = 1;
-        return StringToBstr(pass, password);
+        return StringToBstr(pass.c_str(), password);
     }
     else
     {
@@ -66,15 +66,8 @@ HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword2(Int32 *passwordIsDefined
 HRESULT MLUpdateCallbackWrapper::CryptoGetTextPassword(BSTR *password)
 {
     MT_LOCK
-    const wchar_t *pass = cb->GetPassword();
-    if (pass)
-    {
-        return StringToBstr(pass, password);
-    }
-    else
-    {
-        return S_OK;
-    }
+    const std::wstring pass = cb->GetPassword();
+    return StringToBstr(pass.c_str(), password);
 }
 
 

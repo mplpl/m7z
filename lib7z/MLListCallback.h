@@ -3,10 +3,12 @@
  
     Callback interface for list operation.
  */
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2020 MPL. All rights reserved.
 
 #ifndef MLListCallback_h
 #define MLListCallback_h
+
+#import <string>
 
 namespace lib7z
 {
@@ -20,7 +22,7 @@ public:
      
         \return password
      */
-    virtual const wchar_t *GetPassword() = 0;
+    virtual const std::wstring GetPassword() = 0;
 };
 
 }

@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016 MPL. All rights reserved.
+//  Copyright © 2016-2020 MPL. All rights reserved.
 //
 
 #import "NSString+wstring.h"
@@ -19,12 +19,9 @@
 
 -(std::wstring)wstring {
 
-    return (const wchar_t *)[self cStringUsingEncoding:NSUTF32StringEncoding];
-}
-
--(const wchar_t *)wcstr {
-    
-    return (const wchar_t *)[self cStringUsingEncoding:NSUTF32StringEncoding];
+    NSData* data = [self.precomposedStringWithCanonicalMapping dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
+    std::wstring ws = std::wstring((wchar_t*)[data bytes], data.length / sizeof(wchar_t));
+    return ws;
 }
 
 @end
