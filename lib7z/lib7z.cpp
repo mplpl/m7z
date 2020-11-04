@@ -307,8 +307,9 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     }
     if (!encoding.empty())
     {
-        wstr << L"-mcps=" << encoding.c_str();
-        commandStrings.Add(wstr.str().c_str());
+        std::wstringstream wstrMcps;
+        wstrMcps << L"-mcps=" << encoding.c_str();
+        commandStrings.Add(wstrMcps.str().c_str());
     }
     CArcCmdLineOptions options;
     CArcCmdLineParser parser;
