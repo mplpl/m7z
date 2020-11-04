@@ -55,6 +55,8 @@
 @property (readonly) NSString *subDirToUnpack;
 @property (readonly) NSString *unpackDir;
 @property (readonly) NSString *lockedDir;
+@property (readonly) NSString *archNameZip;
+@property (readonly) NSArray *itemsNls;
 @property (readonly) frmDelegate *delegate;
 @end
 
@@ -72,9 +74,18 @@
     _subDirItems = @[@"/tmp/a/1.txt", @"/tmp/a/2.txt", @"/tmp/a/3.txt"];
     _subDirToUnpack = @"a";
     _lockedDir = @"/tmp/b_locked";
+    _archNameZip = @"/tmp/1.zip";
+    _itemsNls = @[@"/tmp/ŻÓŁĆ.TXT"];
+    
     
     NSError *err;
     for (NSString *item in self.items) {
+        [@"1111111111111111111111111111111111111111" writeToFile:item
+                                                      atomically:YES
+                                                        encoding:NSUTF32LittleEndianStringEncoding
+                                                           error:&err];
+    }
+    for (NSString *item in self.itemsNls) {
         [@"1111111111111111111111111111111111111111" writeToFile:item
                                                       atomically:YES
                                                         encoding:NSUTF32LittleEndianStringEncoding
@@ -214,8 +225,33 @@
     M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
     XCTAssert([archive addItems:@[self.subDir]] == 0);
     archive.delegate = self.delegate;
-    
     XCTAssert([archive extractItems:@[_subDirToUnpack] toDir:self.lockedDir] == M7Z_RC_FAIL);
+}
+
+-(void)testZipCompressWithEncoding {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archNameZip encoding:@"CP852"];
+    archive.delegate = self.delegate;
+    XCTAssert([archive addItems:self.items] == 0);
+}
+
+-(void)testZipCompressNlsExisting {
+    // tests adding a file with NLS in name to a ZIP in when it is there already
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archNameZip];
+    archive.delegate = self.delegate;
+    XCTAssert([archive addItems:self.itemsNls] == 0);
+    XCTAssert([archive addItems:self.itemsNls] == 0);
+}
+
+-(void)testZipCompressNlsExistingDecomposed {
+    // tests adding a file with NLS in name in decomposed Unicode form, to a ZIP in when it is there already
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archNameZip];
+    archive.delegate = self.delegate;
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (NSString *item in self.itemsNls) {
+        [arr addObject:item.decomposedStringWithCompatibilityMapping];
+    }
+    XCTAssert([archive addItems:arr] == 0);
+    XCTAssert([archive addItems:arr] == 0);
 }
 
 @end

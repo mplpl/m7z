@@ -1,5 +1,5 @@
 // OpenCallbackConsole.cpp
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2020 MPL. All rights reserved.
 
 #include "StdAfx.h"
 
@@ -9,16 +9,8 @@ using namespace lib7z;
 
 HRESULT MLListCallbackWrapper::Open_CryptoGetTextPassword(BSTR *password)
 {
-    const wchar_t *pass = cb->GetPassword();
-    if (pass)
-    {
-        return StringToBstr(pass, password);
-    }
-    else
-    {
-        StringToBstr(L"", password);
-        return S_OK;
-    }
+    const std::wstring pass = cb->GetPassword();
+    return StringToBstr(pass.c_str(), password);
 }
 
 
