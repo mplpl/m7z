@@ -1,5 +1,5 @@
 // Main.cpp
-// Copyright @ 2016-2020 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include "StdAfx.h"
 
@@ -129,7 +129,14 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
             encrypted = true;
         }
         
-        DirectoryItem di(std::wstring(sPath), size, sizePacked, std::string(ftime), std::string(s), encrypted);
+        NWindows::NCOM::CPropVariant propMethod;
+        RINOK(arc.Archive->GetProperty(i, kpidMethod, &propMethod));
+        UString method;
+        if (propMethod.vt != VT_EMPTY) {
+            method = (UString)propMethod.bstrVal;
+        }
+        
+        DirectoryItem di(std::wstring(sPath), size, sizePacked, std::string(ftime), std::string(s), encrypted, std::wstring(method));
         retValue.push_back(di);
     }
     

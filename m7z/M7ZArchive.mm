@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016-2020 MPL. All rights reserved.
+//  Copyright © 2016-2021 MPL. All rights reserved.
 //
 
 #import "M7ZArchive.h"
@@ -151,11 +151,12 @@ public:
         DirectoryItem di = *it;
         
         M7ZItem *item = [[M7ZItem alloc] initWithName:[NSString stringWithWstring:di.name]
-                                           size:di.size
-                                 sizeCompressed:di.sizeCompressed
-                                           date:@(di.date.c_str())
-                                          attrs:@(di.attrs.c_str())
-                                      encrypted:di.encrypted];
+                                                 size:di.size
+                                       sizeCompressed:di.sizeCompressed
+                                                 date:@(di.date.c_str())
+                                                attrs:@(di.attrs.c_str())
+                                            encrypted:di.encrypted
+                                    compressionMethod:[NSString stringWithWstring:di.compressionMethod]];
         [output addObject:item];
     }
     

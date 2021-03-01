@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 08/09/16.
-//  Copyright © 2016 MPL. All rights reserved.
+//  Copyright © 2016-2021 MPL. All rights reserved.
 //
 
 /*!
@@ -55,9 +55,9 @@ public:
         Basic constructor that sets all the instance variables.
      */
     DirectoryItem(std::wstring _name, unsigned long long _size, unsigned long long _sizeCompressed,
-                  std::string _date, std::string _attrs, bool encrypted):
+                  std::string _date, std::string _attrs, bool encrypted, std::wstring compressionMethod):
     name(_name), size(_size), sizeCompressed(_sizeCompressed), date(_date),
-    attrs(_attrs), encrypted(encrypted) {}
+    attrs(_attrs), encrypted(encrypted), compressionMethod(compressionMethod) {}
     
 public:
     
@@ -66,7 +66,8 @@ public:
     unsigned long long sizeCompressed;  /*!< item compressed size in bytes */
     std::string date;                   /*!< item modification date */
     std::string attrs;                  /*!< items attributes (in plain string) */
-    bool encrypted;
+    bool encrypted;                     /*!< is this item encrypted */
+    std::wstring compressionMethod;     /*!< item compression method */
 };
     
 }
