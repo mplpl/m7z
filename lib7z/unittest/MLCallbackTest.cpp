@@ -112,9 +112,9 @@ int MLCallbackTest::ThereAreNoFiles()
     return S_FALSE;
 }
 
-const wchar_t *MLCallbackTest::GetPassword()
+const std::wstring MLCallbackTest::GetPassword()
 {
-    return (pass.empty()) ? NULL : pass.c_str();
+    return pass;
 }
 
 void MLCallbackTest::setPassword(std::wstring newpass)

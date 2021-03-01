@@ -115,11 +115,10 @@ public:
         return 1;
     }
     
-    const wchar_t *GetPassword() 
+    const std::wstring GetPassword()
     {
         OUT << "[GetPassword]" << endl;
-        return (pass.empty()) ? NULL : pass.c_str();
-
+        return pass;
     }
 
     void setPassword(std::wstring newpass) 

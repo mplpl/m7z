@@ -29,7 +29,7 @@ public:
                      const wchar_t *newName, const time_t *newTime, const unsigned long long *newSize,
                      int *answer);
     
-    const wchar_t *GetPassword();
+    const std::wstring GetPassword();
     
     int CanNotFindError(const wchar_t *name, int systemError);
     int OpenFileError(const wchar_t *name, int systemError);
