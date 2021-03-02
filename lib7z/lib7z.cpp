@@ -132,7 +132,7 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
         NWindows::NCOM::CPropVariant propMethod;
         RINOK(arc.Archive->GetProperty(i, kpidMethod, &propMethod));
         UString method;
-        if (propMethod.vt != VT_EMPTY) {
+        if (propMethod.vt == VT_BSTR) {
             method = (UString)propMethod.bstrVal;
         }
         

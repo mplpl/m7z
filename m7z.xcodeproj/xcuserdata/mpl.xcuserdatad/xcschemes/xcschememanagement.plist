@@ -17,7 +17,7 @@
 		<key>lib7z_sample.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>4</integer>
 		</dict>
 		<key>lib7z_unittest.xcscheme</key>
 		<dict>
