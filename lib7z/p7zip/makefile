@@ -10,7 +10,9 @@ COMMON_FLAGS= \
 	-DUNICODE \
 	-D_UNICODE \
 	-DUNIX_USE_WIN_FILE \
-	-mmacosx-version-min=10.7
+	-mmacosx-version-min=10.9 \
+	-arch arm64 \
+	-arch x86_64
 
 include $(P7ZIP_PATH)/makefile.crc32
 include $(P7ZIP_PATH)/makefile.macosx_llvm_64bits

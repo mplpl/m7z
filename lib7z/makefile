@@ -6,6 +6,8 @@ CXX=c++
 CC=cc
 
 CXXFLAGS= \
+	-arch arm64 \
+	-arch x86_64 \
 	-m64 \
 	-c \
 	-I. \
@@ -24,7 +26,7 @@ CXXFLAGS= \
 	-Wno-logical-op-parentheses \
 	-Wno-c++11-extensions \
 	-stdlib=libc++ \
-	-mmacosx-version-min=10.7
+	-mmacosx-version-min=10.9
 
 CXXFLAGS_REL= \
 	-O
