@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016-2020 MPL. All rights reserved.
+//  Copyright © 2016-2021 MPL. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -84,6 +84,14 @@ enum M7ZAskOverwrite
     @result YES - continue, NO - abort
  */
 -(BOOL)error:(int)operationResultCode;
+
+/**
+    Called on file open error
+    @param name name of file that cannot be opened
+    @param code system error code
+    @result YES - continue, NO - abort
+ */
+-(BOOL)openFileError:(NSString *)name code:(int)code;
 
 /**
     Called when a file need to be overwritted to ask the user what to do.

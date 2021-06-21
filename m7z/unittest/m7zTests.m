@@ -3,7 +3,7 @@
 //  7zTests
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016-2020 MPL. All rights reserved.
+//  Copyright © 2016-2021 MPL. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -28,6 +28,10 @@
 }
 -(BOOL)error:(int)operationResultCode {
     NSLog(@"Error %d", operationResultCode);
+    return NO;
+}
+- (BOOL)openFileError:(NSString *)name code:(int)code {
+    NSLog(@"File %@ open error %d", name, code);
     return NO;
 }
 -(NSString *)password {

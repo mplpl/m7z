@@ -3,7 +3,7 @@
     
     Callback interface for pack/compress operation.
 */
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #ifndef __MLUPDATE_CALLBACK_H
 #define __MLUPDATE_CALLBACK_H
@@ -93,8 +93,12 @@ public:
     */
     virtual LIB7ZRC FinishArchive() = 0;
  
-    /*! to be removed */
-    virtual LIB7ZRC CanNotFindError(const wchar_t *name, int systemError) = 0;
+    /*!
+        Notifies about an error on opening a file
+        \param name the name of file which cannot be opened
+        \param systemError system error value
+        \result 0 - skip & continue <>0 - break operation
+     */
     virtual LIB7ZRC OpenFileError(const wchar_t *name, int systemError) = 0;
 };
 

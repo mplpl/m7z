@@ -1,5 +1,5 @@
 // MLCallbackTest.h
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include <iostream>
 
@@ -31,7 +31,6 @@ public:
     
     const std::wstring GetPassword();
     
-    int CanNotFindError(const wchar_t *name, int systemError);
     int OpenFileError(const wchar_t *name, int systemError);
     
     int MessageError(const wchar_t *message);

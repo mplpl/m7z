@@ -1,5 +1,5 @@
 // MLCallbackTest.cpp
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include "MLCallbackTest.h"
 #include <iostream>
@@ -18,12 +18,6 @@ int MLCallbackTest::SetTotal(unsigned long long size)
 {
     OUT << "[SetTotal] " << size << endl;
     return S_OK;
-}
-
-int MLCallbackTest::CanNotFindError(const wchar_t *name, int systemError)
-{
-    OUT << "[CanNotFindError] Cannot find  " << name << " (error " << systemError << ")" << endl;
-    return S_FALSE;
 }
 
 int MLCallbackTest::FinishArchive()

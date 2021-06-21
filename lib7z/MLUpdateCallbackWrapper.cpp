@@ -1,5 +1,5 @@
 // UpdateCallbackConsole.cpp
-// Copyright @ 2016-2020 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include "StdAfx.h"
 #include "MLUpdateCallbackWrapper.h"
@@ -38,7 +38,7 @@ HRESULT MLUpdateCallbackWrapper::GetStream(const wchar_t *name, bool isDir, bool
 HRESULT MLUpdateCallbackWrapper::OpenFileError(const FString &path, DWORD systemError)
 {
     MT_LOCK
-    return cb->OpenFileError(path, systemError);
+    return cb->OpenFileError(path, systemError) == 0 ? 1 : 0;
 }
 
 HRESULT MLUpdateCallbackWrapper::SetOperationResult(Int32 x)

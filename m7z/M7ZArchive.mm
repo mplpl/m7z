@@ -100,13 +100,9 @@ public:
     }
 
     int OpenFileError(const wchar_t *name, int systemError) {
-        [delegat error:M7Z_ORC_OtherError];
-        return 0;
-    }
-    
-    int CanNotFindError(const wchar_t *name, int systemError) {
-        [delegat error:M7Z_ORC_OtherError];
-        return 0;
+        // note, that returning 0 aborts, and 1 make the library skip the given file
+        return [delegat openFileError:(name) ? [NSString stringWithWstring:name] : @""
+                                 code:systemError] ? 0 : 1;
     }
     
     int MessageError(const wchar_t *message) {

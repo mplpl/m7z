@@ -1,4 +1,4 @@
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include <lib7z.h>
 #include <iostream>
@@ -90,12 +90,6 @@ public:
     {
         *answer = AskOverwrite::kYesToAll;
         return 0;
-    }
-       
-    int CanNotFindError(const wchar_t *name, int systemError) 
-    {
-        OUT << "[CanNotFindError] Cannot find  " << name << " (error " << systemError << ")" << endl;
-        return 1;
     }
 
     int OpenFileError(const wchar_t *name, int systemError) 
