@@ -3,12 +3,12 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016 MPL. All rights reserved.
+//  Copyright © 2016-2021 MPL. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "M7ZArchive.h"
-#import "M7ZItem.h"
+#import <m7z/M7ZArchive.h>
+#import <m7z/M7ZItem.h>
 
 //! Project version number for m7z.
 FOUNDATION_EXPORT double m7zVersionNumber;
