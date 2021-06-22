@@ -258,4 +258,23 @@
     XCTAssert([archive addItems:arr] == 0);
 }
 
+-(void)testRename {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
+    archive.delegate = self.delegate;
+    
+    XCTAssert([archive renameItem:@"1.txt" newName:@"new_item_name"] == 0);
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    XCTAssert([archive listItemsTo:arr] == 0);
+    BOOL found = NO;
+    BOOL notRenamed = NO;
+    for (M7ZItem *item in arr) {
+        if ([item.name isEqualToString:@"new_item_name"]) found = YES;
+        if ([item.name isEqualToString:@"1.txt"]) notRenamed = YES;
+    }
+    XCTAssert(found);
+    XCTAssert(notRenamed == NO);
+}
+
 @end

@@ -87,6 +87,9 @@ extern LIB7ZRC MLDeleteFromArchive(std::wstring archiveName, std::vector<std::ws
                                    std::wstring encoding = L"");
 
 
+extern LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNameW,
+                                     std::wstring newNameW, MLUpdateCallback &cb,
+                                     std::wstring workDir = L"", std::wstring encoding = L"");
 /*!
     Returns a list of supported character encodings.
     \return vector with supported encoding names

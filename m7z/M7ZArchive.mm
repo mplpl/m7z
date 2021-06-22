@@ -205,6 +205,14 @@ public:
     return ret;
 }
 
+-(int)renameItem:(NSString *)existingName newName:(NSString *)newName {
+    M7ZArchiveCallback cb(self.delegate);
+    int ret = MLRenameItemInArchive([self.name wstring], [existingName wstring],
+                                    [newName wstring], cb, [self.workDir wstring],
+                                    [self.encoding wstring]);
+    return ret;
+}
+
 int do_one(unsigned int count, const    char * const *names, void *arg) {
     NSMutableArray<NSString *> *arr = (__bridge NSMutableArray *)arg;
     [arr addObject:[NSString stringWithUTF8String:iconv_canonicalize(names[0])]];
@@ -221,6 +229,5 @@ int do_one(unsigned int count, const    char * const *names, void *arg) {
     }
     return ret;
 }
-
 
 @end

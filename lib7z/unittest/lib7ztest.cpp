@@ -1,4 +1,4 @@
-// Copyright @ 2016 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include <string>
 #include "gtest/gtest.h"
@@ -225,4 +225,23 @@ TEST_F(lib7zTest, Bz2Test)
     files.clear();
     result = MLExtractFromArchive(arch4, archDir3, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
+}
+
+TEST_F(lib7zTest, RenameTest)
+{
+    std::vector<std::wstring> files;
+    files.push_back(testFiles[0]);
+    int result = MLAddToArchive(arch2, files, ucallback);
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
+    
+    files.clear();
+    result = MLRenameItemInArchive(arch2, L"1.tmp", L"1.tmp.new", ucallback);
+    ASSERT_EQ(result, 0) << "Error while renaming item in archive (" << result << ":" << result << ")";
+    
+    std::vector<DirectoryItem> retValue;
+    result = MLListArchive(arch2, retValue, ucallback);
+    EXPECT_EQ(result, 0) << "Error while listing archive (" << result << ":" << result << ")";
+    
+    ASSERT_EQ(retValue.size(), 1) << "Wrong number of items in archive";
+    ASSERT_EQ(retValue[0].name, L"1.tmp.new") << "Item has not been renamed";
 }

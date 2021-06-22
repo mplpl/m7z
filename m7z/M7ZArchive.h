@@ -143,6 +143,7 @@ enum M7ZAskOverwrite
 -(int)extractAllToDir:(NSString *)dir;
 -(int)extractItems:(NSArray *)items toDir:(NSString *)dir;
 -(int)deleteItems:(NSArray *)items;
+-(int)renameItem:(NSString *)existingName newName:(NSString *)newName;
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *encoding;
