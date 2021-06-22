@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <m7z/M7ZItem.h>
 
 enum M7ZReturnCode
 {
@@ -136,13 +137,13 @@ enum M7ZAskOverwrite
 -(instancetype)initWithName:(NSString *)name;
 -(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding;
 
--(int)listItemsTo:(NSMutableArray *)output;
--(int)addItems:(NSArray *)items;
--(int)addItems:(NSArray *)items encryptHeader:(BOOL)encryptHeader;
--(int)addItems:(NSArray *)items encryptHeader:(BOOL)encryptHeader compressionLevel:(NSInteger)compressionLevel;
+-(int)listItemsTo:(NSMutableArray<M7ZItem *> *)output;
+-(int)addItems:(NSArray<NSString *> *)items;
+-(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader;
+-(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader compressionLevel:(NSInteger)compressionLevel;
 -(int)extractAllToDir:(NSString *)dir;
--(int)extractItems:(NSArray *)items toDir:(NSString *)dir;
--(int)deleteItems:(NSArray *)items;
+-(int)extractItems:(NSArray<NSString *> *)items toDir:(NSString *)dir;
+-(int)deleteItems:(NSArray<NSString *> *)items;
 -(int)renameItem:(NSString *)existingName newName:(NSString *)newName;
 
 @property (readonly) NSString *name;

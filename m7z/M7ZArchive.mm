@@ -133,7 +133,7 @@ public:
 }
 
 
--(int)listItemsTo:(NSMutableArray *)output {
+-(int)listItemsTo:(NSMutableArray<M7ZItem *> *)output {
     
     std::vector<DirectoryItem> ra;
     M7ZArchiveCallback cb(self.delegate);
@@ -160,15 +160,15 @@ public:
     
 }
 
--(int)addItems:(NSArray *)items {
+-(int)addItems:(NSArray<NSString *> *)items {
     return [self addItems:items encryptHeader:NO compressionLevel:5];
 }
 
--(int)addItems:(NSArray *)items encryptHeader:(BOOL)encryptHeader {
+-(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader {
     return [self addItems:items encryptHeader:encryptHeader compressionLevel:5];
 }
 
--(int)addItems:(NSArray *)items encryptHeader:(BOOL)encryptHeader compressionLevel:(NSInteger)compressionLevel {
+-(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader compressionLevel:(NSInteger)compressionLevel {
     std::vector<std::wstring> itemsW;
     for (NSString *item in items) {
         itemsW.push_back([item wstring]);
@@ -183,7 +183,7 @@ public:
     return [self extractItems:nil toDir:dir];
 }
 
--(int)extractItems:(NSArray *)items toDir:(NSString *)dir {
+-(int)extractItems:(NSArray<NSString *> *)items toDir:(NSString *)dir {
     std::vector<std::wstring> files;
     for (NSString *item : items) {
         files.push_back(item.wstring);
@@ -194,7 +194,7 @@ public:
     return ret;
 }
 
--(int)deleteItems:(NSArray *)items {
+-(int)deleteItems:(NSArray<NSString *> *)items {
     std::vector<std::wstring> itemsW;
     for (NSString *item in items) {
         itemsW.push_back([item wstring]);
