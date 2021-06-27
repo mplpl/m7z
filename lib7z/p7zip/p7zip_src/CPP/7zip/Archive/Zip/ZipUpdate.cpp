@@ -799,7 +799,9 @@ static HRESULT Update2(
         {
           complexity += ui.Size;
           complexity += kLocalHeaderSize;
+          mtProgressMixerSpec->Mixer2->CriticalSection.Leave();
           mtProgressMixerSpec->Mixer2->SetProgressOffset(complexity);
+          mtProgressMixerSpec->Mixer2->CriticalSection.Enter();
           RINOK(updateCallback->SetOperationResult(NArchive::NUpdate::NOperationResult::kOK));
           refs.Refs[mtItemIndex - 1].Skip = true;
           continue;
