@@ -201,7 +201,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
           if (_archive.IsJoliet())
             item.GetPathU(s);
           else
-            s = MultiByteToUnicodeString(item.GetPath(_archive.IsSusp, _archive.SuspSkipSize), CP_OEMCP);
+            s = (_convBaseToUtf8 == (iconv_t)-1) ?
+                MultiByteToUnicodeString(item.GetPath(_archive.IsSusp, _archive.SuspSkipSize), CP_OEMCP) :
+                MultiByteToUnicodeString3(item.GetPath(_archive.IsSusp, _archive.SuspSkipSize), _convBaseToUtf8);
 
           if (s.Len() >= 2 && s[s.Len() - 2] == ';' && s.Back() == '1')
             s.DeleteFrom(s.Len() - 2);
@@ -408,6 +410,33 @@ STDMETHODIMP CHandler::GetStream(UInt32 index, ISequentialInStream **stream)
   
   return CreateLimitedInStream(_stream, (UInt64)blockIndex * kBlockSize, currentItemSize, stream);
   COM_TRY_END
+}
+
+STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps)
+{
+  for (UInt32 i = 0; i < numProps; i++)
+  {
+    UString name = names[i];
+    name.MakeLower_Ascii();
+    if (name.IsEmpty())
+      return E_INVALIDARG;
+
+    const PROPVARIANT &prop = values[i];
+
+    if (name.IsEqualTo("cps"))
+    {
+      if (prop.vt == VT_BSTR)
+      {
+        AString codePage = UnicodeStringToMultiByte(prop.bstrVal);
+        _convBaseToUtf8 = iconv_open("UTF-8-MAC", codePage);
+      }
+    }
+    else
+    {
+      return E_INVALIDARG;
+    }
+  }
+  return S_OK;
 }
 
 }}
