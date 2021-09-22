@@ -132,6 +132,15 @@ public:
     return self;
 }
 
+-(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding storeCreatedTime:(BOOL)storeCreatedTime {
+    if (self = [super init]) {
+        _name = name;
+        _encoding = encoding;
+        _storeCreatedTime = storeCreatedTime;
+    }
+    
+    return self;
+}
 
 -(int)listItemsTo:(NSMutableArray<M7ZItem *> *)output {
     
@@ -149,7 +158,9 @@ public:
         M7ZItem *item = [[M7ZItem alloc] initWithName:[NSString stringWithWstring:di.name]
                                                  size:di.size
                                        sizeCompressed:di.sizeCompressed
-                                                 date:@(di.date.c_str())
+                                         creationTime:@(di.creationTime.c_str())
+                                     modificationTime:@(di.modificationTime.c_str())
+                                           accessTime:@(di.accessTime.c_str())
                                                 attrs:@(di.attrs.c_str())
                                             encrypted:di.encrypted
                                     compressionMethod:[NSString stringWithWstring:di.compressionMethod]];
@@ -175,7 +186,7 @@ public:
     }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel,
-                             [self.workDir wstring], [self.encoding wstring]);
+                             [self.workDir wstring], [self.encoding wstring], self.storeCreatedTime);
     return ret;
 }
 

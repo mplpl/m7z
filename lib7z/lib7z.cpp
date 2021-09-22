@@ -109,16 +109,43 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
         GetAttribString(iAttrs, isFolder, s);
         
         NWindows::NCOM::CPropVariant propTime;
+        
         RINOK(arc.Archive->GetProperty(i, kpidMTime, &propTime));
-        char ftime[32];
+        char modtime[32];
         if ((propTime.filetime.dwLowDateTime == 0) && (propTime.filetime.dwHighDateTime == 0)) {
-            ftime[0] = 0;
+            modtime[0] = 0;
         }
         else
         {
             FILETIME localFileTime;
             FileTimeToLocalFileTime(&propTime.filetime, &localFileTime);
-            if (!ConvertFileTimeToString(localFileTime, ftime, true, true)) ftime[0] = 0;
+            if (!ConvertFileTimeToString(localFileTime, modtime, true, true)) modtime[0] = 0;
+            //format is: YYYY-MM-DD hh:mm:ss
+        }
+        
+        RINOK(arc.Archive->GetProperty(i, kpidCTime, &propTime));
+        char createtime[32];
+        if ((propTime.filetime.dwLowDateTime == 0) && (propTime.filetime.dwHighDateTime == 0)) {
+            createtime[0] = 0;
+        }
+        else
+        {
+            FILETIME localFileTime;
+            FileTimeToLocalFileTime(&propTime.filetime, &localFileTime);
+            if (!ConvertFileTimeToString(localFileTime, createtime, true, true)) createtime[0] = 0;
+            //format is: YYYY-MM-DD hh:mm:ss
+        }
+        
+        RINOK(arc.Archive->GetProperty(i, kpidATime, &propTime));
+        char accesstime[32];
+        if ((propTime.filetime.dwLowDateTime == 0) && (propTime.filetime.dwHighDateTime == 0)) {
+            accesstime[0] = 0;
+        }
+        else
+        {
+            FILETIME localFileTime;
+            FileTimeToLocalFileTime(&propTime.filetime, &localFileTime);
+            if (!ConvertFileTimeToString(localFileTime, accesstime, true, true)) accesstime[0] = 0;
             //format is: YYYY-MM-DD hh:mm:ss
         }
         
@@ -136,7 +163,13 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
             method = (UString)propMethod.bstrVal;
         }
         
-        DirectoryItem di(std::wstring(sPath), size, sizePacked, std::string(ftime), std::string(s), encrypted, std::wstring(method));
+        DirectoryItem di(std::wstring(sPath), size, sizePacked,
+                         std::string(createtime),
+                         std::string(modtime),
+                         std::string(accesstime),
+                         std::string(s),
+                         encrypted,
+                         std::wstring(method));
         retValue.push_back(di);
     }
     
@@ -288,7 +321,8 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
 
 
 LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
-                     bool encryptHeader, int compressionLevel, std::wstring workDir, std::wstring encoding)
+                         bool encryptHeader, int compressionLevel, std::wstring workDir, std::wstring encoding,
+                         bool storeCreatedTime)
 {
     UString archiveName = archiveNameW.c_str();
     std::vector<UString> files;
@@ -323,6 +357,10 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
         wstrMcps << L"-mcps=" << encoding.c_str();
         commandStrings.Add(wstrMcps.str().c_str());
     }
+    if (storeCreatedTime) {
+        commandStrings.Add(L"-mtc");
+    }
+    
     CArcCmdLineOptions options;
     CArcCmdLineParser parser;
     parser.Parse1(commandStrings, options);
@@ -363,16 +401,16 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
 
 LIB7ZRC MLAddToArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                        bool encryptHeader, int compressionLevel, std::wstring workDir,
-                       std::wstring encoding)
+                       std::wstring encoding, bool storeCreatedTime)
 {
-    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir, encoding);
+    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir, encoding, storeCreatedTime);
 }
 
 
 LIB7ZRC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                         std::wstring workDir, std::wstring encoding)
 {
-    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding);
+    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding, false);
 }
     
 LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNameW, std::wstring newNameW,
@@ -381,7 +419,7 @@ LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNa
     std::vector<std::wstring> filesW;
     filesW.push_back(existingNameW);
     filesW.push_back(newNameW);
-    return MLGenericCommand(L"rn", archiveNameW, filesW, cb, false, 9, workDir, encoding);
+    return MLGenericCommand(L"rn", archiveNameW, filesW, cb, false, 9, workDir, encoding, false);
 }
 
 int do_one(unsigned int count, const char * const *names, void *arg) {

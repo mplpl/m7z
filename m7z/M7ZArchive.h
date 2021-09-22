@@ -136,6 +136,7 @@ enum M7ZAskOverwrite
 
 -(instancetype)initWithName:(NSString *)name;
 -(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding;
+-(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding storeCreatedTime:(BOOL)storeCreatedTime;
 
 -(int)listItemsTo:(NSMutableArray<M7ZItem *> *)output;
 -(int)addItems:(NSArray<NSString *> *)items;
@@ -148,6 +149,7 @@ enum M7ZAskOverwrite
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *encoding;
+@property (readonly) BOOL storeCreatedTime;
 @property (assign) id<M7ZArchiveDelegate> delegate;
 @property NSString *workDir;
 

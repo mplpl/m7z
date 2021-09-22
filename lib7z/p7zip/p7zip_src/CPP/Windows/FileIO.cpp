@@ -144,14 +144,32 @@ bool CFileBase::Create(LPCWSTR fileName, DWORD desiredAccess,
 }
 */
 
+void CFileBase::UpdateTime(struct utimbuf buf) {
+    struct stat    oldbuf;
+    int ret = stat((const char*)(_unix_filename),&oldbuf);
+    if (ret == 0) {
+      if (buf.actime  == (time_t)-1) buf.actime  = oldbuf.st_atime;
+      if (buf.modtime == (time_t)-1) buf.modtime = oldbuf.st_mtime;
+    } else {
+      time_t current_time = time(0);
+      if (buf.actime  == (time_t)-1) buf.actime  = current_time;
+      if (buf.modtime == (time_t)-1) buf.modtime = current_time;
+    }
+    /* ret = */ utime((const char *)(_unix_filename), &buf);
+}
+
 bool CFileBase::Close()
 {
+  struct utimbuf buf0;
   struct utimbuf buf;
 
+  buf0.actime  = _lastAccessTime;
+  buf0.modtime = _lastCreateTime;
+    
   buf.actime  = _lastAccessTime;
   buf.modtime = _lastWriteTime;
 
-  _lastAccessTime = _lastWriteTime = (time_t)-1;
+  _lastAccessTime = _lastWriteTime = _lastCreateTime = (time_t)-1;
 
   if(_fd == -1)
     return true;
@@ -168,18 +186,13 @@ bool CFileBase::Close()
     _fd = -1;
 
     /* On some OS (mingwin, MacOSX ...), you must close the file before updating times */
+      
+    if (buf0.modtime != buf.modtime && buf0.modtime != (time_t)-1) {
+        UpdateTime(buf0);
+    }
+      
     if ((buf.actime != (time_t)-1) || (buf.modtime != (time_t)-1)) {
-      struct stat    oldbuf;
-      int ret = stat((const char*)(_unix_filename),&oldbuf);
-      if (ret == 0) {
-        if (buf.actime  == (time_t)-1) buf.actime  = oldbuf.st_atime;
-        if (buf.modtime == (time_t)-1) buf.modtime = oldbuf.st_mtime;
-      } else {
-        time_t current_time = time(0);
-        if (buf.actime  == (time_t)-1) buf.actime  = current_time;
-        if (buf.modtime == (time_t)-1) buf.modtime = current_time;
-      }
-      /* ret = */ utime((const char *)(_unix_filename), &buf);
+        UpdateTime(buf);
     }
     return true;
   }
@@ -387,6 +400,12 @@ bool COutFile::SetTime(const FILETIME *cTime, const FILETIME *aTime, const FILET
      ltime.QuadPart = (ltime.QuadPart << 32) | mTime->dwLowDateTime;
      RtlTimeToSecondsSince1970( &ltime, &dw );
      _lastWriteTime = dw;
+  }
+  if (cTime) {
+     ltime.QuadPart = cTime->dwHighDateTime;
+     ltime.QuadPart = (ltime.QuadPart << 32) | cTime->dwLowDateTime;
+     RtlTimeToSecondsSince1970( &ltime, &dw );
+     _lastCreateTime = dw;
   }
 
   return true;

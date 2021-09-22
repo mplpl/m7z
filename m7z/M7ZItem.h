@@ -10,14 +10,22 @@
 
 @interface M7ZItem : NSObject
 
-- (instancetype)initWithName:(NSString *)name size:(unsigned long long)size sizeCompressed:(unsigned long long)sizeCompressed
-                        date:(NSString *)date attrs:(NSString *)attrs encrypted:(BOOL)encrypted
+- (instancetype)initWithName:(NSString *)name
+                        size:(unsigned long long)size
+              sizeCompressed:(unsigned long long)sizeCompressed
+                creationTime:(NSString *)creationTime
+            modificationTime:(NSString *)modificationTime
+                  accessTime:(NSString *)accessTime
+                       attrs:(NSString *)attrs
+                   encrypted:(BOOL)encrypted
            compressionMethod:(NSString *)compressionMethod;
 
 @property (readonly) NSString *name;
 @property (readonly) unsigned long long size;
 @property (readonly) unsigned long long sizeCompressed;
-@property (readonly) NSString *date;
+@property (readonly) NSString *creationTime;
+@property (readonly) NSString *modificationTime;
+@property (readonly) NSString *accessTime;
 @property (readonly) NSString *attrs;
 @property (readonly) BOOL encrypted;
 @property (readonly) NSString *compressionMethod;

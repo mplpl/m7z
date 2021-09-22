@@ -103,7 +103,14 @@ class lib7zTest : public ::testing::Test
 		void printAll(std::vector<DirectoryItem> &retValue)
 		{
 		    for (auto it = retValue.begin(); it < retValue.end(); it++) {
-		        std::wcout << it->name.c_str() << "    " << it->size << "     " << it->sizeCompressed << "     " << it->attrs.c_str() << "     " << it->date.c_str() << "\n";
+		        std::wcout << it->name.c_str()
+                    << "    " << it->size
+                    << "     " << it->sizeCompressed
+                    << "     " << it->attrs.c_str()
+                    << "     " << it->creationTime.c_str()
+                    << "     " << it->modificationTime.c_str()
+                    << "     " << it->accessTime.c_str()
+                    << "\n";
 		    }
 		}
 

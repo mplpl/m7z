@@ -43,13 +43,14 @@ extern LIB7ZRC MLListArchive(std::wstring archiveName, std::vector<DirectoryItem
     \param workDir directory where temporary files will be created - blank mean 'current directory'
     \param encryptHeader should archive header be encrypted (that encrypt file names)
     \param encoding file name characters encoding - blank = default
+    \param storeCreatedTime store file creation time
     \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
         error returned from callback function.
  */
 extern LIB7ZRC MLAddToArchive(std::wstring archiveName, std::vector<std::wstring> files,
                               MLUpdateCallback &callback, bool encryptHeader = false,
                               int compressionLevel = 9, std::wstring workDir = L"",
-                              std::wstring encoding = L"");
+                              std::wstring encoding = L"", bool storeCreatedTime = false);
 
 /*!
     Extract selected files from archive or all the files and store them in given

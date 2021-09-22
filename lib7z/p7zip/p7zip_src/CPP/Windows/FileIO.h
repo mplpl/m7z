@@ -22,6 +22,8 @@
 
 #define _my_SYMLINK_FLAG_RELATIVE 1
 
+#include <utime.h>
+
 namespace NWindows {
 namespace NFile {
 
@@ -54,6 +56,7 @@ protected:
   AString _unix_filename;
   time_t   _lastAccessTime;
   time_t   _lastWriteTime;
+  time_t   _lastCreateTime;
 #ifdef ENV_HAVE_LSTAT
   int     _size;
   char    _buffer[MAX_PATHNAME_LEN+1];
@@ -73,6 +76,9 @@ public:
 
   bool Seek(INT64 distanceToMove, DWORD moveMethod, UINT64 &newPosition);
   bool Seek(UINT64 position, UINT64 &newPosition);
+
+private:
+  void UpdateTime(struct utimbuf buf);
 };
 
 class CInFile: public CFileBase

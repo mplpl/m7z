@@ -241,7 +241,11 @@ static int fillin_CFileInfo(CFileInfo &fileInfo,const char *filename,bool ignore
 
   fileInfo.Attrib |= FILE_ATTRIBUTE_UNIX_EXTENSION + ((stat_info.st_mode & 0xFFFF) << 16);
 
-  RtlSecondsSince1970ToFileTime( stat_info.st_ctime, &fileInfo.CTime );
+  if (stat_info.st_birthtime) {
+    RtlSecondsSince1970ToFileTime( stat_info.st_birthtime, &fileInfo.CTime );
+  } else {
+    RtlSecondsSince1970ToFileTime( stat_info.st_ctime, &fileInfo.CTime );
+  }
   RtlSecondsSince1970ToFileTime( stat_info.st_mtime, &fileInfo.MTime );
   RtlSecondsSince1970ToFileTime( stat_info.st_atime, &fileInfo.ATime );
 

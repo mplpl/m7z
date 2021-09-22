@@ -149,7 +149,10 @@
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     XCTAssert(([archive listItemsTo:arr]) == 0);
     for (M7ZItem *item in arr) {
-        NSLog(@"%@ %llu %llu %@ %@", item.name, item.size, item.sizeCompressed, item.date, item.attrs);
+        NSLog(@"%@ %llu %llu %@ %@ %@ %@", item.name, item.size,
+              item.sizeCompressed, item.creationTime,
+              item.modificationTime, item.accessTime,
+              item.attrs);
     }
     
 }

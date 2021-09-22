@@ -273,11 +273,12 @@ bool MyGetSystemDirectory(FString &path)
 #endif
 #endif // _WIN32
 
-bool SetDirTime(CFSTR fileName, const FILETIME * /* cTime */ , const FILETIME *aTime, const FILETIME *mTime)
+bool SetDirTime(CFSTR fileName, const FILETIME * cTime, const FILETIME *aTime, const FILETIME *mTime)
 {
   AString  cfilename = UnicodeStringToMultiByte(fileName);
   const char * unix_filename = nameWindowToUnix((const char *)cfilename);
 
+  struct utimbuf buf0;
   struct utimbuf buf;
 
   struct stat    oldbuf;
@@ -299,6 +300,25 @@ bool SetDirTime(CFSTR fileName, const FILETIME * /* cTime */ , const FILETIME *a
     ltime.QuadPart = (ltime.QuadPart << 32) | aTime->dwLowDateTime;
     RtlTimeToSecondsSince1970( &ltime, &dw );
     buf.actime = dw;
+  }
+    
+    
+  if (cTime &&
+      (cTime->dwHighDateTime != 0 || cTime->dwLowDateTime != 0) &&
+      (cTime->dwHighDateTime != mTime->dwHighDateTime || cTime->dwLowDateTime != mTime->dwLowDateTime)) {
+       
+      LARGE_INTEGER  ltime;
+      DWORD dw;
+      ltime.QuadPart = cTime->dwHighDateTime;
+      ltime.QuadPart = (ltime.QuadPart << 32) | cTime->dwLowDateTime;
+      RtlTimeToSecondsSince1970( &ltime, &dw );
+      
+      DWORD orgModtime = buf.modtime;
+      buf.modtime = dw;
+      
+      utime(unix_filename, &buf);
+      
+      buf.modtime = orgModtime;
   }
 
   if (mTime)
