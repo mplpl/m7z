@@ -322,7 +322,7 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
 
 LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                          bool encryptHeader, int compressionLevel, std::wstring workDir, std::wstring encoding,
-                         bool storeCreatedTime)
+                         bool storeCreatedTime, bool moveToArchive)
 {
     UString archiveName = archiveNameW.c_str();
     std::vector<UString> files;
@@ -359,6 +359,9 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     }
     if (storeCreatedTime) {
         commandStrings.Add(L"-mtc");
+    }
+    if (moveToArchive) {
+        commandStrings.Add(L"-sdel");
     }
     
     CArcCmdLineOptions options;
@@ -401,16 +404,17 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
 
 LIB7ZRC MLAddToArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                        bool encryptHeader, int compressionLevel, std::wstring workDir,
-                       std::wstring encoding, bool storeCreatedTime)
+                       std::wstring encoding, bool storeCreatedTime, bool moveToArchive)
 {
-    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir, encoding, storeCreatedTime);
+    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir, encoding,
+                            storeCreatedTime, moveToArchive);
 }
 
 
 LIB7ZRC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                         std::wstring workDir, std::wstring encoding)
 {
-    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding, false);
+    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding, false, false);
 }
     
 LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNameW, std::wstring newNameW,
@@ -419,7 +423,7 @@ LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNa
     std::vector<std::wstring> filesW;
     filesW.push_back(existingNameW);
     filesW.push_back(newNameW);
-    return MLGenericCommand(L"rn", archiveNameW, filesW, cb, false, 9, workDir, encoding, false);
+    return MLGenericCommand(L"rn", archiveNameW, filesW, cb, false, 9, workDir, encoding, false, false);
 }
 
 int do_one(unsigned int count, const char * const *names, void *arg) {

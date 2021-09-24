@@ -1,7 +1,7 @@
 /*!
     C++ iterface of lib7z library
  */
-// Copyright @ 2016-2020 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #ifndef __LIB7Z_H__
 #define __LIB7Z_H__
@@ -44,13 +44,15 @@ extern LIB7ZRC MLListArchive(std::wstring archiveName, std::vector<DirectoryItem
     \param encryptHeader should archive header be encrypted (that encrypt file names)
     \param encoding file name characters encoding - blank = default
     \param storeCreatedTime store file creation time
+    \param moveToArchive should the input files be deleted after the operation
     \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
         error returned from callback function.
  */
 extern LIB7ZRC MLAddToArchive(std::wstring archiveName, std::vector<std::wstring> files,
                               MLUpdateCallback &callback, bool encryptHeader = false,
                               int compressionLevel = 9, std::wstring workDir = L"",
-                              std::wstring encoding = L"", bool storeCreatedTime = false);
+                              std::wstring encoding = L"", bool storeCreatedTime = false,
+                              bool moveToArchive = false);
 
 /*!
     Extract selected files from archive or all the files and store them in given

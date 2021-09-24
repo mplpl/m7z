@@ -141,7 +141,8 @@ enum M7ZAskOverwrite
 -(int)listItemsTo:(NSMutableArray<M7ZItem *> *)output;
 -(int)addItems:(NSArray<NSString *> *)items;
 -(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader;
--(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader compressionLevel:(NSInteger)compressionLevel;
+-(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader
+    compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive;
 -(int)extractAllToDir:(NSString *)dir;
 -(int)extractItems:(NSArray<NSString *> *)items toDir:(NSString *)dir;
 -(int)deleteItems:(NSArray<NSString *> *)items;

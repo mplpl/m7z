@@ -172,21 +172,24 @@ public:
 }
 
 -(int)addItems:(NSArray<NSString *> *)items {
-    return [self addItems:items encryptHeader:NO compressionLevel:5];
+    return [self addItems:items encryptHeader:NO compressionLevel:5 moveToArchive:NO];
 }
 
 -(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader {
-    return [self addItems:items encryptHeader:encryptHeader compressionLevel:5];
+    return [self addItems:items encryptHeader:encryptHeader compressionLevel:5 moveToArchive:NO];
 }
 
--(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader compressionLevel:(NSInteger)compressionLevel {
+-(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader
+compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive {
+    
     std::vector<std::wstring> itemsW;
     for (NSString *item in items) {
         itemsW.push_back([item wstring]);
     }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel,
-                             [self.workDir wstring], [self.encoding wstring], self.storeCreatedTime);
+                             [self.workDir wstring], [self.encoding wstring], self.storeCreatedTime,
+                             moveToArchive);
     return ret;
 }
 
