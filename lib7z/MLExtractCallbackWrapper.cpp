@@ -1,5 +1,5 @@
 // MLExtractCallbackWrapper.h
-// Copyright @ 2016-2020 MPL. All rights reserved.
+// Copyright @ 2016-2021 MPL. All rights reserved.
 
 #include "StdAfx.h"
 #include "MLExtractCallback.h"
@@ -35,13 +35,13 @@ MLExtractCallbackWrapper::AskOverwrite(
     Int32 *answer)
 {
     MT_LOCK
-    UInt32 time1;
-    UInt32 time2;
-    NWindows::NTime::FileTimeToUnixTime(*x, time1);
-    NWindows::NTime::FileTimeToUnixTime(*a, time2);
+    UInt32 time1 = 0;
+    UInt32 time2 = 0;
+    if (x) NWindows::NTime::FileTimeToUnixTime(*x, time1);
+    if (a) NWindows::NTime::FileTimeToUnixTime(*a, time2);
     time_t utime1 = time1;
     time_t utime2 = time2;
-    return cb->AskOverwrite(existName, &utime1, y, newName, &utime2, b, answer);
+    return cb->AskOverwrite(existName, x ? &utime1 : 0, y, newName, a ? &utime2 : 0, b, answer);
 }
 
 STDMETHODIMP
