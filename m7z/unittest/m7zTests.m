@@ -280,4 +280,27 @@
     XCTAssert(notRenamed == NO);
 }
 
+-(void)testRenameMany {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    XCTAssert([archive addItems:self.items] == 0);
+    archive.delegate = self.delegate;
+    
+    NSArray *renameData = @[
+        [[M7ZRenameItem alloc] initWithFrom:@"1.txt" to:@"new_1.txt"],
+        [[M7ZRenameItem alloc] initWithFrom:@"2.txt" to:@"new_2.txt"],
+        [[M7ZRenameItem alloc] initWithFrom:@"3.txt" to:@"new_3.txt"]
+    ];
+    XCTAssert([archive renameItems:renameData] == 0);
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    XCTAssert([archive listItemsTo:arr] == 0);
+    int found = 0;
+    BOOL notRenamed = NO;
+    for (M7ZItem *item in arr) {
+        if ([@[@"new_1.txt", @"new_2.txt", @"new_3.txt"] containsObject:item.name]) found++;
+        if ([@[@"1.txt", @"2.txt", @"3.txt"] containsObject:item.name]) notRenamed = YES;
+    }
+    XCTAssert(found == 3);
+    XCTAssert(notRenamed == NO);
+}
 @end

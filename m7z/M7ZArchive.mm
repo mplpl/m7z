@@ -110,6 +110,19 @@ public:
     }
 };
 
+@implementation M7ZRenameItem
+
+-(instancetype)initWithFrom:(NSString *)from to:(NSString *)to {
+    
+    if (self = [super init]) {
+        self.from = from;
+        self.to = to;
+    }
+    
+    return self;
+}
+
+@end
 
 @implementation M7ZArchive
 
@@ -220,10 +233,18 @@ compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive {
 }
 
 -(int)renameItem:(NSString *)existingName newName:(NSString *)newName {
+    return [self renameItems:@[[[M7ZRenameItem alloc] initWithFrom:existingName to:newName]]];
+}
+
+-(int)renameItems:(NSArray<M7ZRenameItem *> *)items {
+    std::vector<std::wstring> itemsW;
+    for (M7ZRenameItem *item in items) {
+        itemsW.push_back([item.from wstring]);
+        itemsW.push_back([item.to wstring]);
+    }
     M7ZArchiveCallback cb(self.delegate);
-    int ret = MLRenameItemInArchive([self.name wstring], [existingName wstring],
-                                    [newName wstring], cb, [self.workDir wstring],
-                                    [self.encoding wstring]);
+    int ret = MLRenameItemsInArchive([self.name wstring], itemsW, cb, [self.workDir wstring],
+                                     [self.encoding wstring]);
     return ret;
 }
 

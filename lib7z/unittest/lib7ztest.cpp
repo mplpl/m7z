@@ -242,7 +242,9 @@ TEST_F(lib7zTest, RenameTest)
     ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
     
     files.clear();
-    result = MLRenameItemInArchive(arch2, L"1.tmp", L"1.tmp.new", ucallback);
+    files.push_back(L"1.tmp");
+    files.push_back(L"1.tmp.new");
+    result = MLRenameItemsInArchive(arch2, files, ucallback);
     ASSERT_EQ(result, 0) << "Error while renaming item in archive (" << result << ":" << result << ")";
     
     std::vector<DirectoryItem> retValue;

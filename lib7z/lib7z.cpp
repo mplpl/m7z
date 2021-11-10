@@ -416,14 +416,11 @@ LIB7ZRC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring>
 {
     return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding, false, false);
 }
-    
-LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNameW, std::wstring newNameW,
+
+LIB7ZRC MLRenameItemsInArchive(std::wstring archiveNameW, std::vector<std::wstring> fromToList,
                               MLUpdateCallback &cb, std::wstring workDir, std::wstring encoding)
 {
-    std::vector<std::wstring> filesW;
-    filesW.push_back(existingNameW);
-    filesW.push_back(newNameW);
-    return MLGenericCommand(L"rn", archiveNameW, filesW, cb, false, 9, workDir, encoding, false, false);
+    return MLGenericCommand(L"rn", archiveNameW, fromToList, cb, false, 9, workDir, encoding, false, false);
 }
 
 int do_one(unsigned int count, const char * const *names, void *arg) {

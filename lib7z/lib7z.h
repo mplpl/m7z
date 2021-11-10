@@ -89,10 +89,22 @@ extern LIB7ZRC MLDeleteFromArchive(std::wstring archiveName, std::vector<std::ws
                                    MLUpdateCallback &callback, std::wstring workDir = L"",
                                    std::wstring encoding = L"");
 
+/*!
+    Rename multiple items in archive.
+ 
+    \param archiveName path to archive file
+    \param existingNameW full path of the item to rename
+    \param newNameW full new path of the item
+    \param callback object used to communicate progress and errors
+    \param workDir directory where temporary files will be created - blank mean 'current directory'
+    \param encoding file name characters encoding - blank = default
+    \return 0 = OK, <>0 = error - one of standard errors (see Lib7zReturnCode) or user defined
+        error returned from callback function.
+ */
+extern LIB7ZRC MLRenameItemsInArchive(std::wstring archiveNameW, std::vector<std::wstring> fromToList,
+                                      MLUpdateCallback &cb, std::wstring workDir = L"",
+                                      std::wstring encoding = L"");
 
-extern LIB7ZRC MLRenameItemInArchive(std::wstring archiveNameW, std::wstring existingNameW,
-                                     std::wstring newNameW, MLUpdateCallback &cb,
-                                     std::wstring workDir = L"", std::wstring encoding = L"");
 /*!
     Returns a list of supported character encodings.
     \return vector with supported encoding names

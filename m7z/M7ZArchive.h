@@ -131,6 +131,14 @@ enum M7ZAskOverwrite
 
 @end
 
+@interface M7ZRenameItem : NSObject
+
+- (instancetype)initWithFrom:(NSString *)from to:(NSString *)to;
+
+@property NSString* from;
+@property NSString *to;
+
+@end
 
 @interface M7ZArchive : NSObject
 
@@ -147,6 +155,7 @@ enum M7ZAskOverwrite
 -(int)extractItems:(NSArray<NSString *> *)items toDir:(NSString *)dir;
 -(int)deleteItems:(NSArray<NSString *> *)items;
 -(int)renameItem:(NSString *)existingName newName:(NSString *)newName;
+-(int)renameItems:(NSArray<M7ZRenameItem *> *)items;
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *encoding;
