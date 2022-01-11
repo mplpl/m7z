@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016-2021 MPL. All rights reserved.
+//  Copyright © 2016-2022 MPL. All rights reserved.
 //
 
 #import "M7ZArchive.h"
@@ -135,7 +135,8 @@ public:
     return self;
 }
 
--(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding {
+-(instancetype)initWithName:(NSString *)name
+                   encoding:(NSString *)encoding {
     
     if (self = [super init]) {
         _name = name;
@@ -145,7 +146,10 @@ public:
     return self;
 }
 
--(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding storeCreatedTime:(BOOL)storeCreatedTime {
+-(instancetype)initWithName:(NSString *)name
+                   encoding:(NSString *)encoding
+           storeCreatedTime:(BOOL)storeCreatedTime {
+    
     if (self = [super init]) {
         _name = name;
         _encoding = encoding;
@@ -185,24 +189,42 @@ public:
 }
 
 -(int)addItems:(NSArray<NSString *> *)items {
-    return [self addItems:items encryptHeader:NO compressionLevel:5 moveToArchive:NO];
+    
+    return [self addItems:items
+            encryptHeader:NO
+         compressionLevel:5
+            moveToArchive:NO
+                excluding:@[]];
 }
 
--(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader {
-    return [self addItems:items encryptHeader:encryptHeader compressionLevel:5 moveToArchive:NO];
+-(int)addItems:(NSArray<NSString *> *)items
+ encryptHeader:(BOOL)encryptHeader {
+    
+    return [self addItems:items
+            encryptHeader:encryptHeader
+         compressionLevel:5
+            moveToArchive:NO
+                excluding:@[]];
 }
 
--(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader
-compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive {
+-(int)addItems:(NSArray<NSString *> *)items
+ encryptHeader:(BOOL)encryptHeader
+compressionLevel:(NSInteger)compressionLevel
+ moveToArchive:(BOOL)moveToArchive
+     excluding:(NSArray<NSString *> *)exclusionWildcards {
     
     std::vector<std::wstring> itemsW;
     for (NSString *item in items) {
         itemsW.push_back([item wstring]);
     }
+    std::vector<std::wstring> exclusionWildcardsW;
+    for (NSString *exclusionWildcard in exclusionWildcards) {
+        exclusionWildcardsW.push_back([exclusionWildcard wstring]);
+    }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLAddToArchive([self.name wstring], itemsW, cb, encryptHeader, (int)compressionLevel,
                              [self.workDir wstring], [self.encoding wstring], self.storeCreatedTime,
-                             moveToArchive);
+                             moveToArchive, exclusionWildcardsW);
     return ret;
 }
 
@@ -210,18 +232,40 @@ compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive {
     return [self extractItems:nil toDir:dir];
 }
 
--(int)extractItems:(NSArray<NSString *> *)items toDir:(NSString *)dir {
+-(int)extractAllToDir:(NSString *)dir
+            excluding:(NSArray<NSString *> *)exclusionWildcards {
+    
+    return [self extractItems:nil toDir:dir excluding:exclusionWildcards];
+}
+
+-(int)extractItems:(NSArray<NSString *> *)items
+             toDir:(NSString *)dir {
+
+    return [self extractItems:items toDir:dir excluding:@[]];
+}
+
+
+-(int)extractItems:(NSArray<NSString *> *)items
+             toDir:(NSString *)dir
+         excluding:(NSArray<NSString *> *)exclusionWildcards {
+    
     std::vector<std::wstring> files;
     for (NSString *item : items) {
         files.push_back(item.wstring);
     }
+    std::vector<std::wstring> exclusionWildcardsW;
+    for (NSString *exclusionWildcard in exclusionWildcards) {
+        exclusionWildcardsW.push_back([exclusionWildcard wstring]);
+    }
     M7ZArchiveCallback cb(self.delegate);
     int ret = MLExtractFromArchive([self.name wstring], [dir wstring], files, cb,
-                                   [self.workDir wstring], [self.encoding wstring]);
+                                   [self.workDir wstring], [self.encoding wstring],
+                                   exclusionWildcardsW);
     return ret;
 }
 
 -(int)deleteItems:(NSArray<NSString *> *)items {
+    
     std::vector<std::wstring> itemsW;
     for (NSString *item in items) {
         itemsW.push_back([item wstring]);
@@ -232,11 +276,14 @@ compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive {
     return ret;
 }
 
--(int)renameItem:(NSString *)existingName newName:(NSString *)newName {
+-(int)renameItem:(NSString *)existingName
+         newName:(NSString *)newName {
+    
     return [self renameItems:@[[[M7ZRenameItem alloc] initWithFrom:existingName to:newName]]];
 }
 
 -(int)renameItems:(NSArray<M7ZRenameItem *> *)items {
+    
     std::vector<std::wstring> itemsW;
     for (M7ZRenameItem *item in items) {
         itemsW.push_back([item.from wstring]);

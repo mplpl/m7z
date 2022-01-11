@@ -3,7 +3,7 @@
 //  m7z
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016-2021 MPL. All rights reserved.
+//  Copyright © 2016-2022 MPL. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -143,18 +143,44 @@ enum M7ZAskOverwrite
 @interface M7ZArchive : NSObject
 
 -(instancetype)initWithName:(NSString *)name;
--(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding;
--(instancetype)initWithName:(NSString *)name encoding:(NSString *)encoding storeCreatedTime:(BOOL)storeCreatedTime;
+
+-(instancetype)initWithName:(NSString *)name
+                   encoding:(NSString *)encoding;
+
+-(instancetype)initWithName:(NSString *)name
+                   encoding:(NSString *)encoding
+           storeCreatedTime:(BOOL)storeCreatedTime;
 
 -(int)listItemsTo:(NSMutableArray<M7ZItem *> *)output;
+
 -(int)addItems:(NSArray<NSString *> *)items;
--(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader;
--(int)addItems:(NSArray<NSString *> *)items encryptHeader:(BOOL)encryptHeader
-    compressionLevel:(NSInteger)compressionLevel moveToArchive:(BOOL)moveToArchive;
+
+-(int)addItems:(NSArray<NSString *> *)items
+ encryptHeader:(BOOL)encryptHeader;
+
+-(int)addItems:(NSArray<NSString *> *)items
+ encryptHeader:(BOOL)encryptHeader
+compressionLevel:(NSInteger)compressionLevel
+ moveToArchive:(BOOL)moveToArchive
+     excluding:(NSArray<NSString *> *)exclusionWildcards;
+
 -(int)extractAllToDir:(NSString *)dir;
--(int)extractItems:(NSArray<NSString *> *)items toDir:(NSString *)dir;
+
+-(int)extractAllToDir:(NSString *)dir
+            excluding:(NSArray<NSString *> *)exclusionWildcards;
+
+-(int)extractItems:(NSArray<NSString *> *)items
+             toDir:(NSString *)dir;
+
+-(int)extractItems:(NSArray<NSString *> *)items
+             toDir:(NSString *)dir
+         excluding:(NSArray<NSString *> *)exclusionWildcards;
+
 -(int)deleteItems:(NSArray<NSString *> *)items;
--(int)renameItem:(NSString *)existingName newName:(NSString *)newName;
+
+-(int)renameItem:(NSString *)existingName
+         newName:(NSString *)newName;
+
 -(int)renameItems:(NSArray<M7ZRenameItem *> *)items;
 
 @property (readonly) NSString *name;

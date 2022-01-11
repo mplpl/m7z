@@ -1,4 +1,4 @@
-// Copyright @ 2016-2021 MPL. All rights reserved.
+// Copyright @ 2016-2022 MPL. All rights reserved.
 
 #include <string>
 #include "gtest/gtest.h"
@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <sys/stat.h>
+#include <dirent.h>
 
 using namespace lib7z;
 
@@ -253,4 +254,53 @@ TEST_F(lib7zTest, RenameTest)
     
     ASSERT_EQ(retValue.size(), 1) << "Wrong number of items in archive";
     ASSERT_EQ(retValue[0].name, L"1.tmp.new") << "Item has not been renamed";
+}
+
+TEST_F(lib7zTest, AddWithExclusionsWildcards)
+{
+    std::vector<std::wstring> files;
+    files.push_back(testFiles[0]);
+    files.push_back(testFiles[1]);
+    std::vector<std::wstring> exclusionWildcards;
+    exclusionWildcards.push_back(L"2.*");
+    int result = MLAddToArchive(arch2, files, ucallback, false, 1, L"", L"", false, false, exclusionWildcards);
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
+    
+    std::vector<DirectoryItem> retValue;
+    result = MLListArchive(arch2, retValue, ucallback);
+    EXPECT_EQ(result, 0) << "Error while listing archive (" << result << ":" << result << ")";
+    
+    ASSERT_EQ(retValue.size(), 1) << "Wrong number of items in archive";
+    ASSERT_EQ(retValue[0].name, L"1.tmp") << "Item has not been excluded";
+}
+
+TEST_F(lib7zTest, ExtractWithExclusionsWildcards)
+{
+    int result = MLAddToArchive(arch2, testFiles, ucallback);
+    ASSERT_EQ(result, 0) << "Error while compressing archive (" << result << ":" << result << ")";
+    
+    std::vector<std::wstring> exclusionWildcards;
+    exclusionWildcards.push_back(L"2.*");
+    
+    std::vector<std::wstring> files;
+    result = MLExtractFromArchive(arch2, archDir3, files, ucallback, L"", L"", exclusionWildcards);
+    ASSERT_EQ(result, 0) << "Error while extracting archive (" << result << ":" << result << ")";
+    
+    std::string archDir3C(archDir3.begin(), archDir3.end());
+    DIR *dir = opendir(archDir3C.c_str());
+    ASSERT_EQ(dir != NULL, true);
+    
+    struct dirent *entry;
+    int count = 0;
+    bool found = false;
+    while ((entry = readdir(dir)) != NULL) {
+        std::string s(entry->d_name);
+        if (s == std::string("..") || s == std::string(".")) continue;
+        if (s == std::string("2.tmp")) found = true;
+        count++;
+    }
+    closedir(dir);
+    
+    ASSERT_EQ(found, false) << "2.tmp found";
+    ASSERT_EQ(count, 2) << "Item not filtered";
 }

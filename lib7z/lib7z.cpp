@@ -1,5 +1,5 @@
 // Main.cpp
-// Copyright @ 2016-2021 MPL. All rights reserved.
+// Copyright @ 2016-2022 MPL. All rights reserved.
 
 #include "StdAfx.h"
 
@@ -176,9 +176,23 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
     return 0;
 }
 
+bool DoesNameMatchWildcards(UString name, std::vector<std::wstring> exclusionWildcards) {
+    
+    for (std::vector<std::wstring>::iterator it = exclusionWildcards.begin();
+         it < exclusionWildcards.end(); it++)
+    {
+        UString nameOnly = ExtractFileNameFromPath(name);
+        bool match = DoesWildcardMatchName(it->c_str(), nameOnly);
+        if (match) return true;
+    }
+    return false;
+}
 
-LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, std::vector<std::wstring> files,
-                        MLExtractCallback &callback, std::wstring workDir, std::wstring encoding)
+LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW,
+                             std::vector<std::wstring> files,
+                             MLExtractCallback &callback, std::wstring workDir,
+                             std::wstring encoding,
+                             std::vector<std::wstring> exclusionWildcards)
 {
     UString archiveName = archiveNameW.c_str();
     UString outDir = outDirW.c_str();
@@ -232,6 +246,9 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
     {
         UString filePath;
         RINOK(arc.GetItemPath(i, filePath));
+        
+        if (DoesNameMatchWildcards(filePath, exclusionWildcards)) continue;
+        
         if (files.size())
         {
             // firstly simply check if given items in on the list (files)
@@ -320,9 +337,12 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW, st
 }
 
 
-LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
-                         bool encryptHeader, int compressionLevel, std::wstring workDir, std::wstring encoding,
-                         bool storeCreatedTime, bool moveToArchive)
+LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW,
+                         std::vector<std::wstring> filesW, MLUpdateCallback &cb,
+                         bool encryptHeader, int compressionLevel, std::wstring workDir,
+                         std::wstring encoding,
+                         bool storeCreatedTime, bool moveToArchive,
+                         std::vector<std::wstring> exclusionWildcards)
 {
     UString archiveName = archiveNameW.c_str();
     std::vector<UString> files;
@@ -362,6 +382,14 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
     }
     if (moveToArchive) {
         commandStrings.Add(L"-sdel");
+    }
+    
+    for (std::vector<std::wstring>::iterator it = exclusionWildcards.begin();
+         it < exclusionWildcards.end(); it++)
+    {
+        std::wstringstream filter;
+        filter << L"-xr!" << (*it);
+        commandStrings.Add(filter.str().c_str());
     }
     
     CArcCmdLineOptions options;
@@ -404,23 +432,33 @@ LIB7ZRC MLGenericCommand(std::wstring command, std::wstring archiveNameW, std::v
 
 LIB7ZRC MLAddToArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                        bool encryptHeader, int compressionLevel, std::wstring workDir,
-                       std::wstring encoding, bool storeCreatedTime, bool moveToArchive)
+                       std::wstring encoding, bool storeCreatedTime, bool moveToArchive,
+                       std::vector<std::wstring> exclusionWildcards)
 {
-    return MLGenericCommand(L"a", archiveNameW, filesW, cb, encryptHeader, compressionLevel, workDir, encoding,
-                            storeCreatedTime, moveToArchive);
+    return MLGenericCommand(L"a", archiveNameW, filesW, cb,
+                            encryptHeader, compressionLevel,
+                            workDir, encoding,
+                            storeCreatedTime, moveToArchive,
+                            exclusionWildcards);
 }
 
 
 LIB7ZRC MLDeleteFromArchive(std::wstring archiveNameW, std::vector<std::wstring> filesW, MLUpdateCallback &cb,
                         std::wstring workDir, std::wstring encoding)
 {
-    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false, 9, workDir, encoding, false, false);
+    std::vector<std::wstring> exclusionWildcards;
+    return MLGenericCommand(L"d", archiveNameW, filesW, cb, false,
+                            9, workDir, encoding, false, false,
+                            exclusionWildcards);
 }
 
 LIB7ZRC MLRenameItemsInArchive(std::wstring archiveNameW, std::vector<std::wstring> fromToList,
                               MLUpdateCallback &cb, std::wstring workDir, std::wstring encoding)
 {
-    return MLGenericCommand(L"rn", archiveNameW, fromToList, cb, false, 9, workDir, encoding, false, false);
+    std::vector<std::wstring> exclusionWildcards;
+    return MLGenericCommand(L"rn", archiveNameW, fromToList, cb, false,
+                            9, workDir, encoding, false, false,
+                            exclusionWildcards);
 }
 
 int do_one(unsigned int count, const char * const *names, void *arg) {

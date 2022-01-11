@@ -3,7 +3,7 @@
 //  7zTests
 //
 //  Created by MPL on 21/03/16.
-//  Copyright © 2016-2021 MPL. All rights reserved.
+//  Copyright © 2016-2022 MPL. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -303,4 +303,34 @@
     XCTAssert(found == 3);
     XCTAssert(notRenamed == NO);
 }
+
+-(void)testAddWithExclusionsWildcard {
+    
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    archive.delegate = self.delegate;
+    XCTAssert([archive addItems:self.items
+                  encryptHeader:NO
+               compressionLevel:1
+                  moveToArchive:NO
+                      excluding:@[@"2.txt"]] == 0);
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    XCTAssert([archive listItemsTo:arr] == 0);
+    XCTAssert(arr.count == 2);
+}
+
+-(void)testExtractWithExclusionsWildcard {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    archive.delegate = self.delegate;
+    XCTAssert([archive addItems:self.items] == 0);
+    XCTAssert([archive extractAllToDir:self.unpackDir
+                             excluding:@[@"2.*"]] == 0);
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *err;
+    NSArray *ret = [fm contentsOfDirectoryAtPath:self.unpackDir error:&err];
+    XCTAssert([ret containsObject:@"2.txt"] == NO);
+    XCTAssert(ret.count == 2);
+}
+
 @end
