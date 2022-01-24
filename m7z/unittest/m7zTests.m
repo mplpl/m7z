@@ -333,4 +333,16 @@
     XCTAssert(ret.count == 2);
 }
 
+-(void)testExtractWithExclusionsWildcardDir {
+    M7ZArchive *archive = [[M7ZArchive alloc] initWithName:self.archName];
+    archive.delegate = self.delegate;
+    XCTAssert([archive addItems:@[self.subDir]] == 0);
+    XCTAssert([archive extractAllToDir:self.unpackDir
+                             excluding:@[@"a"]] == 0);
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *err;
+    NSArray *ret = [fm contentsOfDirectoryAtPath:self.unpackDir error:&err];
+    XCTAssert(ret.count == 0);
+}
 @end

@@ -176,14 +176,27 @@ LIB7ZRC MLListArchive(std::wstring archiveNameW, std::vector<DirectoryItem> &ret
     return 0;
 }
 
-bool DoesNameMatchWildcards(UString name, std::vector<std::wstring> exclusionWildcards) {
+bool DoesNameMatchWildcards(UString name,
+                            std::vector<std::wstring> &exclusionWildcards,
+                            std::vector<UString> &removedPathes) {
     
     for (std::vector<std::wstring>::iterator it = exclusionWildcards.begin();
          it < exclusionWildcards.end(); it++)
     {
         UString nameOnly = ExtractFileNameFromPath(name);
         bool match = DoesWildcardMatchName(it->c_str(), nameOnly);
-        if (match) return true;
+        if (match) {
+            removedPathes.push_back(name);
+            return true;
+        }
+    }
+    
+    // now check if the item is not inside of already removed folder
+    for (std::vector<UString>::iterator it = removedPathes.begin();
+         it < removedPathes.end(); it++)
+    {
+        bool found = name.IsPrefixedBy((*it + L"/"));
+        if (found) return true;
     }
     return false;
 }
@@ -242,12 +255,13 @@ LIB7ZRC MLExtractFromArchive(std::wstring archiveNameW, std::wstring outDirW,
         files2.push_back(*it + L"/");
     }
     
+    std::vector<UString> removedPathes;
     for (UInt32 i = 0; i < numItems; i++)
     {
         UString filePath;
         RINOK(arc.GetItemPath(i, filePath));
         
-        if (DoesNameMatchWildcards(filePath, exclusionWildcards)) continue;
+        if (DoesNameMatchWildcards(filePath, exclusionWildcards, removedPathes)) continue;
         
         if (files.size())
         {
