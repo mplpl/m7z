@@ -1,5 +1,5 @@
 // UpdateCallbackConsole.cpp
-// Copyright @ 2016-2021 MPL. All rights reserved.
+// Copyright @ 2016-2022 MPL. All rights reserved.
 
 #include "StdAfx.h"
 #include "MLUpdateCallbackWrapper.h"
@@ -25,8 +25,17 @@ HRESULT MLUpdateCallbackWrapper::SetTotal(UInt64 size)
 
 HRESULT MLUpdateCallbackWrapper::SetCompleted(const UInt64 *completeValue)
 {
+    // not using it any more, as it is hard to interpret for add/update operation
+    //MT_LOCK
+    //return cb->SetCompleted(completeValue);
+    return S_OK;
+}
+
+HRESULT MLUpdateCallbackWrapper::SetRatioInfo(const UInt64 *inSize, const UInt64 * outSize) {
+    // this callback is better than MLUpdateCallbackWrapper::SetCompleted to describe the current
+    // operation progress as it shows exact amount of data read and compressed
     MT_LOCK
-    return cb->SetCompleted(completeValue);
+    return cb->SetCompleted(inSize);
 }
 
 HRESULT MLUpdateCallbackWrapper::GetStream(const wchar_t *name, bool isDir, bool isAnti, UInt32 mode)
@@ -83,7 +92,6 @@ HRESULT MLUpdateCallbackWrapper::FinishScanning(const CDirItemsStat &st) { retur
 HRESULT MLUpdateCallbackWrapper::StartArchive(const wchar_t *name, bool updating) { return S_OK; }
 HRESULT MLUpdateCallbackWrapper::CheckBreak() { return S_OK; }
 HRESULT MLUpdateCallbackWrapper::SetNumItems(UInt64 numFiles) { return S_OK; }
-HRESULT MLUpdateCallbackWrapper::SetRatioInfo(const UInt64 *inSize, const UInt64 * outSize) { return S_OK; }
 HRESULT MLUpdateCallbackWrapper::WriteSfx(const wchar_t *name, UInt64 size)  { return S_OK; }
 HRESULT MLUpdateCallbackWrapper::ShowDeleteFile(const wchar_t *name, bool isDir) { return S_OK; }
 HRESULT MLUpdateCallbackWrapper::ReadingFileError(const FString &path, DWORD systemError) { return S_OK; }

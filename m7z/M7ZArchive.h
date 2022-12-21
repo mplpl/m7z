@@ -47,17 +47,17 @@ enum M7ZOperationResultCode
 
 enum M7ZItemMode
 {
-    M7Z_IM_Add                = 1000, //extract
-    M7Z_IM_Update,                    //extract
-    M7Z_IM_Analyze,                   //extract
-    M7Z_IM_Replicate,                 //extract
-    M7Z_IM_Repack,                    //extract
-    M7Z_IM_ExtractSkip,               //extract
-    M7Z_IM_Delete,                    //extract
-    M7Z_IM_Header,                    //extract
-    M7Z_IM_Extract            = 2000, //update
-    M7Z_IM_Test,                      //update
-    M7Z_IM_UpdateSkip                 //update
+    M7Z_IM_Add                = 1000, //modify
+    M7Z_IM_Update,                    //modify
+    M7Z_IM_Analyze,                   //modify
+    M7Z_IM_Replicate,                 //modify
+    M7Z_IM_Repack,                    //modify
+    M7Z_IM_UpdateSkip,                //modify
+    M7Z_IM_Delete,                    //modify
+    M7Z_IM_Header,                    //modify
+    M7Z_IM_Extract            = 2000, //extract
+    M7Z_IM_Test,                      //extract
+    M7Z_IM_ExtractSkip                //extract
 };
 
 enum M7ZAskOverwrite
