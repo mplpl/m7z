@@ -41,7 +41,7 @@ public:
     
     int DecompressingItem(const wchar_t *name, bool isFolder, int mode, const unsigned long long *position) {
         [delegat item:[NSString stringWithWstring:name] mode:2000 + mode];
-        return 0;
+        return delegat.shouldBreak;
     }
     
     int SetCompleted(const unsigned long long *completeValue) {
@@ -50,6 +50,7 @@ public:
     }
     
     int SetOperationResult(int x, int kind) {
+        if (delegat.shouldBreak) return 1;
         if (x == 0) return 0;
         
         BOOL ret = YES;
