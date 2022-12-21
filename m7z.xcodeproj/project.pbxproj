@@ -5129,7 +5129,7 @@
 					"$(PROJECT_DIR)/m7z",
 					"$(PROJECT_DIR)/lib7z",
 				);
-				MARKETING_VERSION = 16.02.R10;
+				MARKETING_VERSION = 16.02.R11;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = mpl.m7z;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5156,7 +5156,7 @@
 					"$(PROJECT_DIR)/m7z",
 					"$(PROJECT_DIR)/lib7z",
 				);
-				MARKETING_VERSION = 16.02.R10;
+				MARKETING_VERSION = 16.02.R11;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = mpl.m7z;
 				PRODUCT_NAME = "$(TARGET_NAME)";
