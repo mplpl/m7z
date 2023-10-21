@@ -2,7 +2,12 @@
 *.a
 lib7z/sample/sample
 lib7z/unittest/lib7ztest
-m7z.xcodeproj/xcuserdata/mlabenski.xcuserdatad/xcschemes/lib7z.xcscheme
-m7z.xcodeproj/xcuserdata/mlabenski.xcuserdatad/xcschemes/lib7z_unittest.xcscheme
-m7z.xcodeproj/xcuserdata/mlabenski.xcuserdatad/xcschemes/m7z.xcscheme
-m7z.xcodeproj/xcuserdata/mlabenski.xcuserdatad/xcschemes/m7zTests.xcscheme
+.DS_Store
+xcuserdata/
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
