@@ -478,7 +478,12 @@ LIB7ZRC MLRenameItemsInArchive(std::wstring archiveNameW, std::vector<std::wstri
 int do_one(unsigned int count, const char * const *names, void *arg) {
     std::vector<std::wstring> *arr = (std::vector<std::wstring> *)arg;
     std::wstringstream s;
-    s << iconv_canonicalize(names[0]);
+    const char *cname = iconv_canonicalize(names[0]);
+    if (*cname) {
+        s << iconv_canonicalize(names[0]);
+    } else {
+        s << names[0];
+    }
     arr->push_back(s.str());
     return 0;
 }
